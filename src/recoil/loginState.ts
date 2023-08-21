@@ -1,16 +1,14 @@
-
 import { atom, selector } from "recoil";
 
-
 export const loginState = atom({
-    key: "loginState",
-    default: false
-})
+  key: "loginState",
+  default: true,
+});
 
 export const loginValue = selector({
-    key: "loginValue",
-    get: ({get})=> {
-        const value = get(loginState);
-        return value;
-    }
-})
+  key: "loginValue",
+  get: ({ get }) => {
+    const value = get(loginState);
+    return value;
+  },
+});
