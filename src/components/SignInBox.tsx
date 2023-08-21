@@ -1,20 +1,47 @@
 import { Button } from "@material-tailwind/react";
+import { useEffect, useState } from "react";
 import QRCode from "react-qr-code";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { loginState } from "../recoil/loginState";
 
 export default function SignInBox() {
-    const navigate = useNavigate();
+    const navigation = useNavigate();
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    let qrData = {
+        authCode: queryParams.get("authcode")
+    }
+    const [time, setTime] = useState(false);
+    const [count, setCount] = useState(-2);
     const [isLogin,setIsLogin] = useRecoilState(loginState);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setCount(count - 1);
+        }, 1000);
+
+        return () => {
+            clearTimeout(timer);
+        };
+    }, [count]);
+
+    useEffect(() => {
+        if (count === -1) {
+          setTime(false);
+          setIsLogin(true);
+          window.close();
+        }
+      }, [count]);
 
     const login = () => {
         //yourD 서버로 유저가 검증됐는지 요청해야함.
         // 확인후 true면 로그인
-        setIsLogin(true);
-        navigate('/project');
+        setTime(true);
+        // window.opener.postMessage({loginStatus: true}, "*");
+        setCount(5);
+        navigation('/project');
     }
-
     const YourDVCInfo = {
         "header": {
             "alg": "ES256",

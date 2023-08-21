@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { projectState, projectType } from "../../recoil/dashBoard/project";
-import Menu from "./menu";
+import Menu from "./sideBar";
 
 export default function Settings() {
     const location = useLocation();
@@ -23,18 +23,17 @@ export default function Settings() {
     const HandleSave = () => {
 
         let newPJArray = project.map((pj) => {
-            if (pj.ProjectID === item.ProjectID) {
+            if (pj.clientId === item.ProjectID) {
                 return { ...pj, ProjectName: newProjectName }
             }
             return pj;
         });
         updateProject(newPJArray);
-
     }
 
     const HandleLoginURL = () => {
         let newPJArray = project.map((pj) => {
-            if (pj.ProjectID === item.ProjectID) {
+            if (pj.clientId === item.ProjectID) {
                 return { ...pj, WebLoginURL: newLoginURL }
             }
             return pj;
@@ -43,7 +42,7 @@ export default function Settings() {
     }
 
     const HandleDelete = () => {
-        let newPJArray = project.filter((pj) => pj.ProjectID !== item.ProjectID);
+        let newPJArray = project.filter((pj) => pj.clientId !== item.ProjectID);
         updateProject(newPJArray);
     }
 
@@ -53,26 +52,18 @@ export default function Settings() {
             <div className="bg-white p-3 text-black border rounded-lg mb-5">
                 <div className="text-md font-medium ml-1">Project Name</div>
                 <div className="flex w-full justify-between items-center">
-                    <input className="h-12 text-lg bg-black/5 my-2 pl-3 rounded-lg w-full" placeholder={`${item.ProjectName}`} onChange={(e) => ChangeName(e)} />
+                    <input className="h-12 text-lg bg-black/5 my-2 pl-3 rounded-lg w-full" placeholder={`${item.projectName}`} onChange={(e) => ChangeName(e)} />
                     <button className="w-20 h-10 border rounded-lg text-white bg-[#006ECD]  mx-4 font-semibold px-2 border-gray-400 shadow hover:text-gray-300" onClick={() => HandleSave()}> SAVE</button>
                     <button className="w-18 h-10 bg-white hover:bg-gray-100 text-gray-800 font-semibold px-2 border border-gray-400 rounded-lg shadow">Cancle</button>
                 </div>
             </div>
             <div className="bg-white p-3 text-black border rounded-lg mb-5">
-                <div className="text-md font-medium ml-1">Login URL</div>
-                <div className="flex w-full justify-center items-center">
-                    <input className="h-12 text-lg bg-black/5 my-2 pl-3 rounded-lg w-full" placeholder={`${item.WebLoginURL}`} onChange={(e) => ChangeLoginUrl(e)} />
-                    <button className="w-20 h-10 border rounded-lg text-white bg-[#006ECD]  mx-4 font-semibold px-2 border-gray-400 shadow hover:text-gray-300" onClick={() => HandleLoginURL()}> SAVE</button>
-                    <button className="w-18 h-10 bg-white hover:bg-gray-100 text-gray-800 font-semibold px-2 border border-gray-400 rounded-lg shadow">Cancle</button>
-                </div>
-            </div>
-            <div className="bg-white p-3 text-black border rounded-lg mb-5">
-                {item.RedirectURLs.map((pj: any, index: any) => {
+                {item.redirectURLs.map((pj: any, index: any) => {
                     return (
                         <div>
                             <div className="text-md font-medium ml-1">Redirect URL {index + 1}</div>
                             <div className="flex w-full justify-center items-center">
-                                <input className="h-12 text-lg bg-black/5 my-2 pl-3 rounded-lg w-full" placeholder={`${item.RedirectURLs[index]}`} onChange={(e) => ChangeLoginUrl(e)} />
+                                <input className="h-12 text-lg bg-black/5 my-2 pl-3 rounded-lg w-full" placeholder={`${item.redirectURLs[index]}`} onChange={(e) => ChangeLoginUrl(e)} />
                                 <button className="w-20 h-10 border rounded-lg text-white bg-[#006ECD] mx-4 font-semibold px-2 border-gray-400 shadow hover:text-gray-300" onClick={() => HandleLoginURL()}> SAVE</button>
                                 <button className="w-18 h-10 bg-white hover:bg-gray-100 text-gray-800 font-semibold px-2 border border-gray-400 rounded-lg shadow">Cancle</button>
                             </div>

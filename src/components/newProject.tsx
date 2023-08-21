@@ -3,15 +3,13 @@ import { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import { useRecoilState } from "recoil";
 import { Close } from "../assets/icons/close";
-import { projectModalState, projectState, redirectURLState } from "../recoil/dashBoard/project";
+import { projectModalState, projectState } from "../recoil/dashBoard/project";
 
 export default function NewProject() {
   const [modal, setModal] = useRecoilState(projectModalState);
   const [projectName, setProjectName] = useState("");
-  const [redirectUrl, setRedirectUrl] = useRecoilState(redirectURLState);
   const [project, setProject] = useRecoilState(projectState);
   const [redirectUrls, setRedirectUrls] = useState<any>([""]);
-  const [webLoginUrl,setWebLoginUrl] = useState<string>("");
 
 
   useEffect(() => {
@@ -40,12 +38,10 @@ export default function NewProject() {
     let newProject = [
       ...project, 
       { 
-        ProjectName: projectName, 
-        ServiceDID: "DID:YourD:1234", 
-        StartProjectDate: new Date().getTime(), 
-        RedirectURLs: redirectUrls,
-        WebLoginURL:webLoginUrl,
-        ProjectID:randomNumberInRange(100000,999999)
+        projectName: projectName, 
+        startProjectDate: new Date().getTime(), 
+        redirectURLs: redirectUrls,
+        clientId:randomNumberInRange(100000,999999)
       }
     ];
     // newProject.push({...{ProjectName:projectName,ServiceDID:project[project.length-1].ServiceDID}})
@@ -65,7 +61,7 @@ export default function NewProject() {
   }
 
   return (
-    <div className="absolute w-9/12 h-auto bg-gray-300 left-1/2 right-1/2 -translate-x-1/2 antialiased  rounded-lg border border-gray-300 shadow-xl">
+    <div className="absolute w-9/12 h-auto bg-gray-300 left-1/2 right-1/2 -translate-x-1/2 antialiased  rounded-lg border border-gray-300 shadow-xl z-10">
       <div className="flex p-3 bg-white border-b border-gray-200 rounded-tl-lg rounded-tr-lg">
         <p className="font-semibold text-gray-800">New Project</p>
       </div>
@@ -79,14 +75,6 @@ export default function NewProject() {
           className="p-5  bg-white border border-gray-200 rounded shadow-sm h-12 mb-1"
         />
         <div className="text-gray-500 mb-3 ml-2">The name is used only to identify the client.</div>
-        <p className="mb-2 font-semibold text-gray-700">WebLogin Url</p>
-        <input
-          type="text"
-          placeholder="Type WebLogin URL"
-          id="Server Url"
-          onChange={(e) => setWebLoginUrl(e.target.value)}
-          className="p-5  bg-white border border-gray-200 rounded shadow-sm h-12 mb-3"
-        />
         <div className="relative mb-3">
           <p className="mb-2 font-semibold text-gray-700">Redirect Url 1</p>
           <input
