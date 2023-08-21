@@ -60,7 +60,7 @@ export default function Settings() {
             <div className="bg-white p-3 text-black border rounded-lg mb-5">
                 {item.redirectURLs.map((pj: any, index: any) => {
                     return (
-                        <div>
+                        <div key={index}>
                             <div className="text-md font-medium ml-1">Redirect URL {index + 1}</div>
                             <div className="flex w-full justify-center items-center">
                                 <input className="h-12 text-lg bg-black/5 my-2 pl-3 rounded-lg w-full" placeholder={`${item.redirectURLs[index]}`} onChange={(e) => ChangeLoginUrl(e)} />

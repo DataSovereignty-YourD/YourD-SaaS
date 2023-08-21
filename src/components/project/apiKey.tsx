@@ -2,15 +2,17 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom"
 import { Close } from "../../assets/icons/close";
+import Path from "./path";
 
 export default function ApiKey() {
     const location = useLocation()
+    const pathName = location.pathname;
     const { item } = location.state;
     const apikey1 = "ab090990336c0a8b0809b809";
     const tezosEndpoint = "https://tezos.com";
     const klaytnEndpoint = "https://klaytn.foundation/";
     const [copied, setCopied] = useState([false,false]);
-
+    
     useEffect(() => {
         const timeout = setTimeout(() => {
             if (copied[0]) setCopied([false, copied[1]]);
@@ -28,9 +30,9 @@ export default function ApiKey() {
         });
     }
 
-
     return (
         <div id="ApiKey" >
+            <Path pathname={pathName}/>
             <h1 className="font-bold text-black py-2 uppercase text-2xl">ApiKey</h1>
             <div className="text-black flex  text-xl my-3">
                 <div className="font-medium">ProjectID: </div>
