@@ -130,9 +130,20 @@ export default function ProjectListPage() {
           ) : (
             <div
               onClick={() => newProject()}
-              className="transition-all w-1/2 h-[150px] ease-in-out duration-500 rounded-lg justify-center p-5 shadow-md m-2 mt-4  hover:shadow-lg hover:bg-gray-200"
+              className="flex text-l font-bold transition-all w-full h-[150px] ease-in-out duration-500 rounded-lg  p-5 shadow-md m-2 mt-4  hover:shadow-lg hover:bg-gray-200"
             >
-              A New Project
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: projectList[0].svgurl,
+                }}
+                className="mr-2"
+              />
+              <div className="flex flex-col">
+                A New Project
+                <button className="bg-[#2096F3] text-white py-2 px-4 rounded-lg mt-2 w-40">
+                  {projectList[1].buttontext}
+                </button>
+              </div>
             </div>
           )}
 
