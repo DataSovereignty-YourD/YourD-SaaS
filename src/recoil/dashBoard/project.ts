@@ -25,3 +25,21 @@ export const projectValue = selector({
         return projectInfo;
     }
 })
+
+export const currentProjectState = atom<projectType>({
+    key:"currentProjectState",
+    default: { 
+        projectName: '',
+        startProjectDate:0,
+        clientId:0,
+        redirectURLs:''
+    }
+})
+
+export const currentProjectVaule = selector<projectType>({
+    key:"currentProjectVaule",
+    get:({get})=> {
+        const currentProject = get(currentProjectState);
+        return currentProject;
+    }
+})
