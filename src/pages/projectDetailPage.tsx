@@ -5,6 +5,7 @@ import ApiKey from "../components/project/apiKey";
 import DashBoard from "../components/project/dashboard";
 import Settings from "../components/project/settings";
 import SideBar from "../components/project/sideBar";
+import UserManagement from "../components/project/user";
 import { currentProjectVaule } from "../recoil/dashBoard/project";
 
 export default function ProjectDetailPage() {
@@ -31,6 +32,7 @@ export default function ProjectDetailPage() {
           <Routes>
             <Route path="dashboard" element={<DashBoard />} />
             <Route path="apikey" element={<ApiKey  item={item}/>}/>
+            <Route path="usermanagement" element={<UserManagement item={item}/>}/>
             <Route path="settings" element={<Settings item={item}/>} />
           </Routes>
         </div>
