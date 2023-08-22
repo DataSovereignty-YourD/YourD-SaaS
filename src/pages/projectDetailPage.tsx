@@ -17,7 +17,7 @@ export default function ProjectDetailPage() {
     <div className="antialiased w-screen h-[calc(100vh-48px)] text-slate-300 relative overflow-auto flex border-t-2 ">
       <div
         id="sidebar"
-        className="bg-white border-r-2 w-[200px] p-6 translate-x-300 "
+        className="bg-white border-r-2 max-w-[200px] py-2 translate-x-300"
       >
         <SideBar item={item} />
       </div>
