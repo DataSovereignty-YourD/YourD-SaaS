@@ -1,13 +1,11 @@
 import { atom, selector } from "recoil";
 
 export interface projectType {
-    ProjectName: string,
-    ServiceDID?: string,
-    StartProjectDate: number,
+    projectName: string,
+    startProjectDate: number,
     QR?:any,
-    ProjectID:number,
-    RedirectURLs:any,
-    WebLoginURL:string,
+    clientId:number,
+    redirectURLs:any,
 }
 
 export const projectModalState = atom({
@@ -26,9 +24,4 @@ export const projectValue = selector({
         const projectInfo = get(projectState);
         return projectInfo;
     }
-})
-
-export const redirectURLState = atom({
-    key: 'redirectURLState',
-    default: []
 })

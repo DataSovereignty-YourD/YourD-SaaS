@@ -1,16 +1,17 @@
 import { Link, Navigate, useNavigate, useNavigation } from "react-router-dom";
 import { projectType } from "../../recoil/dashBoard/project";
 
-export default function Menu({ item }: { item: projectType }) {
+export default function SideBar({ item }: { item: projectType }) {
+    console.log(item);
     const navigator = useNavigate();
 
     return (
-        <div className="border-r-2 pr-2 min-h-[90vh] h-full">
+        <div className=" pr-2 min-h-[90vh] h-full">
             <p className="text-black text-mb font-medium mb-2">Welcome back,</p>
             <div className="flex flex-col space-y-2 md:space-y-0 md:flex-row mb-5 items-center md:space-x-2 hover:bg-white group transition duration-150 ease-linear rounded-lg group w-full py-3 px-2">
                 <div>
-                    <p className="text-xl font-medium group-hover:text-indigo-400 text-black leading-3 mb-2 ">{item.ProjectName}</p>
-                    <span className="text-s text-black">ProjectID: {item.ProjectID}</span>
+                    <p className="text-xl font-medium group-hover:text-indigo-400 text-black leading-3 mb-2 ">{item.projectName}</p>
+                    <span className="text-s text-black">ClientID: {item.clientId}</span>
                 </div>
             </div>
             <hr className="my-2 border-slate-700" />
@@ -57,7 +58,7 @@ export default function Menu({ item }: { item: projectType }) {
 
                     </div>
                 </div>
-                <Link to={`/project/${item.ProjectID}/settings`} state={{item:item}} className="hover:bg-white/10 transition duration-150 ease-linear rounded-lg py-3 px-2 group">
+                <Link to={`settings`} state={{item:item}} className="hover:bg-white/10 transition duration-150 ease-linear rounded-lg py-3 px-2 group ">
                     <div className="flex flex-col space-y-2 md:flex-row md:space-y-0 space-x-2 items-center">
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6 group-hover:text-indigo-400">

@@ -47,8 +47,8 @@ export default function ProjectListPage() {
                                         className="col-span-1 h-fit transition-all  ease-in-out duration-500 rounded-2xl justify-center p-5 shadow-md m-2 mt-4 min-w-full hover:shadow-lg hover:bg-gray-200 border">
                                         {/* <div className="text-xs font-bold uppercase text-teal-700 mt-1 mb-2">{item.ServiceDID}</div> */}
                                         <div className="flex">
-                                            <div className="text-xl font-bold mb-2"> Name: {item.ProjectName}</div>
-                                            <div className="text-lg right-2 ml-auto font-bold">Project ID: {item.ProjectID}</div>
+                                            <div className="text-xl font-bold mb-2"> Name: {item.projectName}</div>
+                                            <div className="text-lg right-2 ml-auto font-bold">Project ID: {item.clientId}</div>
                                         </div>
                                         <div>
                                             <div className="flex ">
@@ -62,10 +62,10 @@ export default function ProjectListPage() {
                                                 <div className="flex">
                                                     <div className="font-bold">Create: &nbsp;</div>
                                                     <div>
-                                                        {ProjectDate(item.StartProjectDate)}
+                                                        {ProjectDate(item.startProjectDate)}
                                                     </div>
                                                 </div>
-                                                <Link to={`${item.ProjectID}/dashboard`} state={{ item: item }} className="flex items-center w-fit font-bold bg-[#2096F3] rounded-xl px-3 text-white -mt-4">
+                                                <Link to={`${item.clientId}/dashboard`} state={{ item: item }} className="flex items-center w-fit font-bold bg-[#2096F3] rounded-xl px-3 text-white -mt-4">
                                                     <div className="flex ml-auto">DashBoard</div>
                                                     <img src={Right} className="w-10 resize-x -scale-x-100 -mr-3" />
                                                 </Link>

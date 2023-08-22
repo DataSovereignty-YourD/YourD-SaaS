@@ -1,4 +1,4 @@
-import SignInBox from "../components/SignInBox";
+import SignInBox from "../components/signInBox";
 
 export default function SignInPage() {
     return (
