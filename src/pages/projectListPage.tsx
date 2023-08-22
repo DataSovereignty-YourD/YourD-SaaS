@@ -1,11 +1,10 @@
 
-import { Link, Outlet, Route, Routes, useNavigate } from "react-router-dom";
+import { Link} from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
 import NewProject from "../components/newProject";
 import { currentProjectState, projectModalState, projectValue } from "../recoil/dashBoard/project";
 import { loginValue } from "../recoil/loginState";
 import Right from "../assets/icons/Right.png";
-import ProjectDetailPage from "./projectDetailPage";
 import { useEffect } from "react";
 
 export default function ProjectListPage() {
@@ -13,7 +12,6 @@ export default function ProjectListPage() {
     const [selectProject,setSelectProject] = useRecoilState(currentProjectState);
     const isLogin = useRecoilValue(loginValue);
     const project = useRecoilValue(projectValue);
-    const navigator = useNavigate();
 
     useEffect(() => { console.log(project) }, [project])
 
