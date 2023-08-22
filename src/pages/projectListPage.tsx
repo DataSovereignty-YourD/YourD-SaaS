@@ -2,7 +2,7 @@
 import { Link, Outlet, Route, Routes, useNavigate } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
 import NewProject from "../components/newProject";
-import { projectModalState, projectValue } from "../recoil/dashBoard/project";
+import { currentProjectState, projectModalState, projectValue } from "../recoil/dashBoard/project";
 import { loginValue } from "../recoil/loginState";
 import Right from "../assets/icons/Right.png";
 import ProjectDetailPage from "./projectDetailPage";
@@ -10,6 +10,7 @@ import { useEffect } from "react";
 
 export default function ProjectListPage() {
     const [modalOpen, setModalOpen] = useRecoilState(projectModalState);
+    const [selectProject,setSelectProject] = useRecoilState(currentProjectState);
     const isLogin = useRecoilValue(loginValue);
     const project = useRecoilValue(projectValue);
     const navigator = useNavigate();
@@ -65,7 +66,7 @@ export default function ProjectListPage() {
                                                         {ProjectDate(item.startProjectDate)}
                                                     </div>
                                                 </div>
-                                                <Link to={`${item.clientId}/dashboard`} state={{ item: item }} className="flex items-center w-fit font-bold bg-[#2096F3] rounded-xl px-3 text-white -mt-4">
+                                                <Link to={`${item.clientId}/dashboard`} onClick={()=>{setSelectProject(item)}} className="flex items-center w-fit font-bold bg-[#2096F3] rounded-xl px-3 text-white -mt-4">
                                                     <div className="flex ml-auto">DashBoard</div>
                                                     <img src={Right} className="w-10 resize-x -scale-x-100 -mr-3" />
                                                 </Link>

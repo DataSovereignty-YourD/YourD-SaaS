@@ -2,12 +2,12 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom"
 import { Close } from "../../assets/icons/close";
+import { projectType } from "../../recoil/dashBoard/project";
 import Path from "./path";
 
-export default function ApiKey() {
-    const location = useLocation()
+export default function ApiKey({item}:{item:projectType}) {
+    const location = useLocation();
     const pathName = location.pathname;
-    const { item } = location.state;
     const apikey1 = "ab090990336c0a8b0809b809";
     const tezosEndpoint = "https://tezos.com";
     const klaytnEndpoint = "https://klaytn.foundation/";
@@ -35,8 +35,8 @@ export default function ApiKey() {
             <Path pathname={pathName}/>
             <h1 className="font-bold text-black py-2 uppercase text-2xl">ApiKey</h1>
             <div className="text-black flex  text-xl my-3">
-                <div className="font-medium">ProjectID: </div>
-                <div className="ml-2 ">{item.ProjectID}</div>
+                <div className="font-medium">ClientID: </div>
+                <div className="ml-2 ">{item.clientId}</div>
             </div>
             <div className="relative w-full p-4 rounded-xl bg-white text-black border-gray-400 border my-10">
                 <div>API KEY</div>

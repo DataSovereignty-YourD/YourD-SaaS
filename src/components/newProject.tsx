@@ -10,7 +10,7 @@ export default function NewProject() {
   const [projectName, setProjectName] = useState("");
   const [project, setProject] = useRecoilState(projectState);
   const [redirectUrls, setRedirectUrls] = useState<any>([""]);
-
+  //did 체인 선택, 서비스 체인 선택 항목 추가
 
   useEffect(() => {
     if (modal) document.body.style.overflow = "hidden"; // 모달이 열릴 때 스크롤을 막습니다. 

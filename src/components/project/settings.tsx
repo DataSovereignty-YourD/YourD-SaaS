@@ -2,13 +2,12 @@ import { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { projectState, projectType } from "../../recoil/dashBoard/project";
+import Path from "./path";
 import Menu from "./sideBar";
 
-export default function Settings() {
+export default function Settings({item}:{item:projectType}) {
     const location = useLocation();
-    const { item } = location.state
-    const [newProjectName, setNewProjectName] = useState(item.ProjectName);
-    const [newLoginURL, setNewLoginURL] = useState(item.WebLoginURL);
+    const [newProjectName, setNewProjectName] = useState(item.projectName);
     const [project, updateProject] = useRecoilState(projectState);
 
 
@@ -16,14 +15,10 @@ export default function Settings() {
         setNewProjectName(e.target.value);
     }
 
-    const ChangeLoginUrl = (e: any) => {
-        setNewLoginURL(e.target.value);
-    }
-
     const HandleSave = () => {
 
         let newPJArray = project.map((pj) => {
-            if (pj.clientId === item.ProjectID) {
+            if (pj.clientId === item.clientId) {
                 return { ...pj, ProjectName: newProjectName }
             }
             return pj;
@@ -31,23 +26,24 @@ export default function Settings() {
         updateProject(newPJArray);
     }
 
-    const HandleLoginURL = () => {
-        let newPJArray = project.map((pj) => {
-            if (pj.clientId === item.ProjectID) {
-                return { ...pj, WebLoginURL: newLoginURL }
-            }
-            return pj;
-        });
-        updateProject(newPJArray);
-    }
+    // const HandleLoginURL = () => {
+    //     let newPJArray = project.map((pj) => {
+    //         if (pj.clientId === item.clientId) {
+    //             return { ...pj, WebLoginURL: newLoginURL }
+    //         }
+    //         return pj;
+    //     });
+    //     updateProject(newPJArray);
+    // }
 
     const HandleDelete = () => {
-        let newPJArray = project.filter((pj) => pj.clientId !== item.ProjectID);
+        let newPJArray = project.filter((pj) => pj.clientId !== item.clientId);
         updateProject(newPJArray);
     }
 
     return (
-        <div id="ApiKey" >
+        <div id="Settings" >
+            <Path pathname={location.pathname}/>
             <h1 className="font-bold text-black py-2 uppercase text-2xl">Settings</h1>
             <div className="bg-white p-3 text-black border rounded-lg mb-5">
                 <div className="text-md font-medium ml-1">Project Name</div>
@@ -57,7 +53,7 @@ export default function Settings() {
                     <button className="w-18 h-10 bg-white hover:bg-gray-100 text-gray-800 font-semibold px-2 border border-gray-400 rounded-lg shadow">Cancle</button>
                 </div>
             </div>
-            <div className="bg-white p-3 text-black border rounded-lg mb-5">
+            {/* <div className="bg-white p-3 text-black border rounded-lg mb-5">
                 {item.redirectURLs.map((pj: any, index: any) => {
                     return (
                         <div key={index}>
@@ -70,7 +66,7 @@ export default function Settings() {
                         </div>
                     )
                 })}
-            </div>
+            </div> */}
             <div className="bg-white p-4 text-black border rounded-lg">
                 <div className="flex w-full justify-between items-center">
                     <div className="text-lg font-bold ml-1 text-red-500">Project Delete</div>

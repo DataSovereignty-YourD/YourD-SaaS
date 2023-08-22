@@ -1,10 +1,12 @@
 import { ResponsiveLine } from "@nivo/line";
+import { ResponsiveBarCanvas } from '@nivo/bar'
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { projectType } from "../../recoil/dashBoard/project";
 import Path from "./path";
 import {IoIosArrowUp,IoIosArrowDown} from "react-icons/io";
-export default function DashBoard({ item }: { item: projectType }) {
+import { incomeData, userGrowthData } from "../../test/dashboardTestData";
+export default function DashBoard() {
   const location = useLocation();
   const pathName = location.pathname;
 
@@ -43,16 +45,16 @@ export default function DashBoard({ item }: { item: projectType }) {
   return (
     <div id="dashboard">
       <div id="24h ">
+        <Path pathname={pathName} />
         <h1 className="font-bold text-black mb-2 uppercase text-2xl">
           OverView
         </h1>
-        <Path pathname={pathName} />
         <div id="total" className=" mb-5 ">
           <div className="flex gap-6 my-5">
-            {analyticsData.map((data) => {
+            {analyticsData.map((data,index) => {
               return (
-                <div className="bg-white min-w-[200px] w-full p-3 text-gray-500 font-bold rounded-sm shadow-md" style={{borderBottomColor:data.color,borderBottomWidth:3}}>
-                  <div className="mb-3">{data.title.toUpperCase()}</div>
+                <div key={data.title} className="bg-white min-w-[200px] w-full p-3  font-bold rounded-sm shadow-md" style={{borderBottomColor:data.color,borderBottomWidth:3}}>
+                  <div className="mb-3 text-gray-500">{data.title.toUpperCase()}</div>
                   <div className="flex items-center gap-2 my-2">
                     <div>{data.icon}</div>
                     <div className="text-black font-extrabold text-2xl">{data.value}</div>
@@ -61,9 +63,19 @@ export default function DashBoard({ item }: { item: projectType }) {
               );
             })}
           </div>
-          <div className="h-96 w-full  bg-white rounded-lg p-2 ">
-            <div>User Grow Graph</div>
-            {MyResponsiveLine({ data: exdata })}
+          <div className="flex h-[500px] w-full bg-white rounded-lg shadow-md gap-6">
+            <div className="w-2/3 h-full">
+              <div className="font-bold  text-gray-500 border-b-2 p-4"> User Growth Analysis</div>
+              <div className="w-full h-full">
+                {MyResponsiveLine({ data: userGrowthData })}
+              </div>
+            </div>
+            <div className="w-1/3">
+            <div className="font-bold  text-gray-500 border-b-2 p-4"> D-Ad Incomes</div>
+              <div className=" h-5/6 overflow-visible pr-6">
+                {MyResponsiveBarCanvas({data:incomeData})}
+              </div>
+            </div>
           </div>
         </div>
 
@@ -318,155 +330,117 @@ export default function DashBoard({ item }: { item: projectType }) {
   );
 }
 
-const exdata = [
-  {
-    id: "Total User",
-    color: "hsl(74, 70%, 50%)",
-    data: [
-      {
-        x: "6/28",
-        y: 967,
-      },
-      {
-        x: "6/29",
-        y: 1002,
-      },
-      {
-        x: "6/30",
-        y: 1105,
-      },
-      {
-        x: "6/31",
-        y: 1175,
-      },
-      {
-        x: "7/1",
-        y: 1299,
-      },
-      {
-        x: "7/2",
-        y: 1496,
-      },
-      {
-        x: "7/3",
-        y: 1652,
-      },
-      {
-        x: "7/4",
-        y: 1785,
-      },
-      {
-        x: "7/5",
-        y: 1986,
-      },
-    ],
-  },
-  {
-    id: "New User",
-    color: "hsl(41, 70%, 50%)",
-    data: [
-      {
-        x: "6/28",
-        y: 24,
-      },
-      {
-        x: "6/29",
-        y: 35,
-      },
-      {
-        x: "6/30",
-        y: 103,
-      },
-      {
-        x: "6/31",
-        y: 70,
-      },
-      {
-        x: "7/1",
-        y: 124,
-      },
-      {
-        x: "7/2",
-        y: 97,
-      },
-      {
-        x: "7/3",
-        y: 164,
-      },
-      {
-        x: "7/4",
-        y: 133,
-      },
-      {
-        x: "7/5",
-        y: 201,
-      },
-    ],
-  },
-];
-
-const MyResponsiveLine = ({ data /* see data tab */ }: any) => (
-  <ResponsiveLine
-    data={data}
-    margin={{ top: 10, right: 90, bottom: 30, left: 50 }}
-    xScale={{ type: "point" }}
-    yScale={{
-      type: "linear",
-      min: "auto",
-      max: "auto",
-      // stacked: true,
-      reverse: false,
-    }}
-    yFormat=" >-.2f"
-    axisTop={null}
-    axisRight={null}
-    axisBottom={{
-      tickSize: 5,
-      tickPadding: 5,
-      tickRotation: 0,
-      legend: "transportation",
-      legendOffset: 36,
-      legendPosition: "middle",
-    }}
-    axisLeft={{
-      tickSize: 5,
-      tickPadding: 5,
-      tickRotation: 0,
-      legend: "user",
-      legendOffset: -40,
-      legendPosition: "middle",
-    }}
-    pointSize={10}
-    pointColor={{ theme: "background" }}
-    pointBorderWidth={2}
-    pointBorderColor={{ from: "serieColor" }}
-    pointLabelYOffset={-12}
-    useMesh={true}
-    legends={[
-      {
-        anchor: "bottom-right",
-        direction: "column",
-        justify: false,
-        translateX: 100,
-        translateY: 0,
-        itemsSpacing: 0,
-        itemDirection: "left-to-right",
-        itemWidth: 80,
-        itemHeight: 20,
-        itemOpacity: 0.75,
-        symbolSize: 13,
-        symbolShape: "circle",
-        symbolBorderColor: "rgba(0, 0, 0, .5)",
-        effects: [
-          {
-            on: "hover",
-            style: {
-              itemBackground: "rgba(0, 0, 0, .03)",
-              itemOpacity: 1,
+const MyResponsiveLine = ({ data }: any) => (
+    <ResponsiveLine
+      data={data}
+      margin={{ top: 20, right: 30, bottom: 130, left: 60 }}
+      xScale={{ type: "point" }}
+      yScale={{
+        type: "linear",
+        min: "auto",
+        max: "auto",
+        reverse: false,
+      }}
+      yFormat=" >-.2f"
+      axisBottom={{
+        tickSize: 10,
+        tickPadding: 5,
+        tickRotation: 0,
+        legend: "Date",
+        legendOffset: 36,
+        legendPosition: "start",
+      }}
+      axisLeft={{
+        tickSize: 5,
+        tickPadding: 5,
+        tickRotation: 0,
+        legend: "user",
+        legendOffset: -40,
+        legendPosition: "start",
+      }}
+      pointSize={10}
+      pointColor={{ theme: "background" }}
+      pointBorderWidth={3}
+      pointBorderColor={{ from: "serieColor" }}
+      useMesh={true}
+      legends={[
+        {
+          anchor: "bottom",
+          direction: "row",
+          justify: false,
+          translateY:50,
+          itemWidth: 80,
+          itemHeight: 10,
+          symbolSize: 18,
+          symbolShape: "circle",
+          symbolBorderColor: "rgba(0, 0, 0, .5)",
+          effects: [
+            {
+              on: "hover",
+              style: {
+                itemBackground: "rgba(0, 0, 0, .03)",
+                itemOpacity: 1,
+              },
             },
-          },
-        ],
-      },
-    ]}
-  />
+          ],
+        },
+      ]}
+    />
 );
+
+const MyResponsiveBarCanvas = ({ data /* see data tab */ }:{data:any}) => (
+  <ResponsiveBarCanvas
+      data={data}
+      keys={[
+          'hot dog',
+          'burger',
+      ]}
+      indexBy="Date"
+      
+      margin={{ top: 20, right: 0, bottom:20, left: 60 }}
+      pixelRatio={2}
+      padding={0.2}
+      innerPadding={0}
+      minValue="auto"
+      maxValue="auto"
+      groupMode="stacked"
+      layout="vertical"
+      reverse={false}
+      valueScale={{ type: 'linear' }}
+      colors={{ scheme: 'pastel2' }}
+      colorBy="id"
+      borderRadius={0}
+      axisRight={null}
+      axisBottom={{
+          tickSize: 5,
+          tickPadding: 5,
+          tickRotation: 0,
+          legend: 'Date',
+          legendPosition: 'start',
+          legendOffset: 36
+      }}
+      axisLeft={{
+          tickSize: 5,
+          tickPadding: 5,
+          tickRotation: 0,
+          legend: 'incomes',
+          legendPosition: 'start',
+          legendOffset: -40
+      }}
+      enableGridY={true}
+      enableLabel={true}
+      labelSkipWidth={12}
+      labelSkipHeight={12}
+      labelTextColor={{
+          from: 'color',
+          modifiers: [
+              [
+                  'darker',
+                  1.6
+              ]
+          ]
+      }}
+      isInteractive={true}
+      legends={[]}
+  />
+)

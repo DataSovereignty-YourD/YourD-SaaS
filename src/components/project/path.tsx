@@ -2,28 +2,19 @@ import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 export default function Path({ pathname }: { pathname: string }) {
-  // 맨처음 홈 아이콘 추가
-  // 아래처럼 나오게
-  // {홈 아이콘}/경로
-  // 홈 클릭하면 dashboard로 넘어가게
   const navigate = useNavigate();
-
-  const lastDashboardIndex = pathname.lastIndexOf("dashboard");
-  const result = pathname.slice(0, lastDashboardIndex + "dashboard".length);
-  const pathAfterDashboard = pathname.slice(
-    lastDashboardIndex + "dashboard".length
-  );
-
+  const HomePathName = pathname.split("/").slice(1,3);
+  console.log(HomePathName);
   const arrayPathName = pathname.split("/").slice(3);
 
   const onClickImg = () => {
-    navigate("result");
+    navigate(`/project/${HomePathName[1]}/dashboard`);
   };
   return (
     <div className="inline-flex items-center">
-      <span>
+      <span onClick={onClickImg}>
         <svg
-          className="h-9 w-9 text-black-700"
+          className="h-6 w-6 text-black-700"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -36,7 +27,7 @@ export default function Path({ pathname }: { pathname: string }) {
           />
         </svg>
       </span>
-      <span className="text-xl flex min-w-[200px] p-1 text-gray-500 font-bold uppercase ">
+      <span className="text-lg flex min-w-[200px] p-1 text-gray-500 font-bold uppercase ">
         {arrayPathName.map((data) => {
           return <div>/ {data}</div>;
         })}

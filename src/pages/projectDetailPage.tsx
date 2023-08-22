@@ -1,14 +1,17 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { useRecoilState, useRecoilValue } from "recoil";
 import ApiKey from "../components/project/apiKey";
 import DashBoard from "../components/project/dashboard";
 import Settings from "../components/project/settings";
 import SideBar from "../components/project/sideBar";
+import { currentProjectState, currentProjectVaule } from "../recoil/dashBoard/project";
 
 export default function ProjectDetailPage() {
-  const location = useLocation();
-  const { item } = location.state;
+  // const location = useLocation();
+  // const { item } = location.state;
+  const item = useRecoilValue(currentProjectVaule);
   document.body.style.overflowX = "hidden";
 
   return (
@@ -24,12 +27,12 @@ export default function ProjectDetailPage() {
        */}
         <div
           id="content"
-          className="w-full bg-gray-100 rounded-lg px-4 py-8 overflow-auto min-w-fit"
+          className="w-full bg-gray-100 rounded-lg px-4 py-4 overflow-auto min-w-fit"
         >
           <Routes>
-            <Route path="dashboard" element={<DashBoard item={item} />} />
-            <Route path="apikey" element={<ApiKey />} />
-            <Route path="settings" element={<Settings />} />
+            <Route path="dashboard" element={<DashBoard />} />
+            <Route path="apikey" element={<ApiKey  item={item}/>}/>
+            <Route path="settings" element={<Settings item={item}/>} />
           </Routes>
         </div>
     </div>
