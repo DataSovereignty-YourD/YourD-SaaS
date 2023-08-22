@@ -1,7 +1,6 @@
 
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom"
-import { Close } from "../../assets/icons/close";
 import { projectType } from "../../recoil/dashBoard/project";
 import Path from "./path";
 
@@ -33,7 +32,7 @@ export default function ApiKey({item}:{item:projectType}) {
     return (
         <div id="ApiKey" >
             <Path pathname={pathName}/>
-            <h1 className="font-bold text-black py-2 uppercase text-2xl">ApiKey</h1>
+            <h1 className="font-bold text-black mb-2 uppercase text-2xl">ApiKey</h1>
             <div className="text-black flex  text-xl my-3">
                 <div className="font-medium">ClientID: </div>
                 <div className="ml-2 ">{item.clientId}</div>

@@ -34,7 +34,7 @@ export default function SideBar({ item }: { item: projectType }) {
     ];
 
     return (
-        <div className=" pr-2 min-h-[90vh] h-full">
+        <div className=" pr-2 min-h-[90vh] h-full hidden">
             <p className="text-black text-mb font-medium mb-2">Welcome back,</p>
             <div className="flex flex-col space-y-2 md:space-y-0 md:flex-row mb-5 items-center md:space-x-2 hover:bg-white group transition duration-150 ease-linear rounded-lg group w-full py-3 px-2">
                 <div>

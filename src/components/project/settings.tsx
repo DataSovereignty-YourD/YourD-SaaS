@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useState } from "react";
+import { useLocation} from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { projectState, projectType } from "../../recoil/dashBoard/project";
 import Path from "./path";
-import Menu from "./sideBar";
 
 export default function Settings({item}:{item:projectType}) {
     const location = useLocation();
@@ -44,7 +43,7 @@ export default function Settings({item}:{item:projectType}) {
     return (
         <div id="Settings" >
             <Path pathname={location.pathname}/>
-            <h1 className="font-bold text-black py-2 uppercase text-2xl">Settings</h1>
+            <h1 className="font-bold text-black uppercase text-2xl">Settings</h1>
             <div className="bg-white p-3 text-black border rounded-lg mb-5">
                 <div className="text-md font-medium ml-1">Project Name</div>
                 <div className="flex w-full justify-between items-center">
