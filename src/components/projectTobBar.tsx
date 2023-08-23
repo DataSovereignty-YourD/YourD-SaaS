@@ -6,6 +6,20 @@ import { projectModalState } from "../recoil/dashBoard/project";
 import React, { useState } from "react";
 import { sideBarToggleState } from "../recoil/sideBarToggle";
 import classNames from "classnames";
+import {
+  AiOutlineSearch,
+  AiOutlineMenuUnfold,
+  AiOutlineMore,
+  AiOutlineClose,
+  AiOutlineMenuFold,
+  AiOutlineMessage,
+} from "react-icons/ai";
+import {
+  IoMdNotificationsOutline,
+  IoMdPeople,
+  IoMdTime,
+  IoIosTimer,
+} from "react-icons/io";
 
 export default function ProjectTopBar() {
   const location = useLocation();
@@ -15,6 +29,7 @@ export default function ProjectTopBar() {
     useRecoilState(sideBarToggleState);
   const [isSearchBarVisible, setSearchBarVisible] = useState(false);
   const pathName = location.pathname;
+  const isMain = pathName === "/project";
 
   const handleSearchIconClick = () => {
     return setSearchBarVisible(!isSearchBarVisible);
@@ -42,71 +57,41 @@ export default function ProjectTopBar() {
 
   return (
     <div className="fixed  bg-white w-full h-12 flex items-center z-20">
-      <button
-        onClick={() => setSidebarVisible((prev) => !prev)}
-        className="flex items-center justify-center w-16 px-5 py-2 text-gray-700 hover:bg-gray-100 rounded-md "
-        type="button"
-      >
-        <span>
-          <svg
-            viewBox="64 64 896 896"
-            focusable="false"
-            data-icon="menu-fold"
-            width="1.5em"
-            height="1.5em"
-            fill="currentColor"
-            aria-hidden="true"
-          >
-            <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 000 13.8z"></path>
-          </svg>
-        </span>
-      </button>
+      {!isMain && (
+        <button
+          onClick={() => setSidebarVisible((prev) => !prev)}
+          className="flex items-center justify-center w-16 px-5 py-2 text-gray-700 hover:bg-gray-100 rounded-md "
+          type="button"
+        >
+          {isSidebarVisible ? (
+            <AiOutlineMenuFold size={24} />
+          ) : (
+            <AiOutlineMenuUnfold size={24} />
+          )}
+        </button>
+      )}
       <img
         src={YourdLogo}
         onClick={() => navigation("/")}
-        className="flex h-[48px] object-contain "
+        className="absolute ml-16 h-[48px] object-contain "
       />
       {/* search icon */}
       <div className="flex justify-between w-full mx-10 ">
         <div className="search-icon-container flex items-center ">
           {pathName !== "/project" && (
-            <div className="flex items-center">
-              <div
-                id="search-icon"
-                className="ml-10"
-                onClick={handleSearchIconClick}
-              >
-                {
-                  <svg
-                    className="h-7 w-7 hidden md:flex items-center space-x-1 text-blue-500 "
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    stroke-width="2"
-                    stroke="currentColor"
-                    fill="none"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    {" "}
-                    <path stroke="none" d="M0 0h24v24H0z" />{" "}
-                    <circle cx="10" cy="10" r="7" />{" "}
-                    <line x1="21" y1="21" x2="15" y2="15" />
-                  </svg>
-                }
+            <div className="flex items-center ml-10 duration-300">
+              <input
+                id="header-search"
+                placeholder="검색어를 입력하세요"
+                type="text"
+                className={`px-2 hidden md:flex items-center space-x-1 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500 duration-300 origin-left ${
+                  isSearchBarVisible && "scale-0"
+                }`}
+                value=""
+              />
+              <div id="search-icon" onClick={handleSearchIconClick}>
+                <AiOutlineSearch size={28} />
               </div>
-
-              {isSearchBarVisible && (
-                <div>
-                  <input
-                    id="header-search"
-                    placeholder="검색어를 입력하세요"
-                    type="text"
-                    className="w-48 px-2 hidden md:flex items-center space-x-1 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500  "
-                    value=""
-                  ></input>
-                </div>
-              )}
             </div>
           )}
         </div>
@@ -119,19 +104,7 @@ export default function ProjectTopBar() {
               // type="button"
             >
               <span className="inline-flex items-center hover:bg-gray-100 justify-center px-2.5 py-0.5 rounded-full text-xs font-medium">
-                <svg
-                  className="h-8 w-8 text-gray-500 "
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
-                  />
-                </svg>
+                <IoMdNotificationsOutline size={28} />
 
                 <div className="absolute ml-5 mb-4 inline-block align-middle">
                   <span className="inline-flex items-center px-1 py-1/2 rounded-full text-xs font-medium bg-red-500 text-white">
@@ -143,115 +116,33 @@ export default function ProjectTopBar() {
 
             {isDropdownOpen && (
               <div
-                className="absolute w-[500px] h-[350px]  bg-white menu dropdown-content p-2 shadow z-[1] bg-base-100 rounded-xl"
+                className="absolute w-fit h-fit pb-4  bg-white menu dropdown-content p-2 shadow z-[1] bg-base-100 rounded-xl"
                 style={{ transform: "translateX(-80%)" }}
               >
-                <div>
-                  <div className="text-xl bold font-bold mb-2 ml-4 py-1">
-                    Notification
-                  </div>
-                  <hr></hr>
-                  <div className=" flex my-2  border-b border-gray-100 py-1 font-semibold text-gray-500 md:mx-2">
-                    <div>
-                      <svg
-                        className="h-8 w-8 mr-2 text-blue-600"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        stroke-width="2"
-                        stroke="currentColor"
-                        fill="none"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        {" "}
-                        <path stroke="none" d="M0 0h24v24H0z" />{" "}
-                        <path d="M3 20l1.3 -3.9a9 8 0 1 1 3.4 2.9l-4.7 1" />{" "}
-                        <line x1="12" y1="12" x2="12" y2="12.01" />{" "}
-                        <line x1="8" y1="12" x2="8" y2="12.01" />{" "}
-                        <line x1="16" y1="12" x2="16" y2="12.01" />
-                      </svg>
-                    </div>
-                    <div className="flex-grow">
-                      Aida Burg commented your post.
-                    </div>
-
-                    <div className="text-right">AM 02:00</div>
-                  </div>
-
-                  <div className="flex  my-2  border-b border-gray-100 py-1 font-semibold text-gray-500 md:mx-2">
-                    <div className="flex ">
-                      <svg
-                        className="h-8 w-8 mr-2 text-yellow-300"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        stroke-width="2"
-                        stroke="currentColor"
-                        fill="none"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        {" "}
-                        <path stroke="none" d="M0 0h24v24H0z" />{" "}
-                        <polyline points="12 8 12 12 14 14" />{" "}
-                        <path d="M3.05 11a9 9 0 1 1 .5 4m-.5 5v-5h5" />
-                      </svg>
-                    </div>
-                    <div className="flex-grow">
-                      Your Profile is Complete 60%
-                    </div>
-                    <div className="text-right">AM 01:30</div>
-                  </div>
-                  <div className="flex my-2   border-b border-gray-100 py-1 font-semibold text-gray-500 md:mx-2">
-                    <div>
-                      <svg
-                        className="h-8 w-8 mr-2 text-blue-600"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        {" "}
-                        <circle cx="12" cy="12" r="10" />{" "}
-                        <polyline points="12 6 12 12 16 14" />
-                      </svg>
-                    </div>
-                    <div className="flex-grow">Your User Rate is already</div>
-
-                    <div className="text-right">PM 18:45</div>
-                  </div>
-                  <div className="flex my-2   border-b border-gray-100 py-1 font-semibold text-gray-500 md:mx-2">
-                    <div>
-                      <svg
-                        className="h-8 w-8 mr-2 text-yellow-400"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-                        />
-                      </svg>
-                    </div>
-                    <div className="flex-grow">
-                      Cristina Danny invited to join Meeting.
-                    </div>
-
-                    <div className="text-right">PM 14:00</div>
-                  </div>
-
-                  <div className="flex justify-center">
-                    <button className="bg-[#2096F3] text-white py-2 px-4 rounded-lg mt-6 w-40 font-extrabold">
-                      View All
-                    </button>
-                  </div>
+                <div className="text-xl bold font-bold mb-2 ml-4 py-1">
+                  Notification
                 </div>
+                <hr></hr>
+                {NotificationData.map((notification) => {
+                  return (
+                    <div className=" flex my-2  border-b gap-3 border-gray-100 py-1 justify-between items-center font-semibold text-gray-500 md:mx-2">
+                      <div className="flex gap-3">
+                        <div className="object-contain">
+                          {notification.icon}
+                        </div>
+                        <div className="sm:min-w-[200px] text-sm sm:text-lg lg:min-w-[300px] lg:whitespace-nowrap ">
+                          {notification.message}
+                        </div>
+                      </div>
+                      <div className="text-right text-xs sm:text-sm lg:whitespace-nowrap ">
+                        {notification.time}
+                      </div>
+                    </div>
+                  );
+                })}
+                <button className="bg-[#007aff] flex text-white py-2 px-8 rounded-lg mx-auto font-extrabold">
+                  View All
+                </button>
               </div>
             )}
           </div>
@@ -287,88 +178,31 @@ export default function ProjectTopBar() {
           ></img>
 
           {/* shrink icon */}
-
-          <div className="md:hidden flex items-center">
             <button
-              className="  rounded-md bg-gray-200 hover:bg-gray-300 focus:outline-none focus:ring"
+              className=" md:hidden rounded-md bg-gray-200 hover:bg-gray-300 focus:outline-none focus:ring"
               onClick={() => setMenuToggle(!menuToggle)}
             >
-              {!menuToggle ? (
-                <svg
-                  className="h-8 w-8 text-gray-500"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  {" "}
-                  <circle cx="12" cy="12" r="1" />{" "}
-                  <circle cx="12" cy="5" r="1" />{" "}
-                  <circle cx="12" cy="19" r="1" />
-                </svg>
-              ) : (
-                <svg
-                  className="h-8 w-8 text-gray-500"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              )}
+              {!menuToggle ? <AiOutlineMore size={26} /> : <AiOutlineClose size={26} />}
             </button>
-          </div>
         </div>
       </div>
       <div
-        className={`absolute mt-24 border border-gray-100 shadow   bg-white w-full   ${classNames(
+        className={`absolute mt-28 border border-gray-100 shadow bg-white w-full ${classNames(
           "md:hidden",
-          {
-            hidden: !menuToggle,
-          }
+          { hidden: !menuToggle }
         )}`}
       >
-        <div className=" flex items-center  ">
-          <div className="items-center justify-center mx-4">
-            <svg
-              className=" h-7 w-7   text-blue-500 "
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              stroke-width="2"
-              stroke="currentColor"
-              fill="none"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              {" "}
-              <path stroke="none" d="M0 0h24v24H0z" />{" "}
-              <circle cx="10" cy="10" r="7" />{" "}
-              <line x1="21" y1="21" x2="15" y2="15" />
-            </svg>
-          </div>
-
-          <div
-            className="flex items-center justify-between w-full
-          "
-          >
+        <div className=" flex items-center py-3">
+          <AiOutlineSearch size={30} color={"#007aff"} className="mx-4" />
+          <div className="flex items-center justify-between w-full">
             <input
               id="header-search"
               placeholder="검색어를 입력하세요"
               type="text"
-              className=" w-full  h-12 px-3   rounded-md border border-gray-300 focus:outline-none focus:border-blue-500  "
-            ></input>
-
+              className=" w-full  h-10 px-3   rounded-md border border-gray-300 focus:outline-none focus:border-blue-500  "
+            />
             <img
-              className="    w-10 h-10  mx-2 rounded-full object-fill
-               "
+              className="    w-10 h-10  mx-2 rounded-full object-fill"
               src="https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw&amp;ixlib=rb-1.2.1&amp;q=80&amp;w=400"
               alt="User Avatar"
             ></img>
@@ -378,3 +212,26 @@ export default function ProjectTopBar() {
     </div>
   );
 }
+
+const NotificationData = [
+  {
+    message: "Aida Burg commented your post.",
+    icon: <AiOutlineMessage size={30} color={"#007AFF"} />,
+    time: "AM 01:30",
+  },
+  {
+    message: "Your Profile is Complete 60%",
+    icon: <IoIosTimer size={30} color={"#ffd400"} />,
+    time: "AM 02:00",
+  },
+  {
+    message: "Your User Rate is already.",
+    icon: <IoMdTime size={30} color={"#007aff"} />,
+    time: "PM 14:00",
+  },
+  {
+    message: "Cristina Danny invited to join Meeting.",
+    icon: <IoMdPeople size={30} color={"#FFD400"} />,
+    time: "PM 18:45",
+  },
+];
