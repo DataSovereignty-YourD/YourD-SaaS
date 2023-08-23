@@ -50,25 +50,25 @@ export default function DashBoard() {
   ];
 
   return (
-    <div id="dashboard" className="flex-1">
+    <div id="dashboard" className="grid">
       <Path pathname={pathName} />
-      <h1 className="font-bold text-black mb-2 uppercase text-2xl">OverView</h1>
-      <div id="total" className=" mb-5 ">
-        <div className="flex gap-7 my-5">
+      <h1 className="font-bold text-black mb-2 uppercase text-xl sm:text-2xl">OverView</h1>
+      <div id="total" className="grid mb-5 w-full">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 w-full gap-7 my-5">
           {analyticsData.map((data, index) => {
             return (
               <div
                 key={data.title}
-                className="bg-white min-w-[180px] h-fit flex-1 p-3  font-bold rounded-sm  drop-shadow-md shadow-black transition-transform ease-in-out transform duration-500 hover:scale-110"
+                className="bg-white flex-1 h-fit p-3 rounded-sm drop-shadow-md shadow-black transition-transform ease-in-out transform duration-500 hover:scale-110"
                 style={{
                   borderBottomColor: data.color,
                   borderBottomWidth: 3,
                 }}
               >
-                <div className="mb-3 text-gray-500 uppercase">
+                <div className="mb-3 text-gray-500 uppercase font-bold">
                   {data.title}
                 </div>
-                <div className="flex items-center gap-2 my-2">
+                <div className="items-center gap-2 my-2">
                   <div>{data.icon}</div>
                   <div className="text-black font-extrabold text-2xl">
                     {data.value}
@@ -78,9 +78,9 @@ export default function DashBoard() {
             );
           })}
         </div>
-        <div className="flex h-[450px] w-full bg-white rounded-lg shadow-md gap-6">
-          <div className="w-2/3 h-full">
-            <div className="font-bold  text-gray-500 border-b-2 p-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 w-full bg-white rounded-lg shadow-md gap-6">
+          <div className="w-full h-[450px] md:col-span-2">
+            <div className="font-bold  text-gray-500 border-b-2 p-4 ">
               {" "}
               User Growth Analysis
             </div>
@@ -88,8 +88,8 @@ export default function DashBoard() {
               {MyResponsiveLine({ data: userGrowthData })}
             </div>
           </div>
-          <div className="w-1/3">
-            <div className="font-bold  text-gray-500 border-b-2 p-4">
+          <div className="w-full h-[450px]">
+            <div className="font-bold   text-gray-500 border-b-2 p-4">
               {" "}
               Ads Incomes
             </div>
@@ -100,14 +100,14 @@ export default function DashBoard() {
         </div>
       </div>
 
-      <div className="flex gap-7 my-5">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-7 my-5">
         {IncomeData.map((income) => {
           return (
-            <div className="flex-1 bg-white h-fit p-4 font-bold rounded-sm  drop-shadow-md shadow-black transition-transform ease-in-out transform  duration-500 hover:scale-110">
+            <div className=" bg-white h-fit p-4 font-bold rounded-sm  drop-shadow-md shadow-black transition-transform ease-in-out transform  duration-500 hover:scale-110">
               <div className="font-bold text-gray-500 uppercase">
                 {income.title}
               </div>
-              <div className="flex items-center">
+              <div className=" items-center">
                 <div className="text-xl mr-2 text-gray-500">$</div>
                 <div className="text-black text-2xl w-full">
                   {income.value.toLocaleString()}
@@ -129,10 +129,10 @@ export default function DashBoard() {
       <div className="text-2xl font-bold text-bold text-black">
         User Analytics
       </div>
-      <div className="flex h-[300px] w-full gap-6 my-4">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 w-full gap-6 my-4">
         {UserAnalyticsData.map((item) => {
           return (
-            <div className="h-full w-full bg-white rounded-sm drop-shadow-lg p-4 transition-transform ease-in-out transform  duration-500 hover:scale-110">
+            <div className="h-[300px] w-full bg-white rounded-sm drop-shadow-lg p-4 transition-transform ease-in-out transform  duration-500 hover:scale-110">
               <div className="text-black font-extrabold text-center w-full h-fit mb-2 text-lg">
                 {item.title}
               </div>

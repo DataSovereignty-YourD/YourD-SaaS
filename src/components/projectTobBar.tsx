@@ -21,11 +21,11 @@ export default function ProjectTopBar() {
   };
 
   return (
-    <div className="h-[48px] flex items-center ">
+    <div className="fixed  bg-white w-full h-12 flex items-center z-20">
       {/** 밑에 메뉴버튼이 pathName === /project 일때 버튼 안보이게 하기 */}
       <button
         onClick={() => setSidebarVisible((prev) => !prev)}
-        className="flex items-center justify-center w-15 px-5 py-2 text-gray-700 hover:bg-gray-100 rounded-md "
+        className="flex items-center justify-center w-16 px-5 py-2 text-gray-700 hover:bg-gray-100 rounded-md "
         type="button"
       >
         <span>

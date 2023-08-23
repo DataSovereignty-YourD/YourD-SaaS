@@ -30,10 +30,10 @@ export default function ApiKey({item}:{item:projectType}) {
     }
 
     return (
-        <div id="ApiKey" >
+        <div id="ApiKey">
             <Path pathname={pathName}/>
             <h1 className="font-bold text-black mb-2 uppercase text-2xl">ApiKey</h1>
-            <div className="text-black flex  text-xl my-3">
+            <div className="text-black  text-xl my-3">
                 <div className="font-medium">ClientID: </div>
                 <div className="ml-2 ">{item.clientId}</div>
             </div>
@@ -45,7 +45,7 @@ export default function ApiKey({item}:{item:projectType}) {
                         className="px-5 py-2 w-28 h-10 mx-3 border bg-white hover:bg-gray-100 text-gray-800 font-semibold border-gray-400 rounded-lg shadow "
                         onClick={() => HandleCopy(0)}>
                         {!copied[0] ? "Copy" :
-                            <div className="flex w-full h-full items-center transition-all duration-300 ease-in-out">
+                            <div className=" w-full h-full items-center transition-all duration-300 ease-in-out">
                                 <svg
                                     width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" color='green'
                                     style={{ strokeDasharray: 100, strokeDashoffset: copied ? 0 : -50, transition: 'all 300ms ease-in-out' }}

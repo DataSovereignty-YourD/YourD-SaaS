@@ -15,10 +15,10 @@ export default function ProjectDetailPage() {
   document.body.style.overflowX = "hidden";
 
   return (
-    <div className="antialiased h-[calc(100vh-48px)] text-slate-300 relative overflow-auto flex border-t-2 ">
+    <div className="flex text-slate-300 border-t-2 h-fit bg-gray-100">
       <div
         id="sidebar"
-        className="bg-white border-r-2 max-w-[200px] py-2 translate-x-300"
+        className="fixed bg-white border-r-2 h-full max-w-[200px] py-2 translate-x-300 z-10"
       >
         <SideBar item={item} />
       </div>
@@ -27,7 +27,7 @@ export default function ProjectDetailPage() {
        */}
         <div
           id="content"
-          className="flex-1 bg-gray-100 px-6 py-4 overflow-auto min-w-fit"
+          className="grid w-full px-6 py-4 h-fit  mt-12 ml-16"
         >
           <Routes>
             <Route path="dashboard" element={<DashBoard />} />

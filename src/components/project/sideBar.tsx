@@ -41,9 +41,9 @@ export default function SideBar({ item }: { item: projectType }) {
 
   return (
     <div
-      className={`min-h-[90vh] h-full ${
-        isSidebarVisible ? "w-200" : "w-15"
-      } transform transition-transform duration-300 ease-in-out`}
+      className={`h-full ${
+        isSidebarVisible ? "w-48" : "w-16"
+      } transform transition-transform duration-300 ease-in-out pt-12 `}
     >
       <div id="menu" className="flex flex-col space-y-2 px-2">
         {sideBarData.map((data, index) => (
@@ -51,13 +51,13 @@ export default function SideBar({ item }: { item: projectType }) {
             key={index}
             to={data.path}
             onClick={() => setSelectedMenu(data.path)}
-            className={`flex flex-col h-14 space-y-2 md:flex-row md:space-y-0 md:space-x-2 items-center py-4 rounded-lg group w-full  px-2 ${
+            className={`flex flex-col h-14 space-y-2 md:flex-row md:space-y-0 md:space-x-2 items-center justify-center py-4 rounded-lg group w-ful  px-2 ${
               isSidebarVisible && selectedMenu === data.path
                 ? "bg-gray-200"
                 : "hover:bg-gray-100"
             }`}
           >
-            <div className={ "w-6"}>
+            <div className={ "w-6 h-6 aspect-square"}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
