@@ -72,8 +72,10 @@ export default function ProjectListPage() {
   ];
 
   return (
-    <div className="w-full">
-      <div className="mb-">{modalOpen ? <NewProject /> : <div></div>}</div>
+
+    <div className="w-full pt-12">
+      <div className="mb-10">{modalOpen ? <NewProject /> : <div></div>}</div>
+
       {/* <div className="container text-2xl mx-auto font-bold">Project List</div> */}
       <section title="main" className="container w-full h-screen mx-auto ">
         {/* <div className="text-black w-full "> */}
