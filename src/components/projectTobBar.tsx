@@ -64,7 +64,7 @@ export default function ProjectTopBar() {
         className="flex h-[48px] object-contain "
       />
       {/* search icon */}
-      <div className="flex justify-between w-full   mx-10 ">
+      <div className="flex justify-between w-full mx-10 ">
         <div className="search-icon-container flex items-center ">
           {pathName !== "/project" && (
             <div className="flex items-center">
@@ -75,7 +75,7 @@ export default function ProjectTopBar() {
               >
                 {
                   <svg
-                    className="h-8 w-8 text-blue-500 "
+                    className="h-7 w-7 text-blue-500 "
                     width="24"
                     height="24"
                     viewBox="0 0 24 24"
@@ -108,16 +108,14 @@ export default function ProjectTopBar() {
           )}
         </div>
         {/* notification icon */}
-
         <div className="flex items-center gap-4">
-          <div className="">
-            <button
+          <div >
+            <div
               onClick={toggleDropdown}
-              className="flex items-center justify-center p-2 rounded-md dropdown hover:bg-gray-100 focus:outline-none focus:ring"
-              type="button"
+              className="flex items-center justify-center rounded-md dropdown  focus:outline-none focus:ring"
+              // type="button"
             >
-              <div className="">
-                <span className="inline-flex items-center justify-center px-2.5 py-0.5 rounded-full text-xs font-medium">
+                <span className="inline-flex items-center hover:bg-gray-100 justify-center px-2.5 py-0.5 rounded-full text-xs font-medium">
                   <svg
                     className="h-8 w-8 text-gray-500 "
                     fill="none"
@@ -139,7 +137,6 @@ export default function ProjectTopBar() {
                   </div>
                 </span>
               </div>
-            </button>
 
             {isDropdownOpen && (
               <div

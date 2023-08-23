@@ -50,7 +50,7 @@ export default function DashBoard() {
   ];
 
   return (
-    <div id="dashboard" className="grid">
+    <div id="dashboard" className="grid pb-20">
       <Path pathname={pathName} />
       <h1 className="font-bold text-black mb-2 uppercase text-xl sm:text-2xl">OverView</h1>
       <div id="total" className="grid mb-5 w-full">
@@ -68,7 +68,7 @@ export default function DashBoard() {
                 <div className="mb-3 text-gray-500 uppercase font-bold">
                   {data.title}
                 </div>
-                <div className="items-center gap-2 my-2">
+                <div className="flex items-center gap-2 my-2">
                   <div>{data.icon}</div>
                   <div className="text-black font-extrabold text-2xl">
                     {data.value}
@@ -107,7 +107,7 @@ export default function DashBoard() {
               <div className="font-bold text-gray-500 uppercase">
                 {income.title}
               </div>
-              <div className=" items-center">
+              <div className="flex items-center">
                 <div className="text-xl mr-2 text-gray-500">$</div>
                 <div className="text-black text-2xl w-full">
                   {income.value.toLocaleString()}
