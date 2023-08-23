@@ -73,7 +73,7 @@ export default function ProjectListPage() {
   return (
     <div className="w-full ">
       <div className="mb-10">{modalOpen ? <NewProject /> : <div></div>}</div>
-      <div className="container text-2xl mx-auto font-bold">Project List</div>
+      {/* <div className="container text-2xl mx-auto font-bold">Project List</div> */}
       <section title="main" className="flex container w-full h-screen mx-auto ">
         <div className="text-black w-full ">
           {project[0] && isLogin ? (
@@ -145,9 +145,12 @@ export default function ProjectListPage() {
                 </button>
               </div>
             </div>
+            // <div>
+                
+            // </div>
           )}
 
-          <div className=" grid md:grid-cols-2  items-center">
+          {/* <div className=" grid md:grid-cols-2  items-center">
             {projectList.map((project, index) => {
               return (
                 <div
@@ -174,7 +177,7 @@ export default function ProjectListPage() {
                 </div>
               );
             })}
-          </div>
+          </div> */}
         </div>
       </section>
     </div>

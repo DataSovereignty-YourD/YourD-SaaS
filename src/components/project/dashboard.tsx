@@ -50,7 +50,7 @@ export default function DashBoard() {
   ];
 
   return (
-    <div id="dashboard">
+    <div id="dashboard" className="flex-1">
       <Path pathname={pathName} />
       <h1 className="font-bold text-black mb-2 uppercase text-2xl">OverView</h1>
       <div id="total" className=" mb-5 ">
@@ -59,7 +59,7 @@ export default function DashBoard() {
             return (
               <div
                 key={data.title}
-                className="bg-white min-w-[180px] h-fit w-1/4 p-3  font-bold rounded-sm  drop-shadow-md shadow-black transition-transform ease-in-out transform duration-500 hover:scale-110"
+                className="bg-white min-w-[180px] h-fit flex-1 p-3  font-bold rounded-sm  drop-shadow-md shadow-black transition-transform ease-in-out transform duration-500 hover:scale-110"
                 style={{
                   borderBottomColor: data.color,
                   borderBottomWidth: 3,
@@ -103,7 +103,7 @@ export default function DashBoard() {
       <div className="flex gap-7 my-5">
         {IncomeData.map((income) => {
           return (
-            <div className="w-1/4 bg-white h-fit p-4 font-bold rounded-sm  drop-shadow-md shadow-black transition-transform ease-in-out transform  duration-500 hover:scale-110">
+            <div className="flex-1 bg-white h-fit p-4 font-bold rounded-sm  drop-shadow-md shadow-black transition-transform ease-in-out transform  duration-500 hover:scale-110">
               <div className="font-bold text-gray-500 uppercase">
                 {income.title}
               </div>

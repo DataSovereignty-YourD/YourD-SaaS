@@ -17,5 +17,5 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src", "src/components/SignInBox/.tsx"]
+  // "include": ["src", "src/components/SignInBox/.tsx"]
 }

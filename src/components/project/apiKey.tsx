@@ -37,7 +37,7 @@ export default function ApiKey({item}:{item:projectType}) {
                 <div className="font-medium">ClientID: </div>
                 <div className="ml-2 ">{item.clientId}</div>
             </div>
-            <div className="relative w-full p-4 rounded-xl bg-white text-black border-gray-400 border my-10">
+            <div className="relative w-full p-4 rounded-xl bg-white text-black my-10 drop-shadow-sm">
                 <div>API KEY</div>
                 <div className="flex items-center mt-2">
                     <div className="w-full py-2 border rounded-xl px-4 justify-center bg-black/5">{apikey1}</div>
@@ -58,7 +58,7 @@ export default function ApiKey({item}:{item:projectType}) {
                     </button>
                 </div >
             </div>
-            <div className="relative w-full p-4 rounded-xl bg-white text-black border-gray-400 border my-10">
+            <div className="relative w-full p-4 rounded-xl bg-white text-black my-10 drop-shadow-sm">
                 <div>Endpoints</div>
                 <div className="flex items-center mt-2">
                     <div className="font-bold text-lg w-20">Tezos</div>

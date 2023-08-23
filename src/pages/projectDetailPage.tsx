@@ -5,7 +5,7 @@ import ApiKey from "../components/project/apiKey";
 import DashBoard from "../components/project/dashboard";
 import Settings from "../components/project/settings";
 import SideBar from "../components/project/sideBar";
-import UserManagement from "../components/project/user";
+import UserManagement from "../components/project/userManagement";
 import { currentProjectVaule } from "../recoil/dashBoard/project";
 
 export default function ProjectDetailPage() {
@@ -15,7 +15,7 @@ export default function ProjectDetailPage() {
   document.body.style.overflowX = "hidden";
 
   return (
-    <div className="antialiased w-screen h-[calc(100vh-48px)] text-slate-300 relative overflow-auto flex border-t-2 ">
+    <div className="antialiased h-[calc(100vh-48px)] text-slate-300 relative overflow-auto flex border-t-2 ">
       <div
         id="sidebar"
         className="bg-white border-r-2 max-w-[200px] py-2 translate-x-300"
@@ -27,7 +27,7 @@ export default function ProjectDetailPage() {
        */}
         <div
           id="content"
-          className="w-full bg-gray-100 px-6 py-4 overflow-auto min-w-fit"
+          className="flex-1 bg-gray-100 px-6 py-4 overflow-auto min-w-fit"
         >
           <Routes>
             <Route path="dashboard" element={<DashBoard />} />

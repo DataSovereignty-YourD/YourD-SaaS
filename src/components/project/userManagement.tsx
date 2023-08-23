@@ -13,49 +13,49 @@ function UserManagement({ item }: { item: projectType }) {
     {
       id: 1,
       name: 'User1',
-      email: 'user1@example.com',
+      email: 'did:yourd:klaytn:cypress:example1',
       status: 'Active',
       lastLogin: '2023-08-20',
     },
     {
       id: 2,
       name: 'User2',
-      email: 'user2@example.com',
+      email: 'did:yourd:klaytn:cypress:example2',
       status: 'Inactive',
       lastLogin: '2023-08-18',
     },
     {
       id: 3,
       name: 'User3',
-      email: 'user3@example.com',
+      email: 'did:yourd:klaytn:cypress:example3',
       status: 'Inactive',
       lastLogin: '2023-08-18',
     },
     {
       id: 4,
       name: 'User4',
-      email: 'user4@example.com',
+      email: 'did:yourd:klaytn:cypress:example4',
       status: 'Inactive',
       lastLogin: '2023-08-22',
     },
     {
       id: 5,
       name: 'User5',
-      email: 'user5@example.com',
+      email: 'did:yourd:klaytn:cypress:example5',
       status: 'Active',
       lastLogin: '2023-08-14',
     },
     {
       id: 6,
       name: 'User6',
-      email: 'user6@example.com',
+      email: 'did:yourd:klaytn:cypress:example6',
       status: 'Active',
       lastLogin: '2023-08-23',
     },
     {
       id: 7,
       name: 'User7',
-      email: 'user7@example.com',
+      email: 'did:yourd:klaytn:cypress:example7',
       status: 'Active',
       lastLogin: '2023-08-23',
     },
@@ -110,10 +110,12 @@ function UserManagement({ item }: { item: projectType }) {
         User Management
       </h1>
 
-      <div className="bg-sky-500 rounded-md drop-shadow-md p-6">
+      
+
+      <div className="bg-white mt-3 rounded-md drop-shadow-md">
+      <div className="bg-white  drop-shadow-md">
         <div className="text-black flex items-center justify-between">
           <div className="w-12 h-12"></div>
-
           {columns.map(column => (
             <span
               key={column.key}
@@ -131,15 +133,13 @@ function UserManagement({ item }: { item: projectType }) {
           ))}
         </div>
       </div>
-
-      <div className="bg-white mt-3 rounded-md drop-shadow-md p-4">
         {sortedUsers.map((user) => (
           <div
             key={user.id}
-            className="text-black flex items-center justify-between border-b py-2"
+            className="text-black flex items-center justify-between border-b p-2"
           >
             <BiSolidUserCircle className="w-12 h-12" />
-            <span className="flex-1 mx-2">{user.name}</span>
+            <span className="flex-1  mx-2">{user.name}</span>
             <span className="flex-1 mx-2">{user.email}</span>
             <span className="flex-1 mx-2">{user.status}</span>
             <span className="flex-1 mx-2">{user.lastLogin}</span>
