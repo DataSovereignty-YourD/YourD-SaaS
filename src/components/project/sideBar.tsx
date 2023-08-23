@@ -1,15 +1,13 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { projectType } from "../../recoil/dashBoard/project";
-import { useRecoilState } from "recoil";
-
-import { sideBarToggleState } from "../../recoil/sideBarToggle";
+import { useRecoilValue } from "recoil";
+import { sideBarTogleValue } from "../../recoil/sideBarToggle";
 
 export default function SideBar({ item }: { item: projectType }) {
   const location = useLocation();
   const [selectedMenu, setSelectedMenu] = useState(location.pathname);
-  const [isSidebarVisible, setSidebarVisible] =
-    useRecoilState(sideBarToggleState);
+  const isSidebarVisible = useRecoilValue(sideBarTogleValue);
 
   let sideBarData = [
     {
@@ -43,21 +41,23 @@ export default function SideBar({ item }: { item: projectType }) {
     <div
       className={`h-full ${
         isSidebarVisible ? "w-28 md:w-48" : "w-16"
-      } transform transition-transform duration-300 ease-in-out pt-12 `}
+      } duration-300 ease-in-out pt-12 `}
     >
-      <div id="menu" className="flex flex-col space-y-2 px-2">
+      <div id="menu" className={`fixed  ${
+        isSidebarVisible ? "w-28 md:w-48" : "w-16"
+      } space-y-2 px-2 duration-300`}>
         {sideBarData.map((data, index) => (
           <Link
             key={index}
             to={data.path}
             onClick={() => setSelectedMenu(data.path)}
-            className={`flex h-22 md-14 space-y-2 flex-col md:flex-row md:space-y-0 md:space-x-2 items-center justify-start py-4 rounded-lg group w-full px-3 ${
+            className={`flex h-22 md-14 space-y-2 flex-col md:flex-row md:space-y-0 md:space-x-2 items-center justify-start py-2 rounded-lg group w-full px-3 ${
               isSidebarVisible && selectedMenu === data.path
                 ? "bg-gray-200"
                 : "hover:bg-gray-100"
             }`}
           >
-            <div className={ "w-6 h-6 aspect-square justify-center"}>
+            <div className={"w-6 h-6 aspect-square justify-center"}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -77,12 +77,13 @@ export default function SideBar({ item }: { item: projectType }) {
                 ></path>
               </svg>
             </div>
-            {isSidebarVisible && (
-                <div className="font-medium w-full text-center md:text-left text-sm md:text-lg text-black group-hover:text-indigo-400">
-                  {data.name}
-                </div>
-            )}
-
+            <div
+              className={`font-medium w-full text-center whitespace-nowrap md:text-left text-sm md:text-lg duration-300 text-black group-hover:text-indigo-400 origin-left ${
+                !isSidebarVisible && "scale-0"
+              }`}
+            >
+              {data.name}
+            </div>
           </Link>
         ))}
       </div>

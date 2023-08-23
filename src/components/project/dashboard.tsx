@@ -59,7 +59,7 @@ export default function DashBoard() {
             return (
               <div
                 key={data.title}
-                className="bg-white flex-1 h-fit p-3 rounded-sm drop-shadow-md shadow-black transition-transform ease-in-out transform duration-500 hover:scale-110"
+                className="bg-white h-fit p-3 rounded-sm drop-shadow-md shadow-black transition-transform ease-in-out transform duration-500 hover:scale-110"
                 style={{
                   borderBottomColor: data.color,
                   borderBottomWidth: 3,
