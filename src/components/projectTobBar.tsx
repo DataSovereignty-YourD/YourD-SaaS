@@ -5,6 +5,7 @@ import YourdLogo from "../assets/img/YourDLogo.png";
 import { projectModalState } from "../recoil/dashBoard/project";
 import React, { useState } from "react";
 import { sideBarToggleState } from "../recoil/sideBarToggle";
+import classNames from "classnames";
 
 export default function ProjectTopBar() {
   const location = useLocation();
@@ -36,6 +37,8 @@ export default function ProjectTopBar() {
       setDropdownView(false);
     }, 200);
   };
+
+  const [menuToggle, setMenuToggle] = useState(false);
 
   return (
     <div className="fixed  bg-white w-full h-12 flex items-center z-20">
@@ -75,7 +78,7 @@ export default function ProjectTopBar() {
               >
                 {
                   <svg
-                    className="h-7 w-7 text-blue-500 "
+                    className="h-7 w-7 hidden md:flex items-center space-x-1 text-blue-500 "
                     width="24"
                     height="24"
                     viewBox="0 0 24 24"
@@ -99,7 +102,7 @@ export default function ProjectTopBar() {
                     id="header-search"
                     placeholder="검색어를 입력하세요"
                     type="text"
-                    className="w-48 px-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500  "
+                    className="w-48 px-2 hidden md:flex items-center space-x-1 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500  "
                     value=""
                   ></input>
                 </div>
@@ -109,34 +112,34 @@ export default function ProjectTopBar() {
         </div>
         {/* notification icon */}
         <div className="flex items-center gap-4">
-          <div >
+          <div>
             <div
               onClick={toggleDropdown}
-              className="flex items-center justify-center rounded-md dropdown  focus:outline-none focus:ring"
+              className=" flex items-center justify-center rounded-md dropdown  focus:outline-none focus:ring"
               // type="button"
             >
-                <span className="inline-flex items-center hover:bg-gray-100 justify-center px-2.5 py-0.5 rounded-full text-xs font-medium">
-                  <svg
-                    className="h-8 w-8 text-gray-500 "
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
-                    />
-                  </svg>
+              <span className="inline-flex items-center hover:bg-gray-100 justify-center px-2.5 py-0.5 rounded-full text-xs font-medium">
+                <svg
+                  className="h-8 w-8 text-gray-500 "
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
+                  />
+                </svg>
 
-                  <div className="relative inline-block align-middle">
-                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-500 text-white">
-                      4
-                    </span>
-                  </div>
-                </span>
-              </div>
+                <div className="absolute ml-5 mb-4 inline-block align-middle">
+                  <span className="inline-flex items-center px-1 py-1/2 rounded-full text-xs font-medium bg-red-500 text-white">
+                    4
+                  </span>
+                </div>
+              </span>
+            </div>
 
             {isDropdownOpen && (
               <div
@@ -254,7 +257,7 @@ export default function ProjectTopBar() {
           </div>
           {/* morning/night mode */}
           <svg
-            className="h-8 w-8 text-gray-600 "
+            className="h-8 w-8 hidden md:flex items-center space-x-1 text-gray-600 "
             width="24"
             height="24"
             viewBox="0 0 24 24"
@@ -271,17 +274,105 @@ export default function ProjectTopBar() {
 
           {/* ether logo */}
           <img
-            className=" w-10 h-10 rounded-full object-cover  "
+            className=" w-10 h-10 hidden md:flex items-center space-x-1 rounded-full object-cover  "
             src="http://wiki.hash.kr/images/d/d6/이더리움_로고.png"
             alt="User Avatar"
           ></img>
 
           {/* user image */}
           <img
-            className=" w-10 h-10 rounded-full object-cover   "
+            className="  w-10 h-10 hidden md:flex items-center space-x-1 rounded-full object-cover   "
             src="https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw&amp;ixlib=rb-1.2.1&amp;q=80&amp;w=400"
             alt="User Avatar"
           ></img>
+
+          {/* shrink icon */}
+
+          <div className="md:hidden flex items-center">
+            <button
+              className="  rounded-md bg-gray-200 hover:bg-gray-300 focus:outline-none focus:ring"
+              onClick={() => setMenuToggle(!menuToggle)}
+            >
+              {!menuToggle ? (
+                <svg
+                  className="h-8 w-8 text-gray-500"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  {" "}
+                  <circle cx="12" cy="12" r="1" />{" "}
+                  <circle cx="12" cy="5" r="1" />{" "}
+                  <circle cx="12" cy="19" r="1" />
+                </svg>
+              ) : (
+                <svg
+                  className="h-8 w-8 text-gray-500"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              )}
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        className={`absolute mt-24 border border-gray-100 shadow   bg-white w-full   ${classNames(
+          "md:hidden",
+          {
+            hidden: !menuToggle,
+          }
+        )}`}
+      >
+        <div className=" flex items-center  ">
+          <div className="items-center justify-center mx-4">
+            <svg
+              className=" h-7 w-7   text-blue-500 "
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              {" "}
+              <path stroke="none" d="M0 0h24v24H0z" />{" "}
+              <circle cx="10" cy="10" r="7" />{" "}
+              <line x1="21" y1="21" x2="15" y2="15" />
+            </svg>
+          </div>
+
+          <div
+            className="flex items-center justify-between w-full
+          "
+          >
+            <input
+              id="header-search"
+              placeholder="검색어를 입력하세요"
+              type="text"
+              className=" w-full  h-12 px-3   rounded-md border border-gray-300 focus:outline-none focus:border-blue-500  "
+            ></input>
+
+            <img
+              className="    w-10 h-10  mx-2 rounded-full object-fill
+               "
+              src="https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw&amp;ixlib=rb-1.2.1&amp;q=80&amp;w=400"
+              alt="User Avatar"
+            ></img>
+          </div>
         </div>
       </div>
     </div>
