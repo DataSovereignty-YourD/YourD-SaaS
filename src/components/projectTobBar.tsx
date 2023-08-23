@@ -1,5 +1,5 @@
 import { Button } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import YourdLogo from "../assets/img/YourDLogo.png";
 import { projectModalState } from "../recoil/dashBoard/project";
@@ -7,33 +7,25 @@ import React, { useState } from "react";
 import { sideBarToggleState } from "../recoil/sideBarToggle";
 
 export default function ProjectTopBar() {
+  const location = useLocation();
   const navigation = useNavigate();
   const [isOpen, setIsOpen] = useRecoilState(projectModalState);
   const [isSidebarVisible, setSidebarVisible] =
     useRecoilState(sideBarToggleState);
   const [isSearchBarVisible, setSearchBarVisible] = useState(false);
+  //밑에 pathName 사용할 것
+  const pathName = location.pathname;
 
   const handleSearchIconClick = () => {
     return setSearchBarVisible(!isSearchBarVisible);
   };
 
   return (
-    <div className="h-[48px] flex items-center mx-10  ">
-      <img
-        src={YourdLogo}
-        onClick={() => navigation("/")}
-        className="flex h-[48px] "
-      />
-      {/* <Button
-                className="py-2 bg-gray-500 rounded-[36px]  mt-3"
-                onClick={() => setIsOpen(true)}
-              >
-                New Project
-              </Button> */}
-
+    <div className="h-[48px] flex items-center ">
+      {/** 밑에 메뉴버튼이 pathName === /project 일때 버튼 안보이게 하기 */}
       <button
         onClick={() => setSidebarVisible((prev) => !prev)}
-        className="flex items-center justify-center p-2 text-gray-700 hover:bg-gray-300 rounded-md "
+        className="flex items-center justify-center w-15 px-5 py-2 text-gray-700 hover:bg-gray-100 rounded-md "
         type="button"
       >
         <span>
@@ -50,10 +42,16 @@ export default function ProjectTopBar() {
           </svg>
         </span>
       </button>
+      <img
+        src={YourdLogo}
+        onClick={() => navigation("/")}
+        className="flex h-[48px]"
+      />
 
-      <div className="flex justify-between w-full  ">
+      <div className="flex justify-between w-full   mx-10 ">
         <div className="flex  items-center ">
-          <div className="search-icon" onClick={handleSearchIconClick}>
+          {/** 밑에 메뉴버튼이 pathName === /project 일때 돋보기 안보이게 하기 */}
+          <div id="search-icon" className="ml-10" onClick={handleSearchIconClick}>
             {
               <svg
                 className="h-8 w-8 text-blue-500 "

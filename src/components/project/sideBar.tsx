@@ -7,8 +7,6 @@ import { sideBarToggleState } from "../../recoil/sideBarToggle";
 
 export default function SideBar({ item }: { item: projectType }) {
   const location = useLocation();
-  console.log(item);
-
   const [selectedMenu, setSelectedMenu] = useState(location.pathname);
   const [isSidebarVisible, setSidebarVisible] =
     useRecoilState(sideBarToggleState);
@@ -48,77 +46,54 @@ export default function SideBar({ item }: { item: projectType }) {
   return (
     <div
       className={`min-h-[90vh] h-full ${
-        isSidebarVisible ? "w-108" : "w-15"
+        isSidebarVisible ? "w-200" : "w-15"
       } transform transition-transform duration-300 ease-in-out`}
     >
-      <div className={`min-h-[90vh] h-full `}>
-        {/* {isSidebarVisible && (
-          <>
-            <p className="text-black text-mb font-medium mb-2">Welcome back,</p>
-            <div className="flex flex-col space-y-2 md:space-y-0 md:flex-row mb-5 items-center md:space-x-2 hover:bg-white group transition duration-150 ease-linear rounded-lg group w-full py-3 px-2">
-              <div>
-                <p className="text-xl font-medium group-hover:text-indigo-400 text-black leading-3 mb-2">
-                  {item.projectName}
-                </p>
-                <span className="text-s text-black">
-                  ClientID: {item.clientId}
-                </span>
-              </div>
-              <img
-                className="w-10 h-10 rounded-full object-cover mt-1"
-                src="https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw&ixlib=rb-1.2.1&q=80&w=400"
-                alt="User Avatar"
-              />
+      <div id="menu" className="flex flex-col space-y-2 my-4 px-2">
+        {sideBarData.map((data, index) => (
+          <Link
+            key={index}
+            to={data.path}
+            onClick={() => setSelectedMenu(data.path)}
+            className={`flex flex-col space-y-2 md:flex-row md:space-y-0 md:space-x-2 items-center py-2 rounded-lg group w-full  px-2 ${
+              isSidebarVisible && selectedMenu === data.path
+                ? "bg-gray-200"
+                : "hover:bg-gray-100"
+            }`}
+          >
+            <div className={ "w-8 h-8"}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                className={
+                  selectedMenu === data.path
+                    ? "text-indigo-500"
+                    : "group-hover:text-indigo-400"
+                }
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="1.5"
+                  d={data.svgPath}
+                ></path>
+              </svg>
             </div>
-          </>
-        )} */}
-
-        <div id="menu" className="flex flex-col space-y-2 my-4">
-          {sideBarData.map((data, index) => (
-            <Link
-              key={index}
-              to={data.path}
-              onClick={() => setSelectedMenu(data.path)}
-              className={`flex flex-col space-y-2 md:flex-row md:space-y-0 md:space-x-2 items-center group transition duration-150 ease-linear rounded-lg group w-full py-3 px-2 ${
-                isSidebarVisible && selectedMenu === data.path
-                  ? "bg-gray-200"
-                  : "hover:bg-white"
-              }`}
-            >
-              <div className={isSidebarVisible ? "w-6 h-6" : "w-8 h-8"}>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  className={
-                    selectedMenu === data.path
-                      ? "text-indigo-500"
-                      : "group-hover:text-indigo-400"
-                  }
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="1.5"
-                    d={data.svgPath}
-                  ></path>
-                </svg>
+            {isSidebarVisible && (
+              <div className="h-12">
+                <p className="font-bold text-base lg:text-lg text-black leading-2 group-hover:text-indigo-400 pr-6">
+                  {data.name}
+                </p>
+                <p className="text-slate-400 text-sm">
+                  {data.description}
+                </p>
               </div>
+            )}
 
-              {isSidebarVisible && (
-                <div>
-                  <p className="font-bold text-base lg:text-lg text-black leading-4 group-hover:text-indigo-400">
-                    {data.name}
-                  </p>
-                  <p className="text-slate-400 text-sm hidden md:block">
-                    {data.description}
-                  </p>
-                </div>
-              )}
-            </Link>
-          ))}
-        </div>
+          </Link>
+        ))}
       </div>
     </div>
   );
