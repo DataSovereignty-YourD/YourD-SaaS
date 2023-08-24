@@ -1,6 +1,7 @@
 import { ReactElement } from "react";
 import { useLocation } from "react-router-dom";
 import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
+import { FaArrowTrendUp, FaArrowTrendDown } from "react-icons/fa6";
 import { ResponsiveLine } from "@nivo/line";
 import { ResponsiveBarCanvas } from "@nivo/bar";
 import { ResponsivePie } from "@nivo/pie";
@@ -17,35 +18,40 @@ export default function DashBoard() {
   const location = useLocation();
   const pathName = location.pathname;
 
-  type analyticsDataType= {
-    title: string,
-    value: number,
-    icon: ReactElement,
-    color: string,
-  }
+  type analyticsDataType = {
+    title: string;
+    value: number;
+    changes: string;
+    icon: ReactElement;
+    color: string;
+  };
 
   let analyticsData: analyticsDataType[] = [
     {
       title: "Total Users",
       value: 1895,
-      icon: <IoIosArrowUp color="lightGreen" size={30} />,
+      changes: "+45",
+      icon: <FaArrowTrendUp color="lightGreen" size={30} />,
       color: "blue",
     },
     {
       title: "Daily New Users",
       value: 30,
-      icon: <IoIosArrowUp color="lightGreen" size={30} />,
+      changes: "+24",
+      icon: <FaArrowTrendUp color="lightGreen" size={30} />,
       color: "red",
     },
     {
       title: "Daily User Grow Rate",
       value: 460 / 100,
-      icon: <IoIosArrowUp color="lightGreen" size={30} />,
+      changes: "+27",
+      icon: <FaArrowTrendUp color="lightGreen" size={30} />,
       color: "orange",
     },
     {
       title: "Average Usage Time(mins)",
       value: 5,
+      changes: "-2",
       icon: <IoIosArrowDown color="red" size={30} />,
       color: "green",
     },
@@ -54,8 +60,10 @@ export default function DashBoard() {
   return (
     <div id="dashboard" className="grid pb-20">
       <Path pathname={pathName} />
-      <h1 className="font-bold text-black mb-2 uppercase text-xl sm:text-2xl">OverView</h1>
-      <div id="total" className=" mb-5 w-full mx-auto">
+      <h1 className="font-bold text-black mb-2 uppercase text-xl sm:text-2xl">
+        OverView
+      </h1>
+      <div id="total" className=" w-full mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-7 my-5">
           {analyticsData.map((data, index) => {
             return (
@@ -67,13 +75,28 @@ export default function DashBoard() {
                   borderBottomWidth: 3,
                 }}
               >
-                <div className="mb-3 text-gray-500 uppercase font-bold">
+                <div className="mb-3 text-gray-500 font-sans uppercase font-bold">
                   {data.title}
                 </div>
                 <div className="flex items-center gap-2 my-2">
-                  <div>{data.icon}</div>
-                  <div className="text-black font-extrabold text-2xl">
+                  <div className="mr-2">
+                    {Number(data.changes) < 0 ? (
+                      <FaArrowTrendDown size={24} color={'red'}/>
+                    ) : (
+                      <FaArrowTrendUp size={24} color={'lightgreen'}/>
+                    )}
+                  </div>
+                  <div className="text-black font-bold text-2xl w-full">
                     {data.value}
+                  </div>
+                  <div
+                    className={`text-xl font-medium border bg-${data.color}/5 border-gray-300 px-3 py-1 rounded-md ${
+                      Number(data.changes) < 0
+                        ? "text-red-500"
+                        : "text-green-400"
+                    }`}
+                  >
+                    {data.changes}%
                   </div>
                 </div>
               </div>
@@ -105,7 +128,10 @@ export default function DashBoard() {
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-7 my-5">
         {IncomeData.map((income) => {
           return (
-            <div key={income.title} className=" bg-white h-fit p-4 font-bold rounded-sm  drop-shadow-md shadow-black transition-transform ease-in-out transform  duration-500 hover:scale-110">
+            <div
+              key={income.title}
+              className=" bg-white h-fit p-4 font-bold rounded-sm  drop-shadow-md shadow-black transition-transform ease-in-out transform  duration-500 hover:scale-110"
+            >
               <div className="font-bold text-gray-500 uppercase">
                 {income.title}
               </div>
@@ -134,7 +160,10 @@ export default function DashBoard() {
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 w-full gap-6 my-4">
         {UserAnalyticsData.map((item) => {
           return (
-            <div key={item.title} className="h-[300px] w-full bg-white rounded-sm drop-shadow-lg p-4 transition-transform ease-in-out transform  duration-500 hover:scale-110">
+            <div
+              key={item.title}
+              className="h-[300px] w-full bg-white rounded-sm drop-shadow-lg p-4 transition-transform ease-in-out transform  duration-500 hover:scale-110"
+            >
               <div className="text-black font-extrabold text-center w-full h-fit mb-2 text-lg">
                 {item.title}
               </div>
@@ -190,9 +219,9 @@ const MyResponsiveLine = ({ data }: any) => (
       legendOffset: -40,
       legendPosition: "start",
     }}
-    pointSize={10}
+    pointSize={8}
     pointColor={{ theme: "background" }}
-    pointBorderWidth={3}
+    pointBorderWidth={4}
     pointBorderColor={{ from: "serieColor" }}
     useMesh={true}
     legends={[

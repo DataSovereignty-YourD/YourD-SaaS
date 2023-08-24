@@ -34,16 +34,16 @@ export default function SideBar({ item }: { item: projectType }) {
       name: "Users",
       path: "usermanagement",
       icon: <AiOutlineTeam size={20} />,
-    },
-  ];
-
-  let navigationBottom: navigationType[] = [
-    {
-      classify: "Support",
+    },{
+      classify: "Authentication",
       name: "API KEY",
       path: "apikey",
       icon: <AiOutlineApi size={20} />,
     },
+  ];
+
+  let navigationBottom: navigationType[] = [
+    
     {
       classify: "Support",
       name: "Settings",
@@ -63,11 +63,11 @@ export default function SideBar({ item }: { item: projectType }) {
   }
 
   const navigationComponent = ({ classification, items }) => (
-    <div key={classification} className="flex flex-col justify-center">
+    <div key={classification} className=" flex flex-col justify-center">
       <div
-        className={`flex items-center mx-4 font-bold text-gray-600 h-8 uppercase ${
+        className={`${
           !isSidebarVisible && "hidden"
-        }`}
+        } flex items-center justify-start mx-4 font-bold text-gray-600 h-8 uppercase text-sm `}
       >
         {classification}
       </div>
@@ -85,35 +85,60 @@ export default function SideBar({ item }: { item: projectType }) {
           }`}
         >
           <div
-            className={`${
-              isSidebarVisible ? "md:pl-4 md:pr-2" : "px-4"
-            }  flex `}
+              className={`${
+                isSidebarVisible ? "pl-4 pr-2" : "px-4"
+              }  flex `}
+            >
+              {data.icon}
+            </div>
+            <div
+              className={`${
+                !isSidebarVisible  && "scale-0 text-gray-500 "
+              } font-medium w-fit text-black whitespace-nowrap text-left text-sm  duration-300 group-hover:text-indigo-400 origin-left `}
+            >
+              {data.name}
+            </div>
+          </Link>
+        );
+      })}
+              isSidebarVisible ? "my-0" : !isSettings ? "mt-8" : "mt-0"
+            } ${
+              isSidebarVisible && selectedMenu === data.path
+                ? "bg-blue-100 border-r-4 border-blue-500 text-black"
+                : "hover:bg-gray-100 text-gray-00 "
+            } flex h-12 flex-row items-center justify-start py-2 group w-full  `}
           >
-            {data.icon}
-          </div>
-          <div
-            className={`font-medium w-fit text-black  text-center whitespace-nowrap md:text-left text-sm md:text-lg duration-300 group-hover:text-indigo-400 origin-left ${
-              !isSidebarVisible && "scale-0 text-gray-500 "
-            }`}
-          >
-            {data.name}
-          </div>
-        </Link>
-      ))}
+            <div
+              className={`${
+                isSidebarVisible ? "pl-4 pr-2" : "px-4"
+              }  flex `}
+            >
+              {data.icon}
+            </div>
+            <div
+              className={`${
+                !isSidebarVisible  && "scale-0 text-gray-500 "
+              } font-medium w-fit text-black whitespace-nowrap text-left text-sm  duration-300 group-hover:text-indigo-400 origin-left `}
+            >
+              {data.name}
+            </div>
+          </Link>
+        );
+      })}
     </div>
   );
 
   return (
     <div
-      className={`h-full flex flex-col  ${
-        isSidebarVisible ? "w-28 md:w-48" : "w-14 "
-      } duration-300 ease-in-out pt-12 `}
+      className={`${
+        isSidebarVisible ? "w-40" : "sm:w-14 hidden sm:flex"
+      } h-full fixed bg-white sm:relative flex-col duration-300 ease-in-out pt-12 `}
     >
       <div
         id="menu"
-        className={`   ${
-          isSidebarVisible ? "w-28 md:w-48" : "w-14"
-        }  fixed duration-300 flex flex-col justify-between h-[calc(100vh-8rem)] `}
+        className={`${
+          isSidebarVisible ? "w-40" : "w-14 "
+        } fixed duration-300 flex flex-col justify-between h-[calc(100vh-4rem)] `}
       >
         <div>
           {Object.entries(classifyData(navigationTop)).map(
@@ -131,3 +156,4 @@ export default function SideBar({ item }: { item: projectType }) {
     </div>
   );
 }
+
