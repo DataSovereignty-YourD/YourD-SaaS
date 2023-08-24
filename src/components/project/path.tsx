@@ -1,10 +1,18 @@
 import { useNavigate } from "react-router-dom";
 import { AiOutlineHome } from "react-icons/ai";
+import { useRecoilState } from "recoil";
+import { currentPageState } from "../../recoil/sideBarToggle";
+import { useEffect } from "react";
 export default function Path({ pathname }: { pathname: string }) {
   const navigate = useNavigate();
+  const [currentPath, setCurrentPath] = useRecoilState(currentPageState);
   const HomePathName = pathname.split("/").slice(1, 3);
   const arrayPathName = pathname.split("/").slice(3);
   const lastPath = arrayPathName[arrayPathName.length - 1];
+
+  useEffect(()=>{
+    setCurrentPath(lastPath);
+  },[])
 
   const onClickImg = () => {
     navigate(`/${HomePathName[0]}/${HomePathName[1]}/dashboard`);

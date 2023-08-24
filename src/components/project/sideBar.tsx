@@ -1,8 +1,12 @@
 import { Link, useLocation } from "react-router-dom";
-import { ReactElement, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import { projectType } from "../../recoil/dashBoard/project";
-import { useRecoilValue } from "recoil";
-import { sideBarTogleValue } from "../../recoil/sideBarToggle";
+import { useRecoilState, useRecoilValue } from "recoil";
+import {
+  currentPageState,
+  currentPageValue,
+  sideBarTogleValue,
+} from "../../recoil/sideBarToggle";
 import {
   AiOutlineHome,
   AiOutlineTeam,
@@ -12,7 +16,7 @@ import {
 
 export default function SideBar({ item }: { item: projectType }) {
   const location = useLocation();
-  const [selectedMenu, setSelectedMenu] = useState(location.pathname);
+  const selectedMenu = useRecoilValue(currentPageValue);
   const isSidebarVisible = useRecoilValue(sideBarTogleValue);
 
   type navigationType = {
@@ -63,45 +67,59 @@ export default function SideBar({ item }: { item: projectType }) {
   }
 
   const navigationComponent = ({ classification, items }) => (
-    <div key={classification} className='flex flex-col justify-center'>
-      <div className={`flex items-center mx-4 font-bold text-gray-600 h-8 uppercase ${!isSidebarVisible&& 'hidden'}`}>
+    <div key={classification} className="flex flex-col justify-center">
+      <div
+        className={`${
+          !isSidebarVisible && "hidden"
+        } flex items-center justify-center md:justify-start mx-1 md:mx-4 font-medium md:font-bold text-gray-600 h-8 uppercase text-xs md:text-sm `}
+      >
         {classification}
       </div>
-      {items.map((data) => (
-        <Link
-          key={data.name}
-          to={data.path}
-          onClick={() => setSelectedMenu(data.path)}
-          className={`flex flex-col h-12  md:flex-row items-center  justify-start py-2 group w-full  ${isSidebarVisible? 'my-0':'mt-8'} ${
-            isSidebarVisible && selectedMenu === data.path
-              ? "bg-blue-100 border-r-4 border-blue-500 text-black"
-              : "hover:bg-gray-100 text-gray-500 "
-          }`}
-        >
-          <div className={`${isSidebarVisible?'md:pl-4 md:pr-2':'px-4'}  flex `}>{data.icon}</div>
-          <div
-            className={`font-medium w-fit text-black  text-center whitespace-nowrap md:text-left text-sm md:text-lg duration-300 group-hover:text-indigo-400 origin-left ${
-              !isSidebarVisible && "scale-0 text-gray-500 "
-            }`}
+      {items.map((data) => {
+        const isSettings = data.name === "Settings";
+        return (
+          <Link
+            key={data.name}
+            to={data.path}
+            className={`${
+              isSidebarVisible ? "my-0" : !isSettings ? "mt-8" : "mt-0"
+            } ${
+              isSidebarVisible && selectedMenu === data.path
+                ? "bg-blue-100 border-r-4 border-blue-500 text-black"
+                : "hover:bg-gray-100 text-gray-500 "
+            } flex flex-col h-12  md:flex-row items-center justify-start py-2 group w-full  `}
           >
-            {data.name}
-          </div>
-        </Link>
-      ))}
+            <div
+              className={`${
+                isSidebarVisible ? "md:pl-4 md:pr-2" : "px-4"
+              }  flex `}
+            >
+              {data.icon}
+            </div>
+            <div
+              className={`${
+                !isSidebarVisible && "scale-0 text-gray-500 "
+              } font-medium w-fit text-black   text-center whitespace-nowrap md:text-left text-sm md:text-lg duration-300 group-hover:text-indigo-400 origin-left `}
+            >
+              {data.name}
+            </div>
+          </Link>
+        );
+      })}
     </div>
   );
 
   return (
     <div
-      className={`h-full flex flex-col  ${
+      className={`${
         isSidebarVisible ? "w-28 md:w-48" : "w-14 "
-      } duration-300 ease-in-out pt-12 `}
+      } h-full flex flex-col duration-300 ease-in-out pt-12 `}
     >
       <div
         id="menu"
-        className={`   ${
+        className={`${
           isSidebarVisible ? "w-28 md:w-48" : "w-14"
-        }  fixed duration-300 flex flex-col justify-between h-[calc(100vh-8rem)] `}
+        } fixed duration-300 flex flex-col justify-between h-[calc(100vh-4rem)] `}
       >
         <div>
           {Object.entries(classifyData(navigationTop)).map(

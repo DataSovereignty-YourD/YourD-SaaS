@@ -41,26 +41,27 @@ export default function ProjectTopBar() {
     setDropdownOpen(!isDropdownOpen);
   };
 
-  const [isDropdownView, setDropdownView] = useState(false);
-
-  const handleClickContainer = () => {
-    setDropdownView(!isDropdownView);
-  };
-
-  const handleBlurContainer = () => {
-    setTimeout(() => {
-      setDropdownView(false);
-    }, 200);
-  };
 
   const [menuToggle, setMenuToggle] = useState(false);
+
+  window.addEventListener('resize', () => {
+    // 현재 화면 너비
+    const width = window.innerWidth;
+  
+    if (width <= 640) {
+      // 원하는 함수 실행
+      setSidebarVisible(false);
+    } else if(width> 640 && width < 1024){
+      setSidebarVisible(true);
+    }
+  });
 
   return (
     <div className="fixed bg-white w-full h-12 flex items-center z-20 border border-b-2">
       {!isMain && (
         <button
           onClick={() => setSidebarVisible((prev) => !prev)}
-          className="flex items-center justify-center w-16 px-5 py-2 text-gray-700 hover:bg-gray-100 rounded-md "
+          className="flex items-center justify-center w-14 px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md "
           type="button"
         >
           {isSidebarVisible ? (
