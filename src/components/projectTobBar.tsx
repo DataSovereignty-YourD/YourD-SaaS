@@ -6,6 +6,7 @@ import { projectModalState } from "../recoil/dashBoard/project";
 import React, { useState } from "react";
 import { sideBarToggleState } from "../recoil/sideBarToggle";
 import classNames from "classnames";
+import { loginState } from "../recoil/loginState";
 import {
   AiOutlineSearch,
   AiOutlineMenuUnfold,
@@ -13,13 +14,28 @@ import {
   AiOutlineClose,
   AiOutlineMenuFold,
   AiOutlineMessage,
+  AiOutlineWallet,
+  AiOutlineQuestionCircle,
+  AiOutlineLock,
+  AiOutlineUnorderedList,
+  AiOutlineSetting,
 } from "react-icons/ai";
 import {
   IoMdNotificationsOutline,
   IoMdPeople,
   IoMdTime,
   IoIosTimer,
+  IoMdPhonePortrait,
 } from "react-icons/io";
+
+import { BiLogOut } from "react-icons/bi";
+
+import {
+  PiPencilSimpleLineLight,
+  PiUserListDuotone,
+  PiWechatLogoBold,
+} from "react-icons/pi";
+import { GoPerson } from "react-icons/go";
 
 export default function ProjectTopBar() {
   const location = useLocation();
@@ -55,6 +71,15 @@ export default function ProjectTopBar() {
 
   const [menuToggle, setMenuToggle] = useState(false);
 
+  const [activeTab, setActiveTab] = useState("profile");
+  const handleTabChange = (tab) => {
+    setActiveTab(tab);
+  };
+  const [isLoggedIn, setLoggedIn] = useRecoilState(loginState);
+  const handleLogout = () => {
+    setLoggedIn(!isLoggedIn);
+  };
+
   return (
     <div className="fixed bg-white w-full h-12 flex items-center z-20 border border-b-2">
       {!isMain && (
@@ -80,21 +105,24 @@ export default function ProjectTopBar() {
         <div className="flex items-center">
           {pathName !== "/project" && (
             <div className="md:flex items-center ml-20 w-fit duration-500 origin-left">
-              <div id="search-icon" 
-                className={`hidden md:flex duration-700 ${isSearchBarVisible?'rotate-[360deg]':'[0deg]'}`}
-                onClick={handleSearchIconClick}>
+              <div
+                id="search-icon"
+                className={`hidden md:flex duration-700 ${
+                  isSearchBarVisible ? "rotate-[360deg]" : "[0deg]"
+                }`}
+                onClick={handleSearchIconClick}
+              >
                 <AiOutlineSearch size={28} />
               </div>
-                <input
-                  id="header-search"
-                  placeholder="search"
-                  type="text"
-                  className={`px-2 hidden origin-left duration-500 md:flex items-center rounded-xl transition-width shadow-inner border  focus:outline-none ${
-                    isSearchBarVisible ? "w-full scale-100  ml-2":"w-0 scale-0"
-              }`}
-                  value=""
-                />
-              
+              <input
+                id="header-search"
+                placeholder="search"
+                type="text"
+                className={`px-2 hidden origin-left duration-500 md:flex items-center rounded-xl transition-width shadow-inner border  focus:outline-none ${
+                  isSearchBarVisible ? "w-full scale-100  ml-2" : "w-0 scale-0"
+                }`}
+                value=""
+              />
             </div>
           )}
         </div>
@@ -174,19 +202,88 @@ export default function ProjectTopBar() {
           ></img>
 
           {/* user image */}
-          <img
-            className="  w-10 h-10 hidden md:flex items-center space-x-1 rounded-full object-cover   "
-            src="https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw&amp;ixlib=rb-1.2.1&amp;q=80&amp;w=400"
-            alt="User Avatar"
-          ></img>
+          <div className="">
+            <div
+              onClick={toggleDropdown}
+              className=" flex items-center justify-center rounded-md dropdown  focus:outline-none focus:ring"
+              // type="button"
+            >
+              <span className="inline-flex items-center hover:bg-gray-100 justify-center px-2.5 py-0.5 rounded-full text-xs font-medium">
+                <img
+                  className="  w-10 h-10 hidden md:flex items-center space-x-1 rounded-full object-cover   "
+                  src="https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw&amp;ixlib=rb-1.2.1&amp;q=80&amp;w=400"
+                  alt="User Avatar"
+                ></img>
+              </span>
+            </div>
+
+            {isDropdownOpen && (
+              <div
+                className="border border-red-400 absolute w-fit h-fit   bg-white menu dropdown-content  shadow z-[1] bg-base-100 rounded-xl"
+                style={{ transform: "translateX(-80%)" }}
+              >
+                <div className="border border-red-400 items-center flex text-xl  mb-2  py-1">
+                  <img
+                    className="mx-1  w-10 h-10 hidden md:flex items-center space-x-1 rounded-full object-cover   "
+                    src="https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw&amp;ixlib=rb-1.2.1&amp;q=80&amp;w=400"
+                    alt="User Avatar"
+                  ></img>
+                  <div className="border border-red-400 flex justify-between w-full">
+                    <div className="mx-2">User Name</div>
+                    <BiLogOut
+                      size={32}
+                      className="mx-1"
+                      onClick={handleLogout}
+                    />
+                  </div>
+                </div>
+                <div className="border border-red-400 ">
+                  <div className="border border-red-400 flex justify-between w-full ">
+                    <button
+                      className={`border border-red-400 flex items-center justify-center  w-[calc(50% - 0.25rem)] px-4 py-2 text-gray-700 w-full ${
+                        activeTab === "profile"
+                          ? "bg-white border-b-4 border-blue-500 text-blue-700 font-semibold"
+                          : "hover:bg-gray-100 text-black"
+                      } `}
+                      type="button"
+                      onClick={() => handleTabChange("profile")}
+                    >
+                      <GoPerson className="mx-1" />
+                      Profile
+                    </button>
+                    <button
+                      className={`border border-red-400 flex items-center justify-center w-[calc(50% - 0.25rem)] px-4 py-2 text-gray-700 w-full ${
+                        activeTab === "setting"
+                          ? "bg-white border-b-4 border-blue-500 text-blue-700 font-semibold"
+                          : "hover:bg-gray-100 text-black"
+                      } `}
+                      type="button"
+                      onClick={() => handleTabChange("setting")}
+                    >
+                      <AiOutlineSetting className="mx-1" />
+                      Setting
+                    </button>
+                  </div>
+                  <div className="border border-red-400 ">
+                    {activeTab === "profile" && <ProfileContent />}
+                    {activeTab === "setting" && <SettingContent />}
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
 
           {/* shrink icon */}
-            <button
-              className=" md:hidden rounded-md bg-gray-200 hover:bg-gray-300 focus:outline-none focus:ring"
-              onClick={() => setMenuToggle(!menuToggle)}
-            >
-              {!menuToggle ? <AiOutlineMore size={26} /> : <AiOutlineClose size={26} />}
-            </button>
+          <button
+            className=" md:hidden rounded-md bg-gray-200 hover:bg-gray-300 focus:outline-none focus:ring"
+            onClick={() => setMenuToggle(!menuToggle)}
+          >
+            {!menuToggle ? (
+              <AiOutlineMore size={26} />
+            ) : (
+              <AiOutlineClose size={26} />
+            )}
+          </button>
         </div>
       </div>
       <div
@@ -238,3 +335,85 @@ const NotificationData = [
     time: "PM 18:45",
   },
 ];
+const ProfileData = [
+  {
+    name: "Edit Profile",
+    icon: <PiPencilSimpleLineLight size={30} color={"#007AFF"} />,
+  },
+  {
+    name: "View Profile",
+    icon: <GoPerson size={30} color={"#ffd400"} />,
+  },
+  {
+    name: "Social Profile",
+    icon: <PiUserListDuotone size={30} color={"#007aff"} />,
+  },
+  {
+    name: "Billing",
+    icon: <AiOutlineWallet size={30} color={"#FFD400"} />,
+  },
+  {
+    name: "Logout",
+    icon: <BiLogOut size={30} color={"#007aff"} />,
+  },
+];
+const SettingData = [
+  {
+    name: "support",
+    icon: <AiOutlineQuestionCircle size={30} color={"#007AFF"} />,
+  },
+  {
+    name: "Account Settings",
+    icon: <GoPerson size={30} color={"#ffd400"} />,
+  },
+  {
+    name: "Privacy Center",
+    icon: <AiOutlineLock size={30} color={"#007aff"} />,
+  },
+  {
+    name: "Feedback",
+    icon: <PiWechatLogoBold size={30} color={"#FFD400"} />,
+  },
+  {
+    name: "History",
+    icon: <AiOutlineUnorderedList size={30} color={"#007AFF"} />,
+  },
+];
+
+const ProfileContent = () => {
+  return (
+    <div className="">
+      {ProfileData.map((profiledate) => {
+        return (
+          <div className=" flex my-2  border-b gap-3 border-gray-100 py-1 justify-between items-center font-semibold text-gray-500 md:mx-2">
+            <div className="flex gap-3 ">
+              <div className="object-contain">{profiledate.icon}</div>
+              <div className="sm:min-w-[200px] text-sm sm:text-lg lg:min-w-[200px] lg:whitespace-nowrap ">
+                {profiledate.name}
+              </div>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+const SettingContent = () => {
+  return (
+    <div className="">
+      {SettingData.map((settingdata) => {
+        return (
+          <div className=" flex my-2  border-b gap-3 border-gray-100 py-1 justify-between items-center font-semibold text-gray-500 md:mx-2">
+            <div className="flex gap-3 ">
+              <div className="object-contain">{settingdata.icon}</div>
+              <div className="sm:min-w-[200px] text-sm sm:text-lg lg:min-w-[200px] lg:whitespace-nowrap ">
+                {settingdata.name}
+              </div>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
