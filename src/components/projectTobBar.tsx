@@ -56,7 +56,7 @@ export default function ProjectTopBar() {
   const [menuToggle, setMenuToggle] = useState(false);
 
   return (
-    <div className="fixed  bg-white w-full h-12 flex items-center z-20">
+    <div className="fixed bg-white w-full h-12 flex items-center z-20 border border-b-2">
       {!isMain && (
         <button
           onClick={() => setSidebarVisible((prev) => !prev)}
@@ -77,21 +77,24 @@ export default function ProjectTopBar() {
       />
       {/* search icon */}
       <div className="flex justify-between w-full mx-10 ">
-        <div className="search-icon-container flex items-center ">
+        <div className="flex items-center">
           {pathName !== "/project" && (
-            <div className="flex items-center ml-10 duration-300">
-              <input
-                id="header-search"
-                placeholder="검색어를 입력하세요"
-                type="text"
-                className={`px-2 hidden md:flex items-center space-x-1 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500 duration-300 origin-left ${
-                  isSearchBarVisible && "scale-0"
-                }`}
-                value=""
-              />
-              <div id="search-icon" onClick={handleSearchIconClick}>
+            <div className="md:flex items-center ml-20 w-fit duration-500 origin-left">
+              <div id="search-icon" 
+                className={`hidden md:flex duration-700 ${isSearchBarVisible?'rotate-[360deg]':'[0deg]'}`}
+                onClick={handleSearchIconClick}>
                 <AiOutlineSearch size={28} />
               </div>
+                <input
+                  id="header-search"
+                  placeholder="search"
+                  type="text"
+                  className={`px-2 hidden origin-left duration-500 md:flex items-center rounded-xl transition-width shadow-inner border  focus:outline-none ${
+                    isSearchBarVisible ? "w-full scale-100  ml-2":"w-0 scale-0"
+              }`}
+                  value=""
+                />
+              
             </div>
           )}
         </div>

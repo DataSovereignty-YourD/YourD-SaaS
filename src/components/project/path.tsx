@@ -16,7 +16,7 @@ export default function Path({ pathname }: { pathname: string }) {
       <span className="text-lg flex min-w-[200px] p-1 text-gray-500 font-bold uppercase ">
         {arrayPathName.map((data) => {
           return (
-            <div className="flex">
+            <div key={data} className="flex">
               <div className="text-black">&nbsp; / &nbsp;</div>
               <div
                 className={data === lastPath ? "text-black" : "text-gray-400"}

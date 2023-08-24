@@ -103,7 +103,7 @@ export default function DashBoard() {
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-7 my-5">
         {IncomeData.map((income) => {
           return (
-            <div className=" bg-white h-fit p-4 font-bold rounded-sm  drop-shadow-md shadow-black transition-transform ease-in-out transform  duration-500 hover:scale-110">
+            <div key={income.title} className=" bg-white h-fit p-4 font-bold rounded-sm  drop-shadow-md shadow-black transition-transform ease-in-out transform  duration-500 hover:scale-110">
               <div className="font-bold text-gray-500 uppercase">
                 {income.title}
               </div>
@@ -132,7 +132,7 @@ export default function DashBoard() {
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 w-full gap-6 my-4">
         {UserAnalyticsData.map((item) => {
           return (
-            <div className="h-[300px] w-full bg-white rounded-sm drop-shadow-lg p-4 transition-transform ease-in-out transform  duration-500 hover:scale-110">
+            <div key={item.title} className="h-[300px] w-full bg-white rounded-sm drop-shadow-lg p-4 transition-transform ease-in-out transform  duration-500 hover:scale-110">
               <div className="text-black font-extrabold text-center w-full h-fit mb-2 text-lg">
                 {item.title}
               </div>
