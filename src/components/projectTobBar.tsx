@@ -57,19 +57,12 @@ export default function ProjectTopBar() {
     setDropdownOpen(!isDropdownOpen);
   };
 
-  const [isDropdownView, setDropdownView] = useState(false);
-
-  const handleClickContainer = () => {
-    setDropdownView(!isDropdownView);
-  };
-
-  const handleBlurContainer = () => {
-    setTimeout(() => {
-      setDropdownView(false);
-    }, 200);
-  };
-
   const [menuToggle, setMenuToggle] = useState(false);
+  const [isProfileToggle, setProfileToggle] = useState(false);
+
+  const profileDropdown = () => {
+    setProfileToggle(!isProfileToggle);
+  };
 
   const [activeTab, setActiveTab] = useState("profile");
   const handleTabChange = (tab) => {
@@ -80,12 +73,24 @@ export default function ProjectTopBar() {
     setLoggedIn(!isLoggedIn);
   };
 
+  window.addEventListener("resize", () => {
+    // 현재 화면 너비
+    const width = window.innerWidth;
+
+    if (width <= 640) {
+      // 원하는 함수 실행
+      setSidebarVisible(false);
+    } else if (width > 640 && width < 1024) {
+      setSidebarVisible(true);
+    }
+  });
+
   return (
     <div className="fixed bg-white w-full h-12 flex items-center z-20 border border-b-2">
       {!isMain && (
         <button
           onClick={() => setSidebarVisible((prev) => !prev)}
-          className="flex items-center justify-center w-16 px-5 py-2 text-gray-700 hover:bg-gray-100 rounded-md "
+          className="flex items-center justify-center w-14 px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md "
           type="button"
         >
           {isSidebarVisible ? (
@@ -204,7 +209,7 @@ export default function ProjectTopBar() {
           {/* user image */}
           <div className="">
             <div
-              onClick={toggleDropdown}
+              onClick={profileDropdown}
               className=" flex items-center justify-center rounded-md dropdown  focus:outline-none focus:ring"
               // type="button"
             >
@@ -217,18 +222,18 @@ export default function ProjectTopBar() {
               </span>
             </div>
 
-            {isDropdownOpen && (
+            {isProfileToggle && (
               <div
-                className="border border-red-400 absolute w-fit h-fit   bg-white menu dropdown-content  shadow z-[1] bg-base-100 rounded-xl"
+                className=" absolute w-fit h-fit   bg-white menu dropdown-content  shadow z-[1] bg-base-100 rounded-xl"
                 style={{ transform: "translateX(-80%)" }}
               >
-                <div className="border border-red-400 items-center flex text-xl  mb-2  py-1">
+                <div className=" items-center flex text-xl  mb-2  py-1">
                   <img
                     className="mx-1  w-10 h-10 hidden md:flex items-center space-x-1 rounded-full object-cover   "
                     src="https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw&amp;ixlib=rb-1.2.1&amp;q=80&amp;w=400"
                     alt="User Avatar"
                   ></img>
-                  <div className="border border-red-400 flex justify-between w-full">
+                  <div className=" flex justify-between w-full">
                     <div className="mx-2">User Name</div>
                     <BiLogOut
                       size={32}
@@ -237,10 +242,10 @@ export default function ProjectTopBar() {
                     />
                   </div>
                 </div>
-                <div className="border border-red-400 ">
-                  <div className="border border-red-400 flex justify-between w-full ">
+                <div className=" ">
+                  <div className=" flex justify-between w-full ">
                     <button
-                      className={`border border-red-400 flex items-center justify-center  w-[calc(50% - 0.25rem)] px-4 py-2 text-gray-700 w-full ${
+                      className={` flex items-center justify-center  w-[calc(50% - 0.25rem)] px-4 py-2 text-gray-700 w-full ${
                         activeTab === "profile"
                           ? "bg-white border-b-4 border-blue-500 text-blue-700 font-semibold"
                           : "hover:bg-gray-100 text-black"
@@ -252,7 +257,7 @@ export default function ProjectTopBar() {
                       Profile
                     </button>
                     <button
-                      className={`border border-red-400 flex items-center justify-center w-[calc(50% - 0.25rem)] px-4 py-2 text-gray-700 w-full ${
+                      className={` flex items-center justify-center w-[calc(50% - 0.25rem)] px-4 py-2 text-gray-700 w-full ${
                         activeTab === "setting"
                           ? "bg-white border-b-4 border-blue-500 text-blue-700 font-semibold"
                           : "hover:bg-gray-100 text-black"
@@ -264,7 +269,7 @@ export default function ProjectTopBar() {
                       Setting
                     </button>
                   </div>
-                  <div className="border border-red-400 ">
+                  <div className=" ">
                     {activeTab === "profile" && <ProfileContent />}
                     {activeTab === "setting" && <SettingContent />}
                   </div>
