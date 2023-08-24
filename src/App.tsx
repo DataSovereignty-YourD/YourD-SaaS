@@ -25,7 +25,7 @@ function App() {
           </Routes>
         </div>
       ) : (
-        <div>
+        <div className="bg-gray-100">
           <ProjectTopBar />
           <Routes>
             <Route path="/" element={<DefaultPage />} />

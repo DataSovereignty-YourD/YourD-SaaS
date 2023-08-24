@@ -27,7 +27,7 @@ export default function ProjectDetailPage() {
        */}
         <div
           id="content"
-          className="grid w-full px-6 h-fit mt-16"
+          className="grid w-full px-6 h-fit mt-16 bg-gray-100"
         >
           <Routes>
             <Route path="dashboard" element={<DashBoard />} />
