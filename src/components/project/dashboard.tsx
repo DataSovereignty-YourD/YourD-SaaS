@@ -17,12 +17,14 @@ export default function DashBoard() {
   const location = useLocation();
   const pathName = location.pathname;
 
-  let analyticsData: {
-    title: string;
-    value: number;
-    icon: ReactElement;
-    color: string;
-  }[] = [
+  type analyticsDataType= {
+    title: string,
+    value: number,
+    icon: ReactElement,
+    color: string,
+  }
+
+  let analyticsData: analyticsDataType[] = [
     {
       title: "Total Users",
       value: 1895,
@@ -53,13 +55,13 @@ export default function DashBoard() {
     <div id="dashboard" className="grid pb-20">
       <Path pathname={pathName} />
       <h1 className="font-bold text-black mb-2 uppercase text-xl sm:text-2xl">OverView</h1>
-      <div id="total" className="grid mb-5 w-full">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 w-full gap-7 my-5">
+      <div id="total" className=" mb-5 w-full mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-7 my-5">
           {analyticsData.map((data, index) => {
             return (
               <div
                 key={data.title}
-                className="bg-white h-fit p-3 rounded-sm drop-shadow-md shadow-black transition-transform ease-in-out transform duration-500 hover:scale-110"
+                className="bg-white w-full h-fit p-3 rounded-sm drop-shadow-md shadow-black transition-transform ease-in-out transform duration-500 hover:scale-110"
                 style={{
                   borderBottomColor: data.color,
                   borderBottomWidth: 3,
@@ -103,7 +105,7 @@ export default function DashBoard() {
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-7 my-5">
         {IncomeData.map((income) => {
           return (
-            <div className=" bg-white h-fit p-4 font-bold rounded-sm  drop-shadow-md shadow-black transition-transform ease-in-out transform  duration-500 hover:scale-110">
+            <div key={income.title} className=" bg-white h-fit p-4 font-bold rounded-sm  drop-shadow-md shadow-black transition-transform ease-in-out transform  duration-500 hover:scale-110">
               <div className="font-bold text-gray-500 uppercase">
                 {income.title}
               </div>
@@ -132,7 +134,7 @@ export default function DashBoard() {
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 w-full gap-6 my-4">
         {UserAnalyticsData.map((item) => {
           return (
-            <div className="h-[300px] w-full bg-white rounded-sm drop-shadow-lg p-4 transition-transform ease-in-out transform  duration-500 hover:scale-110">
+            <div key={item.title} className="h-[300px] w-full bg-white rounded-sm drop-shadow-lg p-4 transition-transform ease-in-out transform  duration-500 hover:scale-110">
               <div className="text-black font-extrabold text-center w-full h-fit mb-2 text-lg">
                 {item.title}
               </div>

@@ -12,3 +12,16 @@ export const sideBarTogleValue = selector({
         return value;
     },
 });
+
+export const currentPageState =atom({
+    key:'currentPageState',
+    default: 'dashboard',
+})
+
+export const currentPageValue = selector({
+    key:'currentPageValue',
+    get : ({get})=> {
+        const value = get(currentPageState);
+        return value;
+    },
+})
