@@ -17,12 +17,14 @@ export default function DashBoard() {
   const location = useLocation();
   const pathName = location.pathname;
 
-  let analyticsData: {
-    title: string;
-    value: number;
-    icon: ReactElement;
-    color: string;
-  }[] = [
+  type analyticsDataType= {
+    title: string,
+    value: number,
+    icon: ReactElement,
+    color: string,
+  }
+
+  let analyticsData: analyticsDataType[] = [
     {
       title: "Total Users",
       value: 1895,
