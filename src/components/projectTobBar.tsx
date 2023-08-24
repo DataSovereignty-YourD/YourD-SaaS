@@ -47,9 +47,8 @@ export default function ProjectTopBar() {
   window.addEventListener('resize', () => {
     // 현재 화면 너비
     const width = window.innerWidth;
-  
+    
     if (width <= 640) {
-      // 원하는 함수 실행
       setSidebarVisible(false);
     } else if(width> 640 && width < 1024){
       setSidebarVisible(true);
