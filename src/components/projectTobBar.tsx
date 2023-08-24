@@ -308,10 +308,10 @@ export default function ProjectTopBar() {
                 <div className=" ">
                   <div className=" flex justify-between w-full ">
                     <button
-                      className={` flex items-center justify-center  w-[calc(50% - 0.25rem)] px-4 py-2  w-full  font-normal text-sm ${
+                      className={` flex items-center justify-center  w-[calc(50% - 0.25rem)] px-4 py-2  w-full  font-normal text-sm border-b-2 ${
                         activeTab === "profile"
                           ? "bg-white border-b-2 border-blue-500 text-blue-500  "
-                          : "hover:bg-gray-100 text-black "
+                          : "hover:bg-gray-100 text-black border-transparent"
                       } `}
                       type="button"
                       onClick={() => handleTabChange("profile")}
@@ -320,10 +320,10 @@ export default function ProjectTopBar() {
                       Profile
                     </button>
                     <button
-                      className={` flex items-center justify-center w-[calc(50% - 0.25rem)] px-4 py-2  w-full  font-normal text-sm  ${
+                      className={` flex items-center justify-center w-[calc(50% - 0.25rem)] px-4 py-2  w-full  font-normal text-sm border-b-2 ${
                         activeTab === "setting"
-                          ? "bg-white border-b-2 border-blue-500 text-blue-500 "
-                          : "hover:bg-gray-100 text-black "
+                          ? "bg-white border-blue-500 text-blue-500 "
+                          : "hover:bg-gray-100 text-black border-transparent"
                       } `}
                       type="button"
                       onClick={() => handleTabChange("setting")}
@@ -373,6 +373,7 @@ export default function ProjectTopBar() {
               className="    w-10 h-10  mx-2 rounded-full object-fill"
               src="https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw&amp;ixlib=rb-1.2.1&amp;q=80&amp;w=400"
               alt="User Avatar"
+              onDragStart={()=>{return false}}
             ></img>
           </div>
         </div>
