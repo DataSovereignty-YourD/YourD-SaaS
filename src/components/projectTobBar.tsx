@@ -72,6 +72,11 @@ export default function ProjectTopBar() {
   const handleLogout = () => {
     setLoggedIn(!isLoggedIn);
   };
+  const [selectedItem, setSelectedItem] = useState(null);
+
+  const handleItemClick = (index) => {
+    setSelectedItem(index);
+  };
 
   window.addEventListener("resize", () => {
     // 현재 화면 너비
@@ -85,6 +90,65 @@ export default function ProjectTopBar() {
     }
   });
 
+  const ProfileContent = () => {
+    return (
+      <div className="">
+        {ProfileData.map((profiledata, index) => {
+          return (
+            <div className="flex  gap-2 border-gray-100  justify-between items-center  text-black ">
+              <a
+                href="#"
+                key={index}
+                className={`w-full py-2 text-gray-800  ${
+                  selectedItem === index ? "bg-blue-100" : ""
+                } hover:bg-blue-200 transition duration-300`}
+                onClick={() => handleItemClick(index)}
+              >
+                <div className="flex">
+                  <div className="object-contain  my-auto mx-4 ">
+                    {profiledata.icon}
+                  </div>
+                  <div className="sm:min-w-[200px]  font-light text-xs sm:text-sm lg:min-w-[200px] lg:whitespace-nowrap ">
+                    {profiledata.name}
+                  </div>
+                </div>
+              </a>
+            </div>
+          );
+        })}
+      </div>
+    );
+  };
+
+  const SettingContent = () => {
+    return (
+      <div className="">
+        {SettingData.map((settingdata, index) => {
+          return (
+            <div className="flex  gap-2 border-gray-100  justify-between items-center  text-black ">
+              <a
+                href="#"
+                key={index}
+                className={`w-full py-2 text-gray-800  ${
+                  selectedItem === index ? "bg-blue-100" : ""
+                } hover:bg-blue-200 transition duration-300`}
+                onClick={() => handleItemClick(index)}
+              >
+                <div className="flex">
+                  <div className="object-contain  my-auto mx-4 ">
+                    {settingdata.icon}
+                  </div>
+                  <div className="sm:min-w-[200px]  font-light text-xs sm:text-sm lg:min-w-[200px] lg:whitespace-nowrap ">
+                    {settingdata.name}
+                  </div>
+                </div>
+              </a>
+            </div>
+          );
+        })}
+      </div>
+    );
+  };
   return (
     <div className="fixed bg-white w-full h-12 flex items-center z-20 border border-b-2">
       {!isMain && (
@@ -210,7 +274,7 @@ export default function ProjectTopBar() {
           <div className="">
             <div
               onClick={profileDropdown}
-              className=" flex items-center justify-center rounded-md dropdown  focus:outline-none focus:ring"
+              className=" flex items-center justify-center rounded-md  dropdown  focus:outline-none focus:ring"
               // type="button"
             >
               <span className="inline-flex items-center hover:bg-gray-100 justify-center px-2.5 py-0.5 rounded-full text-xs font-medium">
@@ -224,20 +288,20 @@ export default function ProjectTopBar() {
 
             {isProfileToggle && (
               <div
-                className=" absolute w-fit h-fit   bg-white menu dropdown-content  shadow z-[1] bg-base-100 rounded-xl"
+                className=" absolute w-72 h-fit   bg-white menu dropdown-content shadow-2xl z-[1] bg-base-100 rounded-md"
                 style={{ transform: "translateX(-80%)" }}
               >
-                <div className=" items-center flex text-xl  mb-2  py-1">
+                <div className="  items-center flex text-xl w-full py-6 ">
                   <img
-                    className="mx-1  w-10 h-10 hidden md:flex items-center space-x-1 rounded-full object-cover   "
+                    className="  w-7 h-7  ml-4 mr-2 rounded-full object-fill  "
                     src="https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw&amp;ixlib=rb-1.2.1&amp;q=80&amp;w=400"
                     alt="User Avatar"
                   ></img>
-                  <div className=" flex justify-between w-full">
-                    <div className="mx-2">User Name</div>
+                  <div className=" flex items-center justify-between w-full">
+                    <div className=" font-normal text-sm ">User Name</div>
                     <BiLogOut
-                      size={32}
-                      className="mx-1"
+                      size={20}
+                      className="mx-5"
                       onClick={handleLogout}
                     />
                   </div>
@@ -245,27 +309,27 @@ export default function ProjectTopBar() {
                 <div className=" ">
                   <div className=" flex justify-between w-full ">
                     <button
-                      className={` flex items-center justify-center  w-[calc(50% - 0.25rem)] px-4 py-2 text-gray-700 w-full ${
+                      className={` flex items-center justify-center  w-[calc(50% - 0.25rem)] px-4 py-2  w-full  font-normal text-sm ${
                         activeTab === "profile"
-                          ? "bg-white border-b-4 border-blue-500 text-blue-700 font-semibold"
-                          : "hover:bg-gray-100 text-black"
+                          ? "bg-white border-b-2 border-blue-500 text-blue-500  "
+                          : "hover:bg-gray-100 text-black "
                       } `}
                       type="button"
                       onClick={() => handleTabChange("profile")}
                     >
-                      <GoPerson className="mx-1" />
+                      <GoPerson className="mx-2" />
                       Profile
                     </button>
                     <button
-                      className={` flex items-center justify-center w-[calc(50% - 0.25rem)] px-4 py-2 text-gray-700 w-full ${
+                      className={` flex items-center justify-center w-[calc(50% - 0.25rem)] px-4 py-2  w-full  font-normal text-sm  ${
                         activeTab === "setting"
-                          ? "bg-white border-b-4 border-blue-500 text-blue-700 font-semibold"
-                          : "hover:bg-gray-100 text-black"
+                          ? "bg-white border-b-2 border-blue-500 text-blue-500 "
+                          : "hover:bg-gray-100 text-black "
                       } `}
                       type="button"
                       onClick={() => handleTabChange("setting")}
                     >
-                      <AiOutlineSetting className="mx-1" />
+                      <AiOutlineSetting className="mx-2 " />
                       Setting
                     </button>
                   </div>
@@ -343,82 +407,44 @@ const NotificationData = [
 const ProfileData = [
   {
     name: "Edit Profile",
-    icon: <PiPencilSimpleLineLight size={30} color={"#007AFF"} />,
+    icon: <PiPencilSimpleLineLight size={15} />,
   },
   {
     name: "View Profile",
-    icon: <GoPerson size={30} color={"#ffd400"} />,
+    icon: <GoPerson size={15} />,
   },
   {
     name: "Social Profile",
-    icon: <PiUserListDuotone size={30} color={"#007aff"} />,
+    icon: <PiUserListDuotone size={15} />,
   },
   {
     name: "Billing",
-    icon: <AiOutlineWallet size={30} color={"#FFD400"} />,
+    icon: <AiOutlineWallet size={15} />,
   },
   {
     name: "Logout",
-    icon: <BiLogOut size={30} color={"#007aff"} />,
+    icon: <BiLogOut size={15} />,
   },
 ];
 const SettingData = [
   {
-    name: "support",
-    icon: <AiOutlineQuestionCircle size={30} color={"#007AFF"} />,
+    name: "Support",
+    icon: <AiOutlineQuestionCircle size={15} />,
   },
   {
     name: "Account Settings",
-    icon: <GoPerson size={30} color={"#ffd400"} />,
+    icon: <GoPerson size={15} />,
   },
   {
     name: "Privacy Center",
-    icon: <AiOutlineLock size={30} color={"#007aff"} />,
+    icon: <AiOutlineLock size={15} />,
   },
   {
     name: "Feedback",
-    icon: <PiWechatLogoBold size={30} color={"#FFD400"} />,
+    icon: <PiWechatLogoBold size={15} />,
   },
   {
     name: "History",
-    icon: <AiOutlineUnorderedList size={30} color={"#007AFF"} />,
+    icon: <AiOutlineUnorderedList size={15} />,
   },
 ];
-
-const ProfileContent = () => {
-  return (
-    <div className="">
-      {ProfileData.map((profiledate) => {
-        return (
-          <div className=" flex my-2  border-b gap-3 border-gray-100 py-1 justify-between items-center font-semibold text-gray-500 md:mx-2">
-            <div className="flex gap-3 ">
-              <div className="object-contain">{profiledate.icon}</div>
-              <div className="sm:min-w-[200px] text-sm sm:text-lg lg:min-w-[200px] lg:whitespace-nowrap ">
-                {profiledate.name}
-              </div>
-            </div>
-          </div>
-        );
-      })}
-    </div>
-  );
-};
-
-const SettingContent = () => {
-  return (
-    <div className="">
-      {SettingData.map((settingdata) => {
-        return (
-          <div className=" flex my-2  border-b gap-3 border-gray-100 py-1 justify-between items-center font-semibold text-gray-500 md:mx-2">
-            <div className="flex gap-3 ">
-              <div className="object-contain">{settingdata.icon}</div>
-              <div className="sm:min-w-[200px] text-sm sm:text-lg lg:min-w-[200px] lg:whitespace-nowrap ">
-                {settingdata.name}
-              </div>
-            </div>
-          </div>
-        );
-      })}
-    </div>
-  );
-};
