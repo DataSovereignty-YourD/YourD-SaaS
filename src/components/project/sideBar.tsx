@@ -1,12 +1,8 @@
 import { Link, useLocation } from "react-router-dom";
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useState } from "react";
 import { projectType } from "../../recoil/dashBoard/project";
-import { useRecoilState, useRecoilValue } from "recoil";
-import {
-  currentPageState,
-  currentPageValue,
-  sideBarTogleValue,
-} from "../../recoil/sideBarToggle";
+import { useRecoilValue } from "recoil";
+import { sideBarTogleValue } from "../../recoil/sideBarToggle";
 import {
   AiOutlineHome,
   AiOutlineTeam,
@@ -16,7 +12,7 @@ import {
 
 export default function SideBar({ item }: { item: projectType }) {
   const location = useLocation();
-  const selectedMenu = useRecoilValue(currentPageValue);
+  const [selectedMenu, setSelectedMenu] = useState(location.pathname);
   const isSidebarVisible = useRecoilValue(sideBarTogleValue);
 
   type navigationType = {
@@ -75,13 +71,36 @@ export default function SideBar({ item }: { item: projectType }) {
       >
         {classification}
       </div>
-      {items.map((data) => {
-        const isSettings = data.name === "Settings";
-        return (
-          <Link
-            key={data.name}
-            to={data.path}
-            className={`${
+      {items.map((data) => (
+        <Link
+          key={data.name}
+          to={data.path}
+          onClick={() => setSelectedMenu(data.path)}
+          className={`flex flex-col h-12  md:flex-row items-center  justify-start py-2 group w-full  ${
+            isSidebarVisible ? "my-0" : "mt-8"
+          } ${
+            isSidebarVisible && selectedMenu === data.path
+              ? "bg-blue-100 border-r-4 border-blue-500 text-black"
+              : "hover:bg-gray-100 text-gray-500 "
+          }`}
+        >
+          <div
+              className={`${
+                isSidebarVisible ? "pl-4 pr-2" : "px-4"
+              }  flex `}
+            >
+              {data.icon}
+            </div>
+            <div
+              className={`${
+                !isSidebarVisible  && "scale-0 text-gray-500 "
+              } font-medium w-fit text-black whitespace-nowrap text-left text-sm  duration-300 group-hover:text-indigo-400 origin-left `}
+            >
+              {data.name}
+            </div>
+          </Link>
+        );
+      })}
               isSidebarVisible ? "my-0" : !isSettings ? "mt-8" : "mt-0"
             } ${
               isSidebarVisible && selectedMenu === data.path
@@ -137,3 +156,4 @@ export default function SideBar({ item }: { item: projectType }) {
     </div>
   );
 }
+

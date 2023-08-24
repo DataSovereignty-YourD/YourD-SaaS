@@ -6,6 +6,7 @@ import { projectModalState } from "../recoil/dashBoard/project";
 import React, { useState } from "react";
 import { sideBarToggleState } from "../recoil/sideBarToggle";
 import classNames from "classnames";
+import { loginState } from "../recoil/loginState";
 import {
   AiOutlineSearch,
   AiOutlineMenuUnfold,
@@ -13,13 +14,28 @@ import {
   AiOutlineClose,
   AiOutlineMenuFold,
   AiOutlineMessage,
+  AiOutlineWallet,
+  AiOutlineQuestionCircle,
+  AiOutlineLock,
+  AiOutlineUnorderedList,
+  AiOutlineSetting,
 } from "react-icons/ai";
 import {
   IoMdNotificationsOutline,
   IoMdPeople,
   IoMdTime,
   IoIosTimer,
+  IoMdPhonePortrait,
 } from "react-icons/io";
+
+import { BiLogOut } from "react-icons/bi";
+
+import {
+  PiPencilSimpleLineLight,
+  PiUserListDuotone,
+  PiWechatLogoBold,
+} from "react-icons/pi";
+import { GoPerson } from "react-icons/go";
 
 export default function ProjectTopBar() {
   const location = useLocation();
@@ -41,20 +57,97 @@ export default function ProjectTopBar() {
     setDropdownOpen(!isDropdownOpen);
   };
 
-
   const [menuToggle, setMenuToggle] = useState(false);
+  const [isProfileToggle, setProfileToggle] = useState(false);
 
-  window.addEventListener('resize', () => {
+  const profileDropdown = () => {
+    setProfileToggle(!isProfileToggle);
+  };
+
+  const [activeTab, setActiveTab] = useState("profile");
+  const handleTabChange = (tab) => {
+    setActiveTab(tab);
+  };
+  const [isLoggedIn, setLoggedIn] = useRecoilState(loginState);
+  const handleLogout = () => {
+    setLoggedIn(!isLoggedIn);
+  };
+  const [selectedItem, setSelectedItem] = useState(null);
+
+  const handleItemClick = (index) => {
+    setSelectedItem(index);
+  };
+
+  window.addEventListener("resize", () => {
     // 현재 화면 너비
     const width = window.innerWidth;
-    
+
     if (width <= 640) {
       setSidebarVisible(false);
-    } else if(width> 640 && width < 1024){
+    } else if (width > 640 && width < 1024) {
       setSidebarVisible(true);
     }
   });
 
+  const ProfileContent = () => {
+    return (
+      <div className="">
+        {ProfileData.map((profiledata, index) => {
+          return (
+            <div className="flex  gap-2 border-gray-100  justify-between items-center  text-black ">
+              <a
+                href="#"
+                key={index}
+                className={`w-full py-2 text-gray-800  ${
+                  selectedItem === index ? "bg-blue-100" : ""
+                } hover:bg-blue-200 transition duration-300`}
+                onClick={() => handleItemClick(index)}
+              >
+                <div className="flex">
+                  <div className="object-contain  my-auto mx-4 ">
+                    {profiledata.icon}
+                  </div>
+                  <div className="sm:min-w-[200px]  font-light text-xs sm:text-sm lg:min-w-[200px] lg:whitespace-nowrap ">
+                    {profiledata.name}
+                  </div>
+                </div>
+              </a>
+            </div>
+          );
+        })}
+      </div>
+    );
+  };
+
+  const SettingContent = () => {
+    return (
+      <div className="">
+        {SettingData.map((settingdata, index) => {
+          return (
+            <div className="flex  gap-2 border-gray-100  justify-between items-center  text-black ">
+              <a
+                href="#"
+                key={index}
+                className={`w-full py-2 text-gray-800  ${
+                  selectedItem === index ? "bg-blue-100" : ""
+                } hover:bg-blue-200 transition duration-300`}
+                onClick={() => handleItemClick(index)}
+              >
+                <div className="flex">
+                  <div className="object-contain  my-auto mx-4 ">
+                    {settingdata.icon}
+                  </div>
+                  <div className="sm:min-w-[200px]  font-light text-xs sm:text-sm lg:min-w-[200px] lg:whitespace-nowrap ">
+                    {settingdata.name}
+                  </div>
+                </div>
+              </a>
+            </div>
+          );
+        })}
+      </div>
+    );
+  };
   return (
     <div className="fixed bg-white w-full h-12 flex items-center z-20 border border-b-2">
       {!isMain && (
@@ -80,21 +173,24 @@ export default function ProjectTopBar() {
         <div className="flex items-center">
           {pathName !== "/project" && (
             <div className="md:flex items-center ml-20 w-fit duration-500 origin-left">
-              <div id="search-icon" 
-                className={`hidden md:flex duration-700 ${isSearchBarVisible?'rotate-[360deg]':'[0deg]'}`}
-                onClick={handleSearchIconClick}>
+              <div
+                id="search-icon"
+                className={`hidden md:flex duration-700 ${
+                  isSearchBarVisible ? "rotate-[360deg]" : "[0deg]"
+                }`}
+                onClick={handleSearchIconClick}
+              >
                 <AiOutlineSearch size={28} />
               </div>
-                <input
-                  id="header-search"
-                  placeholder="search"
-                  type="text"
-                  className={`px-2 hidden origin-left duration-500 md:flex items-center rounded-xl transition-width shadow-inner border  focus:outline-none ${
-                    isSearchBarVisible ? "w-full scale-100  ml-2":"w-0 scale-0"
-              }`}
-                  value=""
-                />
-              
+              <input
+                id="header-search"
+                placeholder="search"
+                type="text"
+                className={`px-2 hidden origin-left duration-500 md:flex items-center rounded-xl transition-width shadow-inner border  focus:outline-none ${
+                  isSearchBarVisible ? "w-full scale-100  ml-2" : "w-0 scale-0"
+                }`}
+                value=""
+              />
             </div>
           )}
         </div>
@@ -174,19 +270,88 @@ export default function ProjectTopBar() {
           ></img>
 
           {/* user image */}
-          <img
-            className="  w-10 h-10 hidden md:flex items-center space-x-1 rounded-full object-cover   "
-            src="https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw&amp;ixlib=rb-1.2.1&amp;q=80&amp;w=400"
-            alt="User Avatar"
-          ></img>
+          <div className="">
+            <div
+              onClick={profileDropdown}
+              className=" flex items-center justify-center rounded-md  dropdown  focus:outline-none focus:ring"
+              // type="button"
+            >
+              <span className="inline-flex items-center hover:bg-gray-100 justify-center px-2.5 py-0.5 rounded-full text-xs font-medium">
+                <img
+                  className="  w-10 h-10 hidden md:flex items-center space-x-1 rounded-full object-cover   "
+                  src="https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw&amp;ixlib=rb-1.2.1&amp;q=80&amp;w=400"
+                  alt="User Avatar"
+                ></img>
+              </span>
+            </div>
+
+            {isProfileToggle && (
+              <div
+                className=" absolute w-72 h-fit   bg-white menu dropdown-content shadow-2xl z-[1] bg-base-100 rounded-md"
+                style={{ transform: "translateX(-80%)" }}
+              >
+                <div className="  items-center flex text-xl w-full py-6 ">
+                  <img
+                    className="  w-7 h-7  ml-4 mr-2 rounded-full object-fill  "
+                    src="https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw&amp;ixlib=rb-1.2.1&amp;q=80&amp;w=400"
+                    alt="User Avatar"
+                  ></img>
+                  <div className=" flex items-center justify-between w-full">
+                    <div className=" font-normal text-sm ">User Name</div>
+                    <BiLogOut
+                      size={20}
+                      className="mx-5"
+                      onClick={handleLogout}
+                    />
+                  </div>
+                </div>
+                <div className=" ">
+                  <div className=" flex justify-between w-full ">
+                    <button
+                      className={` flex items-center justify-center  w-[calc(50% - 0.25rem)] px-4 py-2  w-full  font-normal text-sm ${
+                        activeTab === "profile"
+                          ? "bg-white border-b-2 border-blue-500 text-blue-500  "
+                          : "hover:bg-gray-100 text-black "
+                      } `}
+                      type="button"
+                      onClick={() => handleTabChange("profile")}
+                    >
+                      <GoPerson className="mx-2" />
+                      Profile
+                    </button>
+                    <button
+                      className={` flex items-center justify-center w-[calc(50% - 0.25rem)] px-4 py-2  w-full  font-normal text-sm  ${
+                        activeTab === "setting"
+                          ? "bg-white border-b-2 border-blue-500 text-blue-500 "
+                          : "hover:bg-gray-100 text-black "
+                      } `}
+                      type="button"
+                      onClick={() => handleTabChange("setting")}
+                    >
+                      <AiOutlineSetting className="mx-2 " />
+                      Setting
+                    </button>
+                  </div>
+                  <div className=" ">
+                    {activeTab === "profile" && <ProfileContent />}
+                    {activeTab === "setting" && <SettingContent />}
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
 
           {/* shrink icon */}
-            <button
-              className=" md:hidden rounded-md bg-gray-200 hover:bg-gray-300 focus:outline-none focus:ring"
-              onClick={() => setMenuToggle(!menuToggle)}
-            >
-              {!menuToggle ? <AiOutlineMore size={26} /> : <AiOutlineClose size={26} />}
-            </button>
+          <button
+            className=" md:hidden rounded-md bg-gray-200 hover:bg-gray-300 focus:outline-none focus:ring"
+            onClick={() => setMenuToggle(!menuToggle)}
+          >
+            {!menuToggle ? (
+              <AiOutlineMore size={26} />
+            ) : (
+              <AiOutlineClose size={26} />
+            )}
+          </button>
         </div>
       </div>
       <div
@@ -236,5 +401,49 @@ const NotificationData = [
     message: "Cristina Danny invited to join Meeting.",
     icon: <IoMdPeople size={30} color={"#FFD400"} />,
     time: "PM 18:45",
+  },
+];
+const ProfileData = [
+  {
+    name: "Edit Profile",
+    icon: <PiPencilSimpleLineLight size={15} />,
+  },
+  {
+    name: "View Profile",
+    icon: <GoPerson size={15} />,
+  },
+  {
+    name: "Social Profile",
+    icon: <PiUserListDuotone size={15} />,
+  },
+  {
+    name: "Billing",
+    icon: <AiOutlineWallet size={15} />,
+  },
+  {
+    name: "Logout",
+    icon: <BiLogOut size={15} />,
+  },
+];
+const SettingData = [
+  {
+    name: "Support",
+    icon: <AiOutlineQuestionCircle size={15} />,
+  },
+  {
+    name: "Account Settings",
+    icon: <GoPerson size={15} />,
+  },
+  {
+    name: "Privacy Center",
+    icon: <AiOutlineLock size={15} />,
+  },
+  {
+    name: "Feedback",
+    icon: <PiWechatLogoBold size={15} />,
+  },
+  {
+    name: "History",
+    icon: <AiOutlineUnorderedList size={15} />,
   },
 ];
