@@ -138,21 +138,21 @@ export default function ProjectListPage() {
 
               <div
                 onClick={isLogin ? () => newProject() : null}
-                className="flex-col text-l font-bold transition-all w-60 h-50 ease-in-out duration-500 rounded-lg shadow-md mx-auto  border border-black border-dashed hover:shadow-lg 
+                className="flex-col text-l font-bold transition-all w-52 ease-in-out duration-500 rounded-lg shadow-md mx-auto  border border-black border-dashed hover:shadow-lg 
                    hover:bg-gray-200  hover:border-purple-300  justify-center items-center"
               >
-                <div className="flex justify-center items-center mt-12">
+                <div className="flex justify-center items-center mt-14 mb-10">
                   <AiOutlinePlus size={48} />
                 </div>
 
-                <div className="flex-col mb-5">
-                  <div className="mt-20 text-center  pointer-events-none ">
+                
+                  <div className="text-center  pointer-events-none ">
                     Empty project
                   </div>
                   <div className="text-gray-400 text-center">
                     Starting from scratch
                   </div>
-                </div>
+                
               </div>
             </div>
           </div>
