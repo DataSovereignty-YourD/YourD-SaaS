@@ -215,7 +215,7 @@ const MyResponsiveLine = ({ data }: any) => (
       tickSize: 5,
       tickPadding: 5,
       tickRotation: 0,
-      legend: "user",
+      legend: "User",
       legendOffset: -40,
       legendPosition: "start",
     }}

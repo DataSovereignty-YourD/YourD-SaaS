@@ -19,8 +19,8 @@ export default function Path({ pathname }: { pathname: string }) {
   };
 
   return (
-    <div className="inline-flex items-center" onClick={onClickImg}>
-      <AiOutlineHome size={24}/>
+    <div className="inline-flex items-center" >
+      <AiOutlineHome size={24} onClick={onClickImg}/>
       <span className="text-lg flex min-w-[200px] p-1 text-gray-500 font-bold uppercase ">
         {arrayPathName.map((data) => {
           return (

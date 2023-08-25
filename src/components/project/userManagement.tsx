@@ -104,7 +104,7 @@ function UserManagement({ item }: { item: projectType }) {
   ];
 
   return (
-    <div id="usermanagement" className="min-h-[calc(100vh-4rem)]">
+    <div id="usermanagement" className="min-h-[calc(100vh-4rem)] max-h-full pb-10 ">
       <Path pathname={pathName} />
       <h1 className="font-bold text-black mb-2 uppercase text-2xl">
         User Management

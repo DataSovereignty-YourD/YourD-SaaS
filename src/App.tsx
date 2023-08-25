@@ -6,7 +6,7 @@ import MainTopbar from "./components/mainTopBar";
 import DefaultPage from "./pages/defaultPage";
 import ProjectDetailPage from "./pages/projectDetailPage";
 import ProjectListPage from "./pages/projectListPage";
-import SignInPage from "./pages/signInPage";
+import Login from "./components/login/login";
 import { loginValue } from "./recoil/loginState";
 import ProjectTopBar from "./components/projectTobBar";
 
@@ -20,12 +20,12 @@ function App() {
           <MainTopbar />
           <Routes>
             <Route path="/" element={<DefaultPage />} />
-            <Route path="/signin" element={<SignInPage />} />
+            <Route path="/signin" element={<Login />} />
             <Route path={"/fastlogin"} element={<SignInBox />} />
           </Routes>
         </div>
       ) : (
-        <div>
+        <div className="bg-gray-100">
           <ProjectTopBar />
           <Routes>
             <Route path="/" element={<DefaultPage />} />

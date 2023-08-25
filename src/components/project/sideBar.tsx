@@ -1,12 +1,8 @@
 import { Link, useLocation } from "react-router-dom";
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useState } from "react";
 import { projectType } from "../../recoil/dashBoard/project";
-import { useRecoilState, useRecoilValue } from "recoil";
-import {
-  currentPageState,
-  currentPageValue,
-  sideBarTogleValue,
-} from "../../recoil/sideBarToggle";
+import { useRecoilValue } from "recoil";
+import { currentPageValue, sideBarTogleValue } from "../../recoil/sideBarToggle";
 import {
   AiOutlineHome,
   AiOutlineTeam,
@@ -71,7 +67,7 @@ export default function SideBar({ item }: { item: projectType }) {
       <div
         className={`${
           !isSidebarVisible && "hidden"
-        } flex items-center justify-start mx-4 font-bold text-gray-600 h-8 uppercase text-sm `}
+        } flex items-center justify-start mx-4 font-bold text-gray-600 h-8 uppercase text-[10px] `}
       >
         {classification}
       </div>
@@ -84,10 +80,10 @@ export default function SideBar({ item }: { item: projectType }) {
             className={`${
               isSidebarVisible ? "my-0" : !isSettings ? "mt-8" : "mt-0"
             } ${
-              isSidebarVisible && selectedMenu === data.path
+              isSidebarVisible && (selectedMenu === data.path)
                 ? "bg-blue-100 border-r-4 border-blue-500 text-black"
                 : "hover:bg-gray-100 text-gray-00 "
-            } flex h-12 flex-row items-center justify-start py-2 group w-full  `}
+            } flex h-12 flex-row items-center justify-start py-2 group w-full`}
           >
             <div
               className={`${
@@ -137,3 +133,4 @@ export default function SideBar({ item }: { item: projectType }) {
     </div>
   );
 }
+

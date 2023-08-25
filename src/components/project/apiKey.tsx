@@ -33,7 +33,7 @@ export default function ApiKey({ item }: { item: projectType }) {
 
   const CopyButton = (data) => (
     <button
-      className="w-fit h-10 px-2 py-2 ml-3 border bg-white hover:bg-gray-100 text-gray-800 font-semibold border-gray-400 rounded-sm shadow"
+      className="w-fit h-10 px-2 py-2 ml-3 border bg-white  hover:bg-gray-100 text-gray-800 font-semibold border-gray-400 rounded-sm shadow"
       onClick={() => {
         navigator.clipboard.writeText(String(data));
         setShowNotification(true);
