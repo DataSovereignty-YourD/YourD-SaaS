@@ -56,12 +56,18 @@ export default function ProjectTopBar() {
   const toggleDropdown = () => {
     setDropdownOpen(!isDropdownOpen);
   };
+  const closeDropdown = () => {
+    setDropdownOpen(false);
+  };
 
   const [menuToggle, setMenuToggle] = useState(false);
   const [isProfileToggle, setProfileToggle] = useState(false);
 
   const profileDropdown = () => {
     setProfileToggle(!isProfileToggle);
+  };
+  const closeProfileDropdown = () => {
+    setProfileToggle(false);
   };
 
   const [activeTab, setActiveTab] = useState("profile");
@@ -94,20 +100,20 @@ export default function ProjectTopBar() {
       <div className="">
         {ProfileData.map((profiledata, index) => {
           return (
-            <div className="flex  gap-2 border-gray-100  justify-between items-center  text-black ">
+            <div className=" flex  gap-2 border-gray-100  justify-between items-center  text-black ">
               <a
                 href="#"
                 key={index}
-                className={`w-full py-2 text-gray-800  ${
+                className={` w-full py-3 text-gray-800  ${
                   selectedItem === index ? "bg-blue-100" : ""
                 } hover:bg-blue-200 transition duration-300`}
                 onClick={() => handleItemClick(index)}
               >
-                <div className="flex">
-                  <div className="object-contain  my-auto mx-4 ">
+                <div className=" flex">
+                  <div className=" object-contain  my-auto mx-4 ">
                     {profiledata.icon}
                   </div>
-                  <div className="sm:min-w-[200px]  font-light text-xs sm:text-sm lg:min-w-[200px] lg:whitespace-nowrap ">
+                  <div className=" sm:min-w-[200px]  font-light text-xs sm:text-sm lg:min-w-[200px] lg:whitespace-nowrap ">
                     {profiledata.name}
                   </div>
                 </div>
@@ -115,6 +121,24 @@ export default function ProjectTopBar() {
             </div>
           );
         })}
+        <div className="flex border-gray-100  justify-between items-center  text-black  ">
+          <button
+            className={`w-full py-3 text-gray-800  ${
+              selectedItem == "#" ? "bg-blue-100" : ""
+            } hover:bg-blue-200 transition duration-300`}
+            onClick={() => handleItemClick("#")}
+          >
+            <div className="  flex " onClick={handleLogout}>
+              <div className=" object-contain  my-auto mx-4 ">
+                <BiLogOut />
+              </div>
+
+              <div className=" sm:min-w-[200px] text-left  font-light text-xs sm:text-sm lg:min-w-[200px] lg:whitespace-nowrap ">
+                Logout
+              </div>
+            </div>
+          </button>
+        </div>
       </div>
     );
   };
@@ -128,7 +152,7 @@ export default function ProjectTopBar() {
               <a
                 href="#"
                 key={index}
-                className={`w-full py-2 text-gray-800  ${
+                className={`w-full py-3 text-gray-800  ${
                   selectedItem === index ? "bg-blue-100" : ""
                 } hover:bg-blue-200 transition duration-300`}
                 onClick={() => handleItemClick(index)}
@@ -218,31 +242,43 @@ export default function ProjectTopBar() {
                 className="absolute w-fit h-fit pb-4  bg-white menu dropdown-content p-2 shadow z-[1] bg-base-100 rounded-xl"
                 style={{ transform: "translateX(-80%)" }}
               >
-                <div className="text-xl bold font-bold mb-2 ml-4 py-1">
-                  Notification
+                <div className="flex items-center justify-between">
+                  <div className=" text-xl bold font-normal mb-2 ml-4 py-1">
+                    Notification
+                  </div>
+
+                  <button onClick={closeDropdown}>
+                    <AiOutlineClose className="mx-3" />
+                  </button>
                 </div>
                 <hr></hr>
                 {NotificationData.map((notification) => {
                   return (
                     <div className=" flex my-2  border-b gap-3 border-gray-100 py-1 justify-between items-center font-semibold text-gray-500 md:mx-2">
                       <div className="flex gap-3">
-                        <div className="object-contain">
+                        <div className="object-contain sm: my-auto mx-auto">
                           {notification.icon}
                         </div>
-                        <div className="sm:min-w-[200px] text-sm sm:text-lg lg:min-w-[300px] lg:whitespace-nowrap ">
+                        <div className="sm:min-w-[200px] text-md font-normal sm:text-md lg:min-w-[300px] lg:whitespace-nowrap ">
                           {notification.message}
                         </div>
                       </div>
-                      <div className="text-right text-xs sm:text-sm lg:whitespace-nowrap ">
+                      <div className="text-right text-xs font-normal sm:text-sm lg:whitespace-nowrap ">
                         {notification.time}
                       </div>
                     </div>
                   );
                 })}
-                <button className="bg-[#007aff] flex text-white py-2 px-8 rounded-lg mx-auto font-extrabold">
+                <button className="bg-white flex text-blue-500 py-2 px-8 rounded-lg mx-auto font-normal">
                   View All
                 </button>
               </div>
+            )}
+            {isDropdownOpen && (
+              <div
+                className="fixed inset-0 bg-black opacity-25"
+                onClick={closeDropdown}
+              ></div>
             )}
           </div>
           {/* morning/night mode */}
@@ -311,7 +347,7 @@ export default function ProjectTopBar() {
                       className={` flex items-center justify-center  w-[calc(50% - 0.25rem)] px-4 py-2  w-full  font-normal text-sm border-b-2 ${
                         activeTab === "profile"
                           ? "bg-white border-b-2 border-blue-500 text-blue-500  "
-                          : "hover:bg-gray-100 text-black border-transparent"
+                          : "hover:bg-gray-100 border-b-2 border-transparent text-black "
                       } `}
                       type="button"
                       onClick={() => handleTabChange("profile")}
@@ -338,6 +374,12 @@ export default function ProjectTopBar() {
                   </div>
                 </div>
               </div>
+            )}
+            {isProfileToggle && (
+              <div
+                className="fixed inset-0 bg-black opacity-25"
+                onClick={closeProfileDropdown}
+              ></div>
             )}
           </div>
 
@@ -373,7 +415,9 @@ export default function ProjectTopBar() {
               className="    w-10 h-10  mx-2 rounded-full object-fill"
               src="https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw&amp;ixlib=rb-1.2.1&amp;q=80&amp;w=400"
               alt="User Avatar"
-              onDragStart={()=>{return false}}
+              onDragStart={() => {
+                return false;
+              }}
             ></img>
           </div>
         </div>
@@ -420,10 +464,6 @@ const ProfileData = [
   {
     name: "Billing",
     icon: <AiOutlineWallet size={15} />,
-  },
-  {
-    name: "Logout",
-    icon: <BiLogOut size={15} />,
   },
 ];
 const SettingData = [

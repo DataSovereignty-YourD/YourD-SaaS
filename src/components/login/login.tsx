@@ -15,11 +15,24 @@ export default function Login() {
     setSeePassword(!seePassword);
   };
 
+  document.body.style.overflow = "hidden";
+
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col justify-center">
-      <div className="max-w-md w-full mx-auto">
+    <div
+      className="min-h-[calc(100vh-4rem)]  bg-gray-50 flex flex-col justify-center bg-center z-[1]"
+      style={{ backgroundImage: loginimage }}
+    >
+      <div>
+        <img
+          src={loginimage}
+          alt="bgimg"
+          className="absolute z-0  blur-2xl top-0 right-1/2"
+        />
+      </div>
+      <div className="max-w-md w-full mx-auto z-[1]">
         <div className="max-w-md w-full mx-auto mt-4 bg-white p-8 border border-gray-300">
           <form className="form space-y-6">
+            =
             <div>
               <div className="flex justify-center items-center ">
                 <img src={loginimage} className="w-20 h-20 "></img>
@@ -61,7 +74,6 @@ export default function Login() {
                 Sign Up
               </Link>
             </div>
-
             <div className="text-center">
               <button className="w-1/2 py-4  bg-blue-600 hover:bg-blue-799 rounded-full text-white  text-2xl mt-4">
                 Login
@@ -70,6 +82,14 @@ export default function Login() {
           </form>
         </div>
       </div>
+
+      {/* <div>
+        <img
+          src={loginimage}
+          className=" w-[500px] h-[500px] calc(100vh - 175px)"
+          // style={{ transform: "translateX(-20%) translateY(0)" }}
+        />
+      </div> */}
     </div>
   );
 }
