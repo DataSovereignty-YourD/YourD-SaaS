@@ -15,7 +15,7 @@ export default function MainTopbar() {
   return (
     <section
       title="TopBar"
-      className="flex h-[64px] items-center container mx-auto"
+      className="fixed bg-white drop-shadow-md w-screen flex h-[64px] items-center   z-50"
     >
       <div className="flex w-full mx-auto  white text-white items-center justify-between">
         <img
