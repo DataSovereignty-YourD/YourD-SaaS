@@ -9,7 +9,7 @@ import {
 import { loginValue } from '../recoil/loginState';
 import Right from '../assets/icons/Right.png';
 import { useEffect } from 'react';
-import { RiAddBoxLine } from 'react-icons/ri';
+import { AiOutlinePlus } from 'react-icons/ai';
 
 export default function ProjectListPage() {
   const [modalOpen, setModalOpen] = useRecoilState(projectModalState);
@@ -72,7 +72,6 @@ export default function ProjectListPage() {
   ];
 
   return (
-
     <div className="w-full pt-12">
       <div className="mb-10">{modalOpen ? <NewProject /> : <div></div>}</div>
 
@@ -98,7 +97,7 @@ export default function ProjectListPage() {
                     {/* 색상 막대 */}
                     <div
                       // onClick={() => navigator('/project', { state: { item: item } })}
-                      className="flex-1 h-fit p-5 flex flex-col justify-center"
+                      className="flex-1 h-fit p-5 flex flex-col justify-center "
                     >
                       <div className="flex">
                         <div className="text-xl font-bold mb-2">
@@ -131,28 +130,29 @@ export default function ProjectListPage() {
             })}
           </div>
         ) : (
-          <div className="flex justify-center items-center h-full w-full">
+          <div className="flex justify-center items-center h-3/4 w-full">
             <div>
-              <div className="flex-col text-black font-bold text-3xl mb-10">
-                Creating a new project<div></div>
+              <div className="flex-col items-center justify-items text-black font-bold text-3xl mb-10">
+                Creating a new project
               </div>
+
               <div
                 onClick={isLogin ? () => newProject() : null}
-                className="flex-col text-l font-bold transition-all w-full h-1/4 ease-in-out duration-500 rounded-lg  p-5 shadow-md m-2 mt-4 mb-48 border border-black border-solid hover:shadow-lg 
-                 hover:bg-gray-200  hover:border-purple-300  justify-center items-center"
+                className="flex-col text-l font-bold transition-all w-52 ease-in-out duration-500 rounded-lg shadow-md mx-auto  border border-black border-dashed hover:shadow-lg 
+                   hover:bg-gray-200  hover:border-purple-300  justify-center items-center"
               >
-                <div className="flex justify-center items-center">
-                  <RiAddBoxLine size={48} />
+                <div className="flex justify-center items-center mt-14 mb-10">
+                  <AiOutlinePlus size={48} />
                 </div>
 
-                <div className="flex-col">
-                  <div className="mt-20 text-center  pointer-events-none ">
+                
+                  <div className="text-center  pointer-events-none ">
                     Empty project
                   </div>
                   <div className="text-gray-400 text-center">
                     Starting from scratch
                   </div>
-                </div>
+                
               </div>
             </div>
           </div>
