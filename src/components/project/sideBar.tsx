@@ -30,12 +30,12 @@ export default function SideBar({ item }: { item: projectType }) {
       icon: <AiOutlineHome size={20} />,
     },
     {
-      classify: "Authentication",
+      classify: "Management",
       name: "Users",
       path: "usermanagement",
       icon: <AiOutlineTeam size={20} />,
     },{
-      classify: "Authentication",
+      classify: "Management",
       name: "API KEY",
       path: "apikey",
       icon: <AiOutlineApi size={20} />,
@@ -108,13 +108,13 @@ export default function SideBar({ item }: { item: projectType }) {
   return (
     <div
       className={`${
-        isSidebarVisible ? "w-40" : "sm:w-14 hidden sm:flex"
+        isSidebarVisible ? "w-44" : "sm:w-14 hidden sm:flex"
       } h-full fixed bg-white sm:relative flex-col duration-300 ease-in-out pt-12 `}
     >
       <div
         id="menu"
         className={`${
-          isSidebarVisible ? "w-40" : "w-14 "
+          isSidebarVisible ? "w-44" : "w-14 "
         } fixed duration-300 flex flex-col justify-between h-[calc(100vh-4rem)] `}
       >
         <div>
