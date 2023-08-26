@@ -24,11 +24,13 @@ export default function Settings({ item }: { item: projectType }) {
     false,
     false,
   ]);
+
   const [isClicked, setIsClicked] = useState([false, false]);
   const [fontSize, setFontSize] = useState('medium');
   const handleToggleHomeButton = () => {
     setIsClicked([!isClicked[0], isClicked[1]]);
   };
+
   function classNames(...classes) {
     return classes.filter(Boolean).join(' ');
   }
@@ -72,11 +74,13 @@ export default function Settings({ item }: { item: projectType }) {
     let newPJArray = project.filter((pj) => pj.clientId !== item.clientId);
     updateProject(newPJArray);
   };
+
   const toggleExpand = (index: number) => {
     const newIsExpanded = [...isExpanded];
     newIsExpanded[index] = !newIsExpanded[index];
     setIsExpanded(newIsExpanded);
   };
+
   const toggleClick = (index: number) => {
     const newClick = [...isClicked];
     newClick[index] = !newClick[index];
