@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import { ReactElement, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
 import { FaArrowTrendUp, FaArrowTrendDown } from "react-icons/fa6";
@@ -17,6 +17,7 @@ import {
 export default function DashBoard() {
   const location = useLocation();
   const pathName = location.pathname;
+  const [userAnalyticsViewDuration,setUserAnalyticsViewDuration] = useState(false);
 
   type analyticsDataType = {
     title: string;
@@ -64,7 +65,7 @@ export default function DashBoard() {
         OverView
       </h1>
       <div id="total" className=" w-full mx-auto">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-7 my-5">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3  sm:gap-7 my-5">
           {analyticsData.map((data, index) => {
             return (
               <div
@@ -75,22 +76,22 @@ export default function DashBoard() {
                   borderBottomWidth: 3,
                 }}
               >
-                <div className="mb-3 text-gray-500 font-sans uppercase font-bold">
+                <div className="mb-3 text-gray-500 text-lg uppercase font-bold">
                   {data.title}
                 </div>
                 <div className="flex items-center gap-2 my-2">
-                  <div className="mr-2">
+                  <div className="mr-0 sm:mr-2">
                     {Number(data.changes) < 0 ? (
                       <FaArrowTrendDown size={24} color={'red'}/>
                     ) : (
                       <FaArrowTrendUp size={24} color={'lightgreen'}/>
                     )}
                   </div>
-                  <div className="text-black font-bold text-2xl w-full">
+                  <div className="text-black text-sm font-bold sm:text-2xl w-full">
                     {data.value}
                   </div>
                   <div
-                    className={`text-xl font-medium border bg-${data.color}/5 border-gray-300 px-3 py-1 rounded-md ${
+                    className={`text-sm sm:text-xl font-medium border bg-${data.color}/5 border-gray-300 px-1 sm:px-3 py-1 rounded-md ${
                       Number(data.changes) < 0
                         ? "text-red-500"
                         : "text-green-400"
@@ -105,9 +106,16 @@ export default function DashBoard() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 w-full bg-white rounded-lg shadow-md gap-6">
           <div className="w-full h-[450px] md:col-span-2">
-            <div className="font-bold  text-gray-500 border-b-2 p-4 ">
-              {" "}
-              User Growth Analysis
+            <div className="font-bold flex justify-between text-gray-500 border-b-2 p-4 ">
+              <div>User Growth Analysis</div>
+            <div className="flex border h-fit items-center border-gray-200 text-xs rounded-sm">
+              <button
+              onClick={()=>setUserAnalyticsViewDuration(false)}
+               className={`border-r-[1px] py-1 px-4 ${!userAnalyticsViewDuration?'bg-blue-100':'bg-white'}`}>7D</button>
+              <button 
+              onClick={()=>setUserAnalyticsViewDuration(true)}
+              className={`px-4 py-1 ${userAnalyticsViewDuration?'bg-blue-100':'bg-white'}`}>1M</button>
+            </div>
             </div>
             <div className="w-full h-full">
               {MyResponsiveLine({ data: userGrowthData })}
@@ -125,7 +133,7 @@ export default function DashBoard() {
         </div>
       </div>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-7 my-5">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-7 my-5">
         {IncomeData.map((income) => {
           return (
             <div
@@ -176,20 +184,6 @@ export default function DashBoard() {
   );
 }
 
-const UserAnalyticsData = [
-  {
-    title: "Users by age",
-    data: PieChartData,
-  },
-  {
-    title: "Users by Gender",
-    data: userGenderData,
-  },
-  {
-    title: "User usage rate",
-    data: activeUserData,
-  },
-];
 
 const MyResponsiveLine = ({ data }: any) => (
   <ResponsiveLine
@@ -197,6 +191,7 @@ const MyResponsiveLine = ({ data }: any) => (
     margin={{ top: 20, right: 30, bottom: 130, left: 60 }}
     xScale={{ type: "point" }}
     yScale={{
+      
       type: "linear",
       min: "auto",
       max: "auto",
@@ -219,9 +214,8 @@ const MyResponsiveLine = ({ data }: any) => (
       legendOffset: -40,
       legendPosition: "start",
     }}
-    pointSize={8}
-    pointColor={{ theme: "background" }}
-    pointBorderWidth={4}
+    pointSize={10}
+    pointBorderWidth={2}
     pointBorderColor={{ from: "serieColor" }}
     useMesh={true}
     legends={[
@@ -296,6 +290,22 @@ const MyResponsiveBarCanvas = ({ data /* see data tab */ }: { data: any }) => (
     legends={[]}
   />
 );
+
+const UserAnalyticsData = [
+  {
+    title: "Users by age",
+    data: PieChartData,
+  },
+  {
+    title: "Users by Gender",
+    data: userGenderData,
+  },
+  {
+    title: "User usage rate",
+    data: activeUserData,
+  },
+];
+
 
 const MyResponsivePie = ({ data }: any) => (
   <ResponsivePie
