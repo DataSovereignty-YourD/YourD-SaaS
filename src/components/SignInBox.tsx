@@ -39,6 +39,7 @@ export default function SignInBox() {
         // 확인후 true면 로그인
         setTime(true);
         // window.opener.postMessage({loginStatus: true}, "*");
+        setIsLogin(true);
         setCount(5);
         navigation('/project');
     }

@@ -148,7 +148,7 @@ export default function ProjectTopBar() {
       <div className="">
         {SettingData.map((settingdata, index) => {
           return (
-            <div className="flex  gap-2 border-gray-100  justify-between items-center  text-black ">
+            <div className="flex  gap-2 border-gray-100  justify-between items-center  text-black  ">
               <a
                 href="#"
                 key={index}
@@ -173,7 +173,7 @@ export default function ProjectTopBar() {
     );
   };
   return (
-    <div className="fixed bg-white w-full h-12 flex items-center z-20 border border-b-2">
+    <div className="fixed bg-white w-full h-12 flex items-center z-20 drop-shadow-md">
       {!isMain && (
         <button
           onClick={() => setSidebarVisible((prev) => !prev)}
@@ -276,7 +276,7 @@ export default function ProjectTopBar() {
             )}
             {isDropdownOpen && (
               <div
-                className="fixed inset-0 bg-black opacity-25"
+                className="fixed inset-0 bg-black/5"
                 onClick={closeDropdown}
               ></div>
             )}

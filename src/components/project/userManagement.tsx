@@ -13,49 +13,49 @@ function UserManagement({ item }: { item: projectType }) {
     {
       id: 1,
       name: 'User1',
-      email: 'did:yourd:klaytn:cypress:example1',
+      did: 'did:yourd:klaytn:cypress:example1',
       status: 'Active',
       lastLogin: '2023-08-20',
     },
     {
       id: 2,
       name: 'User2',
-      email: 'did:yourd:klaytn:cypress:example2',
+      did: 'did:yourd:klaytn:cypress:example2',
       status: 'Inactive',
       lastLogin: '2023-08-18',
     },
     {
       id: 3,
       name: 'User3',
-      email: 'did:yourd:klaytn:cypress:example3',
+      did: 'did:yourd:klaytn:cypress:example3',
       status: 'Inactive',
       lastLogin: '2023-08-18',
     },
     {
       id: 4,
       name: 'User4',
-      email: 'did:yourd:klaytn:cypress:example4',
+      did: 'did:yourd:klaytn:cypress:example4',
       status: 'Inactive',
       lastLogin: '2023-08-22',
     },
     {
       id: 5,
       name: 'User5',
-      email: 'did:yourd:klaytn:cypress:example5',
+      did: 'did:yourd:klaytn:cypress:example5',
       status: 'Active',
       lastLogin: '2023-08-14',
     },
     {
       id: 6,
       name: 'User6',
-      email: 'did:yourd:klaytn:cypress:example6',
+      did: 'did:yourd:klaytn:cypress:example6',
       status: 'Active',
       lastLogin: '2023-08-23',
     },
     {
       id: 7,
       name: 'User7',
-      email: 'did:yourd:klaytn:cypress:example7',
+      did: 'did:yourd:klaytn:cypress:example7',
       status: 'Active',
       lastLogin: '2023-08-23',
     },
@@ -79,10 +79,10 @@ function UserManagement({ item }: { item: projectType }) {
         return sortDirection === 'asc'
           ? a.name.localeCompare(b.name)
           : b.name.localeCompare(a.name);
-      case 'email':
+      case 'did':
         return sortDirection === 'asc'
-          ? a.email.localeCompare(b.email)
-          : b.email.localeCompare(a.email);
+          ? a.did.localeCompare(b.did)
+          : b.did.localeCompare(a.did);
       case 'status':
         return sortDirection === 'asc'
           ? a.status.localeCompare(b.status)
@@ -98,7 +98,7 @@ function UserManagement({ item }: { item: projectType }) {
 
   const columns = [
     { key: 'name', label: 'Name' },
-    { key: 'email', label: 'Email' },
+    { key: 'did', label: 'DID' },
     { key: 'status', label: 'Status' },
     { key: 'lastLogin', label: 'LastLogin' },
   ];
@@ -113,13 +113,13 @@ function UserManagement({ item }: { item: projectType }) {
       
 
       <div className="bg-white mt-3 rounded-md drop-shadow-md">
-      <div className="bg-white  drop-shadow-md">
-        <div className="text-black flex items-center justify-between">
-          <div className="w-12 h-12"></div>
-          {columns.map(column => (
+      <div className="bg-white  drop-shadow-md text-black grid grid-cols-5 items-center justify-between px-2 py-3">
+          {columns.map(column => {
+            const isDID = column.key === 'did';
+            return(
             <span
               key={column.key}
-              className="flex-1 mx-2 hover:group relative cursor-pointer"
+              className={`${isDID ? 'col-span-2':'col-span-1'} mx-2 hover:group relative cursor-pointer`}
               onClick={() => handleSort(column.key)}>
               {column.label}
               <button className="absolute top-1/2 transform -translate-y-1/2">
@@ -130,19 +130,18 @@ function UserManagement({ item }: { item: projectType }) {
                 )}
               </button>
             </span>
-          ))}
-        </div>
+          )})}
       </div>
         {sortedUsers.map((user) => (
           <div
             key={user.id}
-            className="text-black flex items-center justify-between border-b p-2"
+            className="grid grid-cols-5 text-black  items-center justify-between border-b p-2"
           >
-            <BiSolidUserCircle className="w-12 h-12" />
-            <span className="flex-1  mx-2">{user.name}</span>
-            <span className="flex-1 mx-2">{user.email}</span>
-            <span className="flex-1 mx-2">{user.status}</span>
-            <span className="flex-1 mx-2">{user.lastLogin}</span>
+            
+            <span className="col-span-1  mx-2 flex items-center"><BiSolidUserCircle className="w-12 h-12 mr-2 flex" />{user.name}</span>
+            <span className="col-span-2 mx-2">{user.did}</span>
+            <span className="col-span-1 mx-2">{user.status}</span>
+            <span className="col-span-1 mx-2">{user.lastLogin}</span>
           </div>
         ))}
       </div>
