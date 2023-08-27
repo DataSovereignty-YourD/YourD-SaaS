@@ -6,10 +6,13 @@ import {
   useLocation,
   useNavigate,
 } from "react-router-dom";
+import { useRecoilState } from "recoil";
 import loginimage from "../../assets/img/YourD_Logo.jpg";
+import { loginState } from "../../recoil/loginState";
 
 export default function Login() {
   const [seePassword, setSeePassword] = useState(true);
+  const [isLogin,setIsLogin] = useRecoilState(loginState);
   const navigate = useNavigate();
 
   const seePasswordHandler = () => {
@@ -78,7 +81,7 @@ export default function Login() {
             <div className="text-center">
               <button
                 className="w-1/2 py-4  bg-blue-600 hover:bg-blue-799 rounded-full text-white  text-2xl mt-4 "
-                onClick={() => navigate("/")}
+                onClick={() => setIsLogin(true)}
               >
                 Login
               </button>

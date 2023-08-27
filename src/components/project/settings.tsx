@@ -141,7 +141,7 @@ export default function Settings({ item }: { item: projectType }) {
   ];
 
   return (
-    <div id="Settings">
+    <div id="Settings" className='pb-20'>
       <Path pathname={location.pathname} />
       <div className="bg-white p-4">
         <div className="p-3 border rounded-lg bg-blue-50 flex items-center">

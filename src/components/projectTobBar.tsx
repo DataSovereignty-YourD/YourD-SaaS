@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import YourdLogo from "../assets/img/YourDLogo.png";
 import { projectModalState } from "../recoil/dashBoard/project";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { sideBarToggleState } from "../recoil/sideBarToggle";
 import classNames from "classnames";
 import { loginState } from "../recoil/loginState";
@@ -35,6 +35,7 @@ export default function ProjectTopBar() {
   const [menuToggle, setMenuToggle] = useState(false);
   const [isProfileToggle, setProfileToggle] = useState(false);
   const [isLoggedIn, setLoggedIn] = useRecoilState(loginState);
+
   const handleSearchIconClick = () => {
     return setSearchBarVisible(!isSearchBarVisible);
   };
@@ -161,6 +162,7 @@ export default function ProjectTopBar() {
               setSelectedItem={setSelectedItem}
               activeTab={activeTab}
               setActiveTab={setActiveTab}
+              navigation={navigation}
             />
 
             {isProfileToggle && (

@@ -13,11 +13,13 @@ export default function Billing() {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const location = useLocation();
   const pathName = location.pathname;
+  const [isPlanOpen, setIsPlanOpen] = useState(false);
   const handleMenuClick = (key) => {
     setActiveMenu(key);
   };
   const openPopup = () => {
     setIsPopupOpen(true);
+    setIsPlanOpen(true);
   };
   const closePopup = () => {
     setIsPopupOpen(false);
@@ -51,7 +53,7 @@ export default function Billing() {
   ];
 
   return (
-    <div className=" bg-white rounded-lg shadow-md p-6">
+    <div className=" pb-20">
       <Path pathname={location.pathname} />
       <h2 className=" text-2xl font-semibold mb-4 text-black">
         Usage & Billing
@@ -66,7 +68,7 @@ export default function Billing() {
                   activeMenu === item.key
                     ? "border-b-2 border-blue-500"
                     : "border-transparent"
-                } focus:outline-none hover:bg-gray-100 hover:rounded-lg`}
+                } focus:outline-none hover:bg-gray-100`}
               >
                 <div className=" flex items-center">
                   {item.icon}
@@ -78,8 +80,8 @@ export default function Billing() {
         </ul>
       </nav>
 
-      <div className=" container  mx-auto p-5 value">
-        {activeMenu === "usage" && <Usage></Usage>}
+      <div className="w-full h-fit  value">
+        {activeMenu === "usage" && <Usage />}
         {activeMenu === "plan" && <Plan></Plan>}
         {activeMenu === "add-ons" && <div>소개 페이지 컨텐츠</div>}
         {activeMenu === "history" && <div>소개 페이지 컨텐츠</div>}
