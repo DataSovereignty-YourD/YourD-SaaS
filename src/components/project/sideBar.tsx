@@ -2,7 +2,10 @@ import { Link, useLocation } from "react-router-dom";
 import { ReactElement, useState } from "react";
 import { projectType } from "../../recoil/dashBoard/project";
 import { useRecoilValue } from "recoil";
-import { currentPageValue, sideBarTogleValue } from "../../recoil/sideBarToggle";
+import {
+  currentPageValue,
+  sideBarTogleValue,
+} from "../../recoil/sideBarToggle";
 import {
   AiOutlineHome,
   AiOutlineTeam,
@@ -35,16 +38,22 @@ export default function SideBar({ item }: { item: projectType }) {
       name: "Users",
       path: "usermanagement",
       icon: <AiOutlineTeam size={20} />,
-    },{
+    },
+    {
       classify: "Management",
       name: "API KEY",
       path: "apikey",
       icon: <AiOutlineApi size={20} />,
     },
+    {
+      classify: "Management",
+      name: "Billing",
+      path: "billing",
+      icon: <AiOutlineApi size={20} />,
+    },
   ];
 
   let navigationBottom: navigationType[] = [
-    
     {
       classify: "Support",
       name: "Settings",
@@ -137,4 +146,3 @@ export default function SideBar({ item }: { item: projectType }) {
     </div>
   );
 }
-
