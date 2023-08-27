@@ -78,10 +78,10 @@ export default function Billing() {
   ];
   function Plan() {
     return (
-      <div id="billing" className=" text-black  grid pb-20">
+      <div id="billing" className="bg-white text-black grid pb-20">
         <Subscribe isPlanOpen={isPlanOpen} setIsPlanOpen={setIsPlanOpen}/>
-        <div className=" flex justify-between mb-10">
-          <div className="font-normal text-lg px-5 py-2">Plan : Discover</div>
+        <div className=" flex justify-between mx-5 mb-10">
+          <div className="font-normal text-lg py-2">Plan : Discover</div>
           <div className=" flex">
             <button
               className=" flex items-center mx-3 border-black text-white bg-purple-600 rounded-lg"
@@ -107,8 +107,8 @@ export default function Billing() {
           </div>
         </div>
 
-        <div className=" mt-5 mb-14">
-          <div className=" mb-2 text-sm">Upcoming Invoice</div>
+        <div className=" mt-5 mb-14 mx-5">
+          <div className=" mb-2 text-sm font-medium">Upcoming Invoice</div>
           <div className=" flex gap-6 border border-gray-200 rounded-lg py-10 px-8">
             <div className=" border-r-2 w-full">
               <div className="flex items-center text-sm font-semibold ">
@@ -126,15 +126,15 @@ export default function Billing() {
           </div>
         </div>
 
-        <div>
-          <div className=" flex justify-between mb-2 px-3 py-2 bg-gray-200 font-bold text-sm">
+        <div className="mx-6">
+          <div className=" flex justify-between mb-2 px-3 py-4 bg-gray-200 font-bold text-sm">
             <div>Upcoming Invoice Breakdown</div>
             <div>Amount</div>
           </div>
           {invoiceData.map((item, index) => (
             <div
               key={index}
-              className=" flex justify-between mb-3 border-b-4 border-gray-300 px-3 py-2"
+              className=" flex justify-between mb-3 border-b-[1px] border-gray-300 px-3 py-2"
             >
               <div>{item.name}</div>
               <div>{item.amount}</div>
@@ -145,7 +145,7 @@ export default function Billing() {
     );
   }
   return (
-    <div className=" bg-white rounded-lg shadow-md p-6">
+    <div className=" pb-20">
       <Path pathname={location.pathname} />
       <h2 className=" text-2xl font-semibold mb-4 text-black">
         Usage & Billing
@@ -160,7 +160,7 @@ export default function Billing() {
                   activeMenu === item.key
                     ? "border-b-2 border-blue-500"
                     : "border-transparent"
-                } focus:outline-none hover:bg-gray-100 hover:rounded-lg`}
+                } focus:outline-none hover:bg-gray-100`}
               >
                 <div className=" flex items-center">
                   {item.icon}
@@ -172,7 +172,7 @@ export default function Billing() {
         </ul>
       </nav>
 
-      <div className=" container  mx-auto p-5 value">
+      <div className="w-full h-fit  value">
         {activeMenu === "usage" && <div>홈 페이지 컨텐츠</div>}
         {activeMenu === "plan" && <Plan></Plan>}
         {activeMenu === "add-ons" && <div>소개 페이지 컨텐츠</div>}

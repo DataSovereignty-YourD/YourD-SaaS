@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import {
   PiPencilSimpleLineLight,
   PiUserListDuotone,
@@ -25,13 +23,14 @@ export default function ProfileModal({
   setSelectedItem,
   activeTab,
   setActiveTab,
+  navigation,
 }) {
   if (!isProfileToggle) return null;
   //   const [selectedItem, setSelectedItem] = useState(null);
   //   const [activeTab, setActiveTab] = useState("profile");
-
   const handleItemClick = (index) => {
     setSelectedItem(index);
+    navigation("/");
   };
   const handleLogout = () => {
     setLoggedIn(!isLoggedIn);

@@ -4,16 +4,10 @@ import { BsCheckLg } from 'react-icons/bs';
 import { IoIosArrowDown } from 'react-icons/io';
 
 export default function Subscribe({ isPlanOpen, setIsPlanOpen }) {
-  const [isNextOpen, setIsNextOpen] = useState(false);
-  const [isClosed, setIsClosed] = useState(false);
   const [isChosen, setIsChosen] = useState(false);
   const isAnyPlanChosen = isChosen;
   const [chosenPlan, setChosenPlan] = useState(null);
   const [isExpanded, setIsExpanded] = useState(false);
-
-  function ToggleClose() {
-    const [isPlanOpen, setIsPlanOpen] = useState(false);
-  }
 
   function ToggleSelect({ index }) {
     const handleClick = () => {
@@ -34,6 +28,7 @@ export default function Subscribe({ isPlanOpen, setIsPlanOpen }) {
       ></button>
     );
   }
+
   const ToggleExpand = () => {
     setIsExpanded((prev) => !prev);
   };
