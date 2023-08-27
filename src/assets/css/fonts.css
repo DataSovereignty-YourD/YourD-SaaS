@@ -1,0 +1,36 @@
+@font-face {
+    font-family: 'AurulentSansMono-Regular';
+    src: url('../font/AurulentSansMono_Regular.otf') format('opentype');
+  }
+  
+  @font-face {
+    font-family: 'JuliaMono_Black';
+    src: url('../font/JuliaMono_Black.ttf') format('truetype');
+  }
+  
+  @font-face {
+    font-family: 'JuliaMono_BlackItalic';
+    src: url('../font/JuliaMono_BlackItalic.ttf') format('truetype');
+  }
+  @font-face {
+    font-family: 'JuliaMono_Bold';
+    src: url('../font/JuliaMono_Bold.ttf') format('truetype');}
+ @font-face {
+    font-family: 'JuliaMono-Light';
+    src: url('../font/JuliaMono_Light.ttf') format('truetype');}
+        
+@font-face {
+    font-family: 'MonospaceTypewriter';
+    src: url('../font/MonospaceTypewriter.ttf') format('truetype');}
+@font-face {
+    font-family: 'unispace_rg';
+    src: url('../font/unispace_rg.otf') format('opentype');}
+
+@font-face {
+    font-family: 'VerilySerifMono';
+    src: url('../font/VerilySerifMono.otf') format('opentype');}
+
+@font-face {
+    font-family: 'unispacerg';
+    src: url('../font/unispace_rg.otf') format('opentype');}
+        
