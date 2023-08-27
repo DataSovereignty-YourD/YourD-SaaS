@@ -13,6 +13,7 @@ import {
   AiOutlineSetting,
 } from "react-icons/ai";
 import classNames from "classnames";
+import { FaHornbill } from "react-icons/fa";
 
 export default function SideBar({ item }: { item: projectType }) {
   const location = useLocation();
@@ -49,7 +50,7 @@ export default function SideBar({ item }: { item: projectType }) {
       classify: "Management",
       name: "Billing",
       path: "billing",
-      icon: <AiOutlineApi size={20} />,
+      icon: <FaHornbill size={20} />,
     },
   ];
 
@@ -96,13 +97,11 @@ export default function SideBar({ item }: { item: projectType }) {
                 "border-r-4 border-blue-500 bg-blue-100 text-black":
                   selectedMenu === data.path && isSidebarVisible,
                 "hover:bg-gray-100 text-gray-400": selectedMenu !== data.path,
-                "text-black" : selectedMenu === data.path
+                "text-black": selectedMenu === data.path,
               }
             )}
           >
-            <div
-              className={`${isSidebarVisible ? "pl-4 pr-2" : "px-4"}  `}
-            >
+            <div className={`${isSidebarVisible ? "pl-4 pr-2" : "px-4"}  `}>
               {data.icon}
             </div>
             <div
