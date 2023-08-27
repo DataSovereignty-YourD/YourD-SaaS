@@ -24,7 +24,7 @@ export default function ProjectDetailPage() {
       {/*
        *일단 여기 밑으로는 건들지 않기
        */}
-      <div id="content" className="grid w-full px-6 h-fit mt-16 bg-gray-100">
+      <div id="content" className="grid w-full px-6 h-fit pt-16 bg-gray-100  min-h-screen">
         <Routes>
           <Route path="dashboard" element={<DashBoard />} />
           <Route path="apikey" element={<ApiKey item={item} />} />

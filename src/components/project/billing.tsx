@@ -8,17 +8,20 @@ import { MdOutlineElectricalServices, MdOutlineHistory } from "react-icons/md";
 import { HiOutlineWallet } from "react-icons/hi2";
 import { AiTwotoneThunderbolt } from "react-icons/ai";
 import { LiaCalendarCheck } from "react-icons/lia";
+import Subscribe from "./subscribe";
 
 export default function Billing() {
   const [activeMenu, setActiveMenu] = useState("plan");
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const location = useLocation();
   const pathName = location.pathname;
+  const [isPlanOpen, setIsPlanOpen] = useState(false);
   const handleMenuClick = (key) => {
     setActiveMenu(key);
   };
   const openPopup = () => {
     setIsPopupOpen(true);
+    setIsPlanOpen(true);
   };
   const closePopup = () => {
     setIsPopupOpen(false);
@@ -76,6 +79,7 @@ export default function Billing() {
   function Plan() {
     return (
       <div id="billing" className=" text-black  grid pb-20">
+        <Subscribe isPlanOpen={isPlanOpen} setIsPlanOpen={setIsPlanOpen}/>
         <div className=" flex justify-between mb-10">
           <div className="font-normal text-lg px-5 py-2">Plan : Discover</div>
           <div className=" flex">
@@ -90,9 +94,8 @@ export default function Billing() {
             {isPopupOpen && (
               <div className=" popup">
                 <div className=" popup-content">
-                  <h2>팝업 내용</h2>
-                  <p>이것은 팝업의 내용입니다.</p>
-                  <button onClick={closePopup}>X</button>
+                  <button onClick={closePopup}>X
+                  </button>
                 </div>
               </div>
             )}
