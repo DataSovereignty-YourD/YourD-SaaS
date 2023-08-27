@@ -10,6 +10,7 @@ import loginimage from "../../assets/img/YourD_Logo.jpg";
 
 export default function Login() {
   const [seePassword, setSeePassword] = useState(true);
+  const navigate = useNavigate();
 
   const seePasswordHandler = () => {
     setSeePassword(!seePassword);
@@ -67,15 +68,18 @@ export default function Login() {
                 Don't have an account?
               </div>
 
-              <Link
-                to="./signup"
+              <button
+                onClick={() => navigate("/signup")}
                 className="inline-block font-medium text-sm text-blue-500 ml-3"
               >
                 Sign Up
-              </Link>
+              </button>
             </div>
             <div className="text-center">
-              <button className="w-1/2 py-4  bg-blue-600 hover:bg-blue-799 rounded-full text-white  text-2xl mt-4">
+              <button
+                className="w-1/2 py-4  bg-blue-600 hover:bg-blue-799 rounded-full text-white  text-2xl mt-4 "
+                onClick={() => navigate("/")}
+              >
                 Login
               </button>
             </div>

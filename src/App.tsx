@@ -7,8 +7,10 @@ import DefaultPage from "./pages/defaultPage";
 import ProjectDetailPage from "./pages/projectDetailPage";
 import ProjectListPage from "./pages/projectListPage";
 import Login from "./components/login/login";
+
 import { loginValue } from "./recoil/loginState";
 import ProjectTopBar from "./components/projectTobBar";
+import SignUp from "./components/login/signUp";
 
 function App() {
   const isLogin = useRecoilValue(loginValue);
@@ -21,6 +23,7 @@ function App() {
           <Routes>
             <Route path="/" element={<DefaultPage />} />
             <Route path="/signin" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
             <Route path={"/fastlogin"} element={<SignInBox />} />
           </Routes>
         </div>
