@@ -12,13 +12,12 @@ export default function ProjectDetailPage() {
   // const location = useLocation();
   // const { item } = location.state;
   const item = useRecoilValue(currentProjectVaule);
-  document.body.style.overflowX = "hidden";
 
   return (
     <div className="flex text-slate-300  h-full bg-gray-100">
       <div
         id="sidebar"
-        className="flex bg-white border-r-2  max-w-[200px] py-2 translate-x-300 z-10"
+        className="flex bg-white border-r-2  max-w-[200px] py-2 z-10"
       >
         <SideBar item={item} />
       </div>

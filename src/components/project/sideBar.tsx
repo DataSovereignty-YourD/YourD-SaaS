@@ -9,6 +9,7 @@ import {
   AiOutlineApi,
   AiOutlineSetting,
 } from "react-icons/ai";
+import classNames from "classnames";
 
 export default function SideBar({ item }: { item: projectType }) {
   const location = useLocation();
@@ -77,24 +78,27 @@ export default function SideBar({ item }: { item: projectType }) {
           <Link
             key={data.name}
             to={data.path}
-            className={`${
-              isSidebarVisible ? "my-0" : !isSettings ? "mt-8" : "mt-0"
-            } ${
-              isSidebarVisible && (selectedMenu === data.path)
-                ? "bg-blue-100 border-r-4 border-blue-500 text-black"
-                : "hover:bg-gray-100 text-gray-00 "
-            } flex h-12 flex-row items-center justify-start py-2 group w-full`}
+            className={classNames(
+              "flex h-12 flex-row items-center justify-start py-2 group w-full ",
+              {
+                "my-0": isSidebarVisible,
+                "mt-8": !isSidebarVisible && !isSettings,
+                "mt-0": !isSidebarVisible && isSettings,
+                "border-r-4 border-blue-500 bg-blue-100 text-black":
+                  selectedMenu === data.path && isSidebarVisible,
+                "hover:bg-gray-100 text-gray-400": selectedMenu !== data.path,
+                "text-black" : selectedMenu === data.path
+              }
+            )}
           >
             <div
-              className={`${
-                isSidebarVisible ? "pl-4 pr-2" : "px-4"
-              }  flex `}
+              className={`${isSidebarVisible ? "pl-4 pr-2" : "px-4"}  `}
             >
               {data.icon}
             </div>
             <div
               className={`${
-                !isSidebarVisible  && "scale-0 text-gray-500 "
+                !isSidebarVisible && "scale-0 text-gray-500 "
               } font-medium w-fit text-black whitespace-nowrap text-left text-sm  duration-300 group-hover:text-indigo-400 origin-left `}
             >
               {data.name}

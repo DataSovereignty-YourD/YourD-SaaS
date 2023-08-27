@@ -27,6 +27,10 @@ import {
   IoIosTimer,
   IoMdPhonePortrait,
 } from "react-icons/io";
+import {
+  MdOutlineModeNight,
+  MdOutlineLightMode,
+} from 'react-icons/md';
 
 import { BiLogOut } from "react-icons/bi";
 
@@ -34,6 +38,7 @@ import {
   PiPencilSimpleLineLight,
   PiUserListDuotone,
   PiWechatLogoBold,
+  PiUserCircle,
 } from "react-icons/pi";
 import { GoPerson } from "react-icons/go";
 
@@ -88,10 +93,8 @@ export default function ProjectTopBar() {
     // 현재 화면 너비
     const width = window.innerWidth;
 
-    if (width <= 640) {
+    if (width <= 1024) {
       setSidebarVisible(false);
-    } else if (width > 640 && width < 1024) {
-      setSidebarVisible(true);
     }
   });
 
@@ -219,7 +222,7 @@ export default function ProjectTopBar() {
           )}
         </div>
         {/* notification icon */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-0 md:gap-3">
           <div>
             <div
               onClick={toggleDropdown}
@@ -228,18 +231,15 @@ export default function ProjectTopBar() {
             >
               <span className="inline-flex items-center hover:bg-gray-100 justify-center px-2.5 py-0.5 rounded-full text-xs font-medium">
                 <IoMdNotificationsOutline size={28} />
-
-                <div className="absolute ml-5 mb-4 inline-block align-middle">
-                  <span className="inline-flex items-center px-1 py-1/2 rounded-full text-xs font-medium bg-red-500 text-white">
-                    4
-                  </span>
+                <div className="absolute ml-5 mb-4 inline-flex align-center px-1 py-1/2 rounded-full bg-red-500 text-white">
+                  4
                 </div>
               </span>
             </div>
 
             {isDropdownOpen && (
               <div
-                className="absolute w-fit h-fit pb-4  bg-white menu dropdown-content p-2 shadow z-[1] bg-base-100 rounded-xl"
+                className="absolute min-w-max w-fit h-fit pb-4  bg-white p-2 shadow z-[1] bg-base-100 rounded-xl"
                 style={{ transform: "translateX(-80%)" }}
               >
                 <div className="flex items-center justify-between">
@@ -276,35 +276,13 @@ export default function ProjectTopBar() {
             )}
             {isDropdownOpen && (
               <div
-                className="fixed inset-0 bg-black/5"
+                className="fixed w-screen h-screen inset-0 bg-black/5"
                 onClick={closeDropdown}
               ></div>
             )}
           </div>
           {/* morning/night mode */}
-          <svg
-            className="h-8 w-8 hidden md:flex items-center space-x-1 text-gray-600 "
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            stroke-width="2"
-            stroke="currentColor"
-            fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            {" "}
-            <path stroke="none" d="M0 0h24v24H0z" />{" "}
-            <path d="M16.2 4a9.03 9.03 0 1 0 3.9 12a6.5 6.5 0 1 1 -3.9 -12" />
-          </svg>
-
-          {/* ether logo */}
-          <img
-            className=" w-10 h-10 hidden md:flex items-center space-x-1 rounded-full object-cover  "
-            src="http://wiki.hash.kr/images/d/d6/이더리움_로고.png"
-            alt="User Avatar"
-          ></img>
-
+          <MdOutlineModeNight size={28} className='hidden md:flex'/>
           {/* user image */}
           <div className="">
             <div
@@ -313,11 +291,7 @@ export default function ProjectTopBar() {
               // type="button"
             >
               <span className="inline-flex items-center hover:bg-gray-100 justify-center px-2.5 py-0.5 rounded-full text-xs font-medium">
-                <img
-                  className="  w-10 h-10 hidden md:flex items-center space-x-1 rounded-full object-cover   "
-                  src="https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw&amp;ixlib=rb-1.2.1&amp;q=80&amp;w=400"
-                  alt="User Avatar"
-                ></img>
+                <PiUserCircle size={28} className=' hidden md:flex '/>
               </span>
             </div>
 
@@ -327,11 +301,7 @@ export default function ProjectTopBar() {
                 style={{ transform: "translateX(-80%)" }}
               >
                 <div className="  items-center flex text-xl w-full py-6 ">
-                  <img
-                    className="  w-7 h-7  ml-4 mr-2 rounded-full object-fill  "
-                    src="https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw&amp;ixlib=rb-1.2.1&amp;q=80&amp;w=400"
-                    alt="User Avatar"
-                  ></img>
+                  <PiUserCircle size={28} className='ml-4 mr-2'/>
                   <div className=" flex items-center justify-between w-full">
                     <div className=" font-normal text-sm ">User Name</div>
                     <BiLogOut
@@ -375,12 +345,12 @@ export default function ProjectTopBar() {
                 </div>
               </div>
             )}
-            {isProfileToggle && (
-              <div
-                className="fixed inset-0 bg-black opacity-25"
-                onClick={closeProfileDropdown}
-              ></div>
-            )}
+              {isProfileToggle && (
+                <div
+                  className="absolute w-screen h-screen inset-0 bg-black/5"
+                  onClick={closeProfileDropdown}
+                />
+              )}
           </div>
 
           {/* shrink icon */}
@@ -397,7 +367,7 @@ export default function ProjectTopBar() {
         </div>
       </div>
       <div
-        className={`absolute mt-28 border border-gray-100 shadow bg-white w-full ${classNames(
+        className={`absolute mt-28 border z-50 border-gray-100 shadow bg-white w-full ${classNames(
           "md:hidden",
           { hidden: !menuToggle }
         )}`}
@@ -409,16 +379,9 @@ export default function ProjectTopBar() {
               id="header-search"
               placeholder="검색어를 입력하세요"
               type="text"
-              className=" w-full  h-10 px-3   rounded-md border border-gray-300 focus:outline-none focus:border-blue-500  "
+              className=" w-full h-10 px-3   rounded-md border border-gray-300 focus:outline-none focus:border-blue-500  "
             />
-            <img
-              className="    w-10 h-10  mx-2 rounded-full object-fill"
-              src="https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw&amp;ixlib=rb-1.2.1&amp;q=80&amp;w=400"
-              alt="User Avatar"
-              onDragStart={() => {
-                return false;
-              }}
-            ></img>
+            <PiUserCircle size={32} className='mx-2'/>
           </div>
         </div>
       </div>

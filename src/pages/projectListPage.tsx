@@ -110,7 +110,7 @@ export default function ProjectListPage() {
           </div>
         ) : (
           <div className="flex flex-col items-center justify-around h-full w-full">
-            <div className="flex flex-col w-full items-center my-20">
+            <div className="flex flex-col w-full items-center my-16">
               <div className=" text-center text-black font-bold text-3xl mb-10">
                 Creating a new project
               </div>
