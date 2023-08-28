@@ -59,7 +59,7 @@ export default function DashBoard() {
   ];
 
   return (
-    <div id="dashboard" className="grid pb-20">
+    <div id="dashboard" className="pb-20">
       <Path pathname={pathName} />
       <h1 className="font-bold text-black mb-2 uppercase text-xl sm:text-2xl">
         OverView
