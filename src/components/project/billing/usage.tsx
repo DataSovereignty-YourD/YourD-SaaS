@@ -14,7 +14,7 @@ export default function Usage() {
   const [sortDirection, setSortDirection] = useState("asc");
   const [isDropdown, setDropdown] = useState(false);
   const toggleDropdown = () => {
-    setDropdown(true);
+    setDropdown(!isDropdown);
   };
 
   const handleSort = (column: string) => {
@@ -60,12 +60,34 @@ export default function Usage() {
     { key: "failed_requests", label: "Failed_requests" },
   ];
 
+  function DropDown() {
+    return (
+      <div>
+        <button
+          className="text-black border border-gray-700 hover:bg-blue-100 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center"
+          type="button"
+          onClick={toggleDropdown}
+        >
+          Dropdown button
+          <MdOutlineKeyboardArrowDown />
+        </button>
+
+        {isDropdown && (
+          <div
+            className="bg-white text-base list-none divide-y divide-gray-100 rounded shadow"
+            id="dropdown"
+          ></div>
+        )}
+      </div>
+    );
+  }
+
   return (
     <div className=" ">
       <div className="font-bold text-black"></div>
       <div className=" grid grid-cols-1 md:grid-cols-2  bg-white rounded-lg  gap-28">
-        <div className=" font-bold text-black ">
-          <div>Network Request Volumes</div>
+        <div className=" font-bold text-black p-5 ">
+          <div className="mx-3">Network Request Volumes</div>
           <div className="flex justify-between">
             <div className="flex-col p-4">
               <div className=" font-bold   text-gray-500 border-b-2  uppercase">
@@ -75,60 +97,7 @@ export default function Usage() {
             </div>
             <div>
               <div className="max-w-lg mx-auto">
-                <button
-                  className="text-black border border-gray-700 hover:bg-blue-100 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center"
-                  type="button"
-                  onClick={() => toggleDropdown()}
-                >
-                  Dropdown button
-                  <MdOutlineKeyboardArrowDown />
-                </button>
-
-                <div
-                  className="hidden bg-white text-base  list-none divide-y divide-gray-100 rounded shadow "
-                  id="dropdown"
-                >
-                  <div className="">
-                    <span className="block text-sm">Bonnie Green</span>
-                    <span className="block text-sm font-medium text-gray-900 truncate">
-                      name@flowbite.com
-                    </span>
-                  </div>
-                  <ul className="py-1" aria-labelledby="dropdown">
-                    <li>
-                      <a
-                        href="#"
-                        className="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2"
-                      >
-                        Dashboard
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="#"
-                        className="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2"
-                      >
-                        Settings
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="#"
-                        className="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2"
-                      >
-                        Earnings
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="#"
-                        className="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2"
-                      >
-                        Sign out
-                      </a>
-                    </li>
-                  </ul>
-                </div>
+                <DropDown />
               </div>
             </div>
           </div>
@@ -136,8 +105,8 @@ export default function Usage() {
             {MyResponsiveBarCanvas({ data: incomeData })}
           </div>
         </div>
-        <div className=" font-bold text-black ">
-          <div>Method Request Volumes</div>
+        <div className=" font-bold text-black p-5 ">
+          <div className="mx-3">Method Request Volumes</div>
           <div className="flex justify-between">
             <div className="flex-col p-4">
               <div className=" font-bold   text-gray-500 border-b-2  uppercase">
@@ -147,60 +116,7 @@ export default function Usage() {
             </div>
             <div>
               <div className="max-w-lg mx-auto">
-                <button
-                  className="text-black border border-gray-700  hover:bg-blue-100 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center"
-                  type="button"
-                  data-dropdown-toggle="dropdown"
-                >
-                  Dropdown button
-                  <MdOutlineKeyboardArrowDown />
-                </button>
-
-                <div
-                  className="hidden bg-white text-base  list-none divide-y divide-gray-100 rounded shadow "
-                  id="dropdown"
-                >
-                  <div className="">
-                    <span className="block text-sm">Bonnie Green</span>
-                    <span className="block text-sm font-medium text-gray-900 truncate">
-                      name@flowbite.com
-                    </span>
-                  </div>
-                  <ul className="py-1" aria-labelledby="dropdown">
-                    <li>
-                      <a
-                        href="#"
-                        className="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2"
-                      >
-                        Dashboard
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="#"
-                        className="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2"
-                      >
-                        Settings
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="#"
-                        className="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2"
-                      >
-                        Earnings
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="#"
-                        className="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2"
-                      >
-                        Sign out
-                      </a>
-                    </li>
-                  </ul>
-                </div>
+                <DropDown />
               </div>
             </div>
           </div>

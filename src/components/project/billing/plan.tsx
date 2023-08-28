@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Subscribe from "../subscribe";
 
 import { AiTwotoneThunderbolt } from "react-icons/ai";
 import { LiaCalendarCheck } from "react-icons/lia";
@@ -6,14 +7,13 @@ import { LiaCalendarCheck } from "react-icons/lia";
 export default function Plan() {
   const [activeMenu, setActiveMenu] = useState("plan");
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const handleMenuClick = (key) => {
-    setActiveMenu(key);
+  const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const closeDropdown = () => {
+    setDropdownOpen(false);
   };
-  const openPopup = () => {
+
+  const openSubscribePopup = () => {
     setIsPopupOpen(true);
-  };
-  const closePopup = () => {
-    setIsPopupOpen(false);
   };
 
   const invoiceData = [
@@ -40,32 +40,31 @@ export default function Plan() {
   ];
   return (
     <div id="billing" className=" text-black  grid pb-20">
-      <div className=" flex justify-between mb-10">
+      <div className=" flex justify-between my-10">
         <div className="font-normal text-lg px-5 py-2">Plan : Discover</div>
         <div className=" flex">
           <button
             className=" flex items-center mx-3 border-black text-white bg-purple-600 rounded-lg"
-            onClick={openPopup}
+            onClick={openSubscribePopup}
           >
             <div className=" mx-3 flex items-center ">
               upgrade <AiTwotoneThunderbolt />
             </div>
           </button>
-          {isPopupOpen && (
-            <div className=" popup">
-              <div className=" popup-content">
-                <h2>팝업 내용</h2>
-                <p>이것은 팝업의 내용입니다.</p>
-                <button onClick={closePopup}>X</button>
-              </div>
-            </div>
-          )}
+
           <button className=" items-center border-black bg-blue-500 rounded-lg">
             <div className=" mx-3 flex items-center text-white">
-              cancel subscription
+              openSubscribePopupion
             </div>
           </button>
         </div>
+        <Subscribe isPopupOpen={isPopupOpen} setIsPopupOpen={setIsPopupOpen} />
+        {isPopupOpen && (
+          <div
+            className="fixed w-screen h-screen inset-0 bg-black/5"
+            onClick={closeDropdown}
+          ></div>
+        )}
       </div>
 
       <div className=" mt-5 mb-14">

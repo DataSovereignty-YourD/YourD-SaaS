@@ -14,6 +14,7 @@ export default function Billing() {
   const location = useLocation();
   const pathName = location.pathname;
   const [isPlanOpen, setIsPlanOpen] = useState(false);
+
   const handleMenuClick = (key) => {
     setActiveMenu(key);
   };
@@ -55,9 +56,7 @@ export default function Billing() {
   return (
     <div className=" pb-20">
       <Path pathname={location.pathname} />
-      <h2 className=" text-2xl font-semibold mb-4 text-black">
-        Usage & Billing
-      </h2>
+      <h2 className=" text-2xl font-bold mb-4 text-black">Usage & Billing</h2>
       <nav className=" bg-white text-black p-4">
         <ul className=" flex space-x-4">
           {menuItems.map((item) => (
