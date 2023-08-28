@@ -3,6 +3,7 @@ import Subscribe from "../subscribe";
 
 import { AiTwotoneThunderbolt } from "react-icons/ai";
 import { LiaCalendarCheck } from "react-icons/lia";
+import Subscribe from "../subscribe";
 
 export default function Plan() {
   const [activeMenu, setActiveMenu] = useState("plan");
@@ -38,7 +39,12 @@ export default function Plan() {
   ];
   return (
     <div id="billing" className=" text-black  grid pb-20">
+
       <div className=" flex justify-between my-10">
+
+      
+      <div className=" flex justify-between mb-10">
+
         <div className="font-normal text-lg px-5 py-2">Plan : Discover</div>
         <div className=" flex">
           <button

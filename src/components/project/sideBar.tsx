@@ -46,15 +46,16 @@ export default function SideBar({ item }: { item: projectType }) {
       path: "apikey",
       icon: <AiOutlineApi size={20} />,
     },
+    
+  ];
+
+  let navigationBottom: navigationType[] = [
     {
-      classify: "Management",
+      classify: "Support",
       name: "Billing",
       path: "billing",
       icon: <FaHornbill size={20} />,
     },
-  ];
-
-  let navigationBottom: navigationType[] = [
     {
       classify: "Support",
       name: "Settings",
