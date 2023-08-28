@@ -15,14 +15,13 @@ export default function Usage() {
   const [isDropdownA, setDropdownA] = useState(false);
   const [isDropdownB, setDropdownB] = useState(false);
   const [sortedUsers, setSortedUsers] = useState([...users]);
-  const [selectedDate, setSelectedDate] = useState("");
+  const [selectedDate, setSelectedDate] = useState(dates[1].list);
   const [selectedDateInfo, setSelectedDateInfo] = useState(null);
 
   useEffect(() => {
     const selectedDateInfo = dates.find(
       (dateInfo) => dateInfo.list === selectedDate
     );
-
     if (selectedDateInfo) {
       setSelectedDateInfo(selectedDateInfo);
     }
@@ -166,7 +165,7 @@ export default function Usage() {
           <div className="flex justify-between">
             <div className="flex-col p-4">
               <div className=" font-bold   text-gray-500 border-b-2  uppercase">
-                {selectedDateInfo.date}total
+                {selectedDateInfo && selectedDateInfo.date} total
               </div>
               <div className="text-lg">73</div>
             </div>
