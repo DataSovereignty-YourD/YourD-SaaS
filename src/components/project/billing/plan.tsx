@@ -7,11 +7,9 @@ import { LiaCalendarCheck } from "react-icons/lia";
 export default function Plan() {
   const [activeMenu, setActiveMenu] = useState("plan");
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [isDropdownOpen, setDropdownOpen] = useState(false);
   const closeDropdown = () => {
-    setDropdownOpen(false);
+    setIsPopupOpen(false);
   };
-
   const openSubscribePopup = () => {
     setIsPopupOpen(true);
   };

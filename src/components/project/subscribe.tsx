@@ -80,7 +80,7 @@ export default function Subscribe({ isPopupOpen, setIsPopupOpen }) {
   const currentPlan = contentsItems[0].title;
 
   return (
-    <div className="bg-slate-50 text-black absolute  w-fit h-fit z-10 rounded-lg">
+    <div className="bg-slate-50 text-black absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-fit h-fit z-50 rounded-lg">
       {/* Header */}
       <div className="flex items-center justify-between bg-white h-14 rounded-lg">
         <div className="ml-5 text-black font-bold h-1/2 text-xl">
