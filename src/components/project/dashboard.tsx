@@ -76,7 +76,7 @@ export default function DashBoard() {
                   borderBottomWidth: 3,
                 }}
               >
-                <div className="mb-3 text-gray-500 text-lg uppercase font-bold">
+                <div className="mb-3 text-gray-500 text-sm md:text-[1rem]  uppercase font-bold">
                   {data.title}
                 </div>
                 <div className="flex items-center gap-2 my-2">

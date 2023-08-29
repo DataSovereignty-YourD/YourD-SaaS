@@ -15,9 +15,10 @@ export default function Login() {
   const [isLogin,setIsLogin] = useRecoilState(loginState);
   const navigate = useNavigate();
 
-  const seePasswordHandler = () => {
-    setSeePassword(!seePassword);
-  };
+  const handleLogin=()=> {
+    setIsLogin(true);
+    navigate('/project');
+  }
 
   document.body.style.overflow = "hidden";
 
@@ -81,7 +82,7 @@ export default function Login() {
             <div className="text-center">
               <button
                 className="w-1/2 py-4  bg-blue-600 hover:bg-blue-799 rounded-full text-white  text-2xl mt-4 "
-                onClick={() => setIsLogin(true)}
+                onClick={() => handleLogin()}
               >
                 Login
               </button>
