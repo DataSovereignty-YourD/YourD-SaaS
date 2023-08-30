@@ -6,10 +6,10 @@ import MainTopbar from "./components/mainTopBar";
 import DefaultPage from "./pages/defaultPage";
 import ProjectDetailPage from "./pages/projectDetailPage";
 import ProjectListPage from "./pages/projectListPage";
-import Login from "./components/login/login";
 import ProjectTopBar from "./components/projectTobBar";
-import SignUp from "./components/login/signUp";
 import NotFoundPage from './pages/404Page';
+import Login from "./pages/login/login";
+import SignUp from "./pages/login/signUp";
 
 function App() {
   const isLoggedin = useRecoilValue(loginValue);
