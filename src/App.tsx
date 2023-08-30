@@ -9,7 +9,7 @@ import ProjectListPage from "./pages/projectListPage";
 import Login from "./components/login/login";
 import ProjectTopBar from "./components/projectTobBar";
 import SignUp from "./components/login/signUp";
-import NotFound from "./pages/notFoundPage";
+import NotFoundPage from './pages/404Page';
 
 function App() {
   const isLoggedin = useRecoilValue(loginValue);
@@ -34,7 +34,7 @@ function App() {
         <Route path="/" element={<DefaultPage />} />
         <Route path="/project" element={<ProjectListPage />} />
         <Route path={"/project/:id/*"} element={<ProjectDetailPage />} />
-        <Route path={"*"} element={<NotFound />} />
+        <Route path={"*"} element={<NotFoundPage />} />
       </Routes>
     </div>
   );
