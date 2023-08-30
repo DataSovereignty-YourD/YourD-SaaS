@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Subscribe from "../subscribe";
 
 import { AiTwotoneThunderbolt } from "react-icons/ai";
 import { LiaCalendarCheck } from "react-icons/lia";
@@ -36,7 +37,6 @@ export default function Plan() {
     },
   ];
   return (
-
     <div id="billing" className=" text-black  grid pb-20 ">
       <div className="justify-between my-10">
         <div className=" flex justify-between mb-10">
@@ -67,7 +67,6 @@ export default function Plan() {
               onClick={closeDropdown}
             ></div>
           )}
-
         </div>
 
         <div className=" mt-5 mb-14">
@@ -106,5 +105,5 @@ export default function Plan() {
         </div>
       </div>
     </div>
-  )
+  );
 }
