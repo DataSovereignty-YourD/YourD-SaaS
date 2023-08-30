@@ -4,19 +4,18 @@ import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
 import { FaArrowTrendUp, FaArrowTrendDown } from "react-icons/fa6";
 import { AiOutlineArrowDown, AiOutlineArrowUp } from "react-icons/ai";
 import { GoPersonAdd } from "react-icons/go";
-
 import { ResponsiveLine } from "@nivo/line";
 import { ResponsiveBarCanvas } from "@nivo/bar";
 import { ResponsivePie } from "@nivo/pie";
 import CanvasJSReact from "@canvasjs/react-charts";
-import Path from "./path";
+import Path from "../../components/project/path";
 import {
   activeUserData,
   IncomeData,
   incomeData,
   PieChartData,
+  recentTransactions,
   userGenderData,
-  userGrowthData,
 } from "../../test/dashboardTestData";
 export default function DashBoard() {
   const location = useLocation();
@@ -131,20 +130,15 @@ export default function DashBoard() {
                   borderBottomWidth: 3,
                 }}
               >
-
-                <div className=" flex items-center">
+                <div className=" flex items-center h-8 md:h-12">
                   <div
-                    className=" text-black font-bold"
-                    style={{ fontSize: "24px" }}
+                    className=" text-black font-bold text-2xl"
                   >
                     {data.titleicon}
                   </div>
-                  <div className=" mx-2  text-gray-500 text-lg uppercase font-bold">
+                  <div className=" mx-2  text-gray-500 text-sm md:text-lg uppercase font-bold">
                     {data.title}
                   </div>
-
-                
-
                 </div>
                 <div className=" flex items-center gap-2 my-2">
                   <div className="mr-0 sm:mr-2">
@@ -173,9 +167,9 @@ export default function DashBoard() {
             );
           })}
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 w-full bg-white rounded-lg shadow-md gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 w-full h-fit pb-10 bg-white rounded-lg shadow-md gap-6">
           <div className="w-full h-[450px] md:col-span-2">
-            <div className="font-bold flex justify-between text-gray-500 text-[24px] border-b-2 p-4 ">
+            <div className="font-bold flex justify-between text-gray-500 text-sm md:text-lg border-b-2 p-4 ">
               <div>User Growth Analysis</div>
               <div className="flex border h-fit items-center border-gray-200 text-xs rounded-sm">
                 <button
@@ -199,7 +193,7 @@ export default function DashBoard() {
             <div className="w-full h-full">{<AreaChart />}</div>
           </div>
           <div className="w-full h-[450px]">
-            <div className="font-bold   text-gray-500 border-b-2 p-4 text-[24px]">
+            <div className="font-bold   text-gray-500 border-b-2 p-4 ">
               Ads Incomes
             </div>
             <div className=" h-5/6 overflow-visible pr-6">
@@ -576,54 +570,3 @@ const MyResponsivePie = ({ data }: any) => (
     ]}
   />
 );
-
-export const recentTransactions = [
-  {
-    txId: "01e4dsa",
-    user: "johndoe",
-    date: "2021-09-01",
-    cost: "43.95",
-  },
-  {
-    txId: "0315dsaa",
-    user: "jackdower",
-    date: "2022-04-01",
-    cost: "133.45",
-  },
-  {
-    txId: "01e4dsa",
-    user: "aberdohnny",
-    date: "2021-09-01",
-    cost: "43.95",
-  },
-  {
-    txId: "51034szv",
-    user: "goodmanave",
-    date: "2022-11-05",
-    cost: "200.95",
-  },
-  {
-    txId: "0a123sb",
-    user: "stevebower",
-    date: "2022-11-02",
-    cost: "13.55",
-  },
-  {
-    txId: "01e4dsa",
-    user: "aberdohnny",
-    date: "2021-09-01",
-    cost: "43.95",
-  },
-  {
-    txId: "120s51a",
-    user: "wootzifer",
-    date: "2019-04-15",
-    cost: "24.20",
-  },
-  {
-    txId: "0315dsaa",
-    user: "jackdower",
-    date: "2022-04-01",
-    cost: "133.45",
-  },
-];

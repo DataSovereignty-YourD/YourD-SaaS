@@ -85,10 +85,9 @@ export default function ProfileModal({
       <div className="">
         {ProfileData.map((profiledata, index) => {
           return (
-            <div className=" flex  gap-2 border-gray-100  justify-between items-center  text-black ">
+            <div key={index} className=" flex  gap-2 border-gray-100  justify-between items-center  text-black ">
               <a
                 href="#"
-                key={index}
                 className={` w-full py-3 text-gray-800  ${
                   selectedItem === index ? "bg-blue-100" : ""
                 } hover:bg-blue-200 transition duration-300`}

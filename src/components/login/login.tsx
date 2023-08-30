@@ -18,6 +18,7 @@ export default function Login() {
   const handleLogin=()=> {
     setIsLogin(true);
     navigate('/project');
+    document.body.style.overflow = "auto";
   }
 
   document.body.style.overflow = "hidden";
@@ -31,7 +32,8 @@ export default function Login() {
         <img
           src={loginimage}
           alt="bgimg"
-          className="absolute z-0  blur-2xl top-0 right-1/2"
+          
+          className="absolute z-0 w-[600px] blur-lg top-1/5 left-1/5"
         />
       </div>
       <div className="max-w-md w-full mx-auto z-[1]">
@@ -90,14 +92,6 @@ export default function Login() {
           </form>
         </div>
       </div>
-
-      {/* <div>
-        <img
-          src={loginimage}
-          className=" w-[500px] h-[500px] calc(100vh - 175px)"
-          // style={{ transform: "translateX(-20%) translateY(0)" }}
-        />
-      </div> */}
     </div>
   );
 }

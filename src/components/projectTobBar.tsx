@@ -103,13 +103,13 @@ export default function ProjectTopBar() {
                 <AiOutlineSearch size={28} />
               </div>
               <input
-                id="header-search"
+                id="search"
                 placeholder="search"
                 type="text"
                 className={`px-2 hidden origin-left duration-500 md:flex items-center rounded-xl transition-width shadow-inner border  focus:outline-none ${
                   isSearchBarVisible ? "w-full scale-100  ml-2" : "w-0 scale-0"
                 }`}
-                value=""
+                defaultValue=""
               />
             </div>
           )}

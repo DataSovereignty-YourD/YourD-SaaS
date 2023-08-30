@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
-import Plan from "./billing/plan";
-import Path from "./path";
-import Usage from "./billing/usage";
+import Plan from "../../components/project/billing/plan";
+import Path from "../../components/project/path";
+import Usage from "../../components/project/billing/usage";
 
 import { TfiBarChart } from "react-icons/tfi";
 import { MdOutlineElectricalServices, MdOutlineHistory } from "react-icons/md";

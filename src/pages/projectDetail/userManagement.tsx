@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { projectType } from '../../recoil/dashBoard/project';
-import Path from './path';
+import Path from '../../components/project/path';
 import { BiSolidUserCircle } from 'react-icons/bi';
 import { AiOutlineArrowDown, AiOutlineArrowUp } from 'react-icons/ai';
 

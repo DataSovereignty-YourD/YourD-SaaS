@@ -11,6 +11,7 @@ export default function DefaultPage() {
   useEffect(() => {
     if (isLogin) navigate("/project");
   }, []);
+  
   return (
     <div>
       <Login />

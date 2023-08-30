@@ -3,8 +3,8 @@ import { useLocation } from "react-router-dom";
 import { projectType } from "../../recoil/dashBoard/project";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import {CgCopy} from "react-icons/cg";
-import Path from "./path";
-import LocalPush from "../utils/localPush";
+import Path from "../../components/project/path";
+import LocalPush from "../../components/utils/localPush";
 
 export default function ApiKey({ item }: { item: projectType }) {
   const location = useLocation();

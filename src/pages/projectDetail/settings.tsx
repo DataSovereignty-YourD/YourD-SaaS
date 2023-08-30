@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { projectState, projectType } from '../../recoil/dashBoard/project';
 import { loginState } from '../../recoil/loginState';
-import Path from './path';
+import Path from '../../components/project/path';
 import { MdArrowRight, MdArrowDropDown } from 'react-icons/md';
 import { BiSearch, BiKey, BiSolidCreditCard } from 'react-icons/bi';
 import { BsPersonCircle } from 'react-icons/bs';

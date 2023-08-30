@@ -1,39 +1,42 @@
 import { Route, Routes } from "react-router-dom";
 import { useRecoilValue } from "recoil";
-import ApiKey from "../components/project/apiKey";
-import DashBoard from "../components/project/dashboard";
-import Settings from "../components/project/settings";
-import SideBar from "../components/project/sideBar";
-import UserManagement from "../components/project/userManagement";
-import Billing from "../components/project/billing";
+import ApiKey from "./projectDetail/apiKey";
+import DashBoard from "./projectDetail/dashboard";
+import Settings from "./projectDetail/settings";
+import SideBar from "./projectDetail/sideBar";
+import UserManagement from "./projectDetail/userManagement";
+import Billing from "./projectDetail/billing";
 import { currentProjectVaule } from "../recoil/dashBoard/project";
+import { useParams } from 'react-router-dom';
+import NotFound from "./notFoundPage";
+import { stringify } from "querystring";
+import useSessionStorage from "../function/sesstionStorage";
 
 export default function ProjectDetailPage() {
-  // const location = useLocation();
-  // const { item } = location.state;
-  const item = useRecoilValue(currentProjectVaule);
+  const [selectProject, setSelectProject] = useSessionStorage('currentProjectState',{});
+  const {id} =useParams();
+  //isVailed함수
+  
+  if (id !== String(selectProject.clientId)) {
+    return <NotFound/>;
+  }
 
   return (
-    <div className="flex text-slate-300  h-full bg-gray-100">
+    <div className="flex text-slate-300  h-full">
       <div
         id="sidebar"
-        className="flex bg-white border-r-2  max-w-[200px] py-2 z-10"
+        className="flex bg-white shadow-md max-w-[200px] py-2 z-10"
       >
-        <SideBar item={item} />
+        <SideBar item={selectProject} />
       </div>
-      {/*
-       *일단 여기 밑으로는 건들지 않기
-       */}
-      <div id="content" className="grid w-full px-6 h-fit pt-16 bg-gray-100  min-h-screen">
+      <div id="content" className="grid w-full px-6 h-fit pt-16 min-h-screen">
         <Routes>
-          <Route path="dashboard" element={<DashBoard />} />
-          <Route path="apikey" element={<ApiKey item={item} />} />
-          <Route
-            path="usermanagement"
-            element={<UserManagement item={item} />}
-          />
-          <Route path="settings" element={<Settings item={item} />} />
-          <Route path="billing" element={<Billing />} />
+          <Route path="/dashboard" element={<DashBoard />} />
+          <Route path="/apikey" element={<ApiKey item={selectProject} />} />
+          <Route path="/usermanagement" element={<UserManagement item={selectProject} />}/>
+          <Route path="/settings" element={<Settings item={selectProject} />} />
+          <Route path="/billing" element={<Billing />} />
+          <Route path={"*"} element={<NotFound />} />
         </Routes>
       </div>
     </div>

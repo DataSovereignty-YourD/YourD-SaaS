@@ -1,0 +1,26 @@
+import React from 'react';
+
+function Dropdown(props) {
+    const [visibilityAnimation, setVisibilityAnimation] = React.useState(false);
+    const [repeat, setRepeat] = React.useState(null);
+
+    React.useEffect(() => {
+        if (props.visibility) {
+            clearTimeout(repeat);
+            setRepeat(null);
+            setVisibilityAnimation(true);
+        } else {
+            setRepeat(setTimeout(() => {
+                setVisibilityAnimation(false);
+            }, 400));
+        }
+    }, [props.visibility]);
+
+    return (
+        <article className={`absolute p-1 overflow-hidden `}>
+            { visibilityAnimation && props.children }
+        </article>
+    )
+};
+
+export default Dropdown;
