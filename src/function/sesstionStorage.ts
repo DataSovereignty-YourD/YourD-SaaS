@@ -7,7 +7,7 @@ function useSessionStorage(key, initialValue) {
   const [storedValue, setStoredValue] = useState(() => {
     try {
       const item = window.sessionStorage.getItem(key);
-      return JSON.parse(item).length ? JSON.parse(item) : initialValue;
+      return JSON.parse(item) ? JSON.parse(item) : initialValue;
     } catch (error) {
       console.log(error);
       return initialValue;

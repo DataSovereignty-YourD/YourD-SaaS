@@ -1,24 +1,40 @@
 import { Route, Routes } from "react-router-dom";
 import { useRecoilValue } from "recoil";
-import ApiKey from "./projectDetail/apiKey";
-import DashBoard from "./projectDetail/dashboard";
-import Settings from "./projectDetail/settings";
-import SideBar from "./projectDetail/sideBar";
-import UserManagement from "./projectDetail/userManagement";
-import Billing from "./projectDetail/billing";
+import ApiKey from "./projectDetail/apiKeyPage";
+import DashBoard from "./projectDetail/dashboardPage";
+import Settings from "./projectDetail/settingsPage";
+import SideBar from "./projectDetail/sideBarPage";
+import UserManagement from "./projectDetail/userManagementPage";
+import Billing from "./projectDetail/billingPage";
 import { currentProjectVaule } from "../recoil/dashBoard/project";
-import { useParams } from 'react-router-dom';
-import NotFound from "./notFoundPage";
+import { useParams } from "react-router-dom";
 import { stringify } from "querystring";
 import useSessionStorage from "../function/sesstionStorage";
+import NotFoundPage from "./404Page";
+import { useEffect, useState } from "react";
 
 export default function ProjectDetailPage() {
-  const [selectProject, setSelectProject] = useSessionStorage('currentProjectState',{});
-  const {id} =useParams();
-  //isVailed함수
-  
-  if (id !== String(selectProject.clientId)) {
-    return <NotFound/>;
+  const [projectInfo, setProjectInfo] = useSessionStorage("projectInfo", {});
+  const [showNotFound, setShowNotFound] = useState(false);
+  const [projectIndex, setProjectIndex] = useState(null);
+  const { id } = useParams();
+
+  useEffect(() => {
+    let found = false;
+    projectInfo.map((project, index) => {
+      if (String(id) === String(project.clientId)) {
+        found = true;
+        setProjectIndex(index);
+      }
+    });
+
+    if (!found) {
+      setShowNotFound(true);
+    }
+  }, []);
+
+  if (showNotFound) {
+    return <NotFoundPage />;
   }
 
   return (
@@ -27,16 +43,25 @@ export default function ProjectDetailPage() {
         id="sidebar"
         className="flex bg-white shadow-md max-w-[200px] py-2 z-10"
       >
-        <SideBar item={selectProject} />
+        <SideBar item={projectInfo[projectIndex]} />
       </div>
       <div id="content" className="grid w-full px-6 h-fit pt-16 min-h-screen">
         <Routes>
           <Route path="/dashboard" element={<DashBoard />} />
-          <Route path="/apikey" element={<ApiKey item={selectProject} />} />
-          <Route path="/usermanagement" element={<UserManagement item={selectProject} />}/>
-          <Route path="/settings" element={<Settings item={selectProject} />} />
+          <Route
+            path="/apikey"
+            element={<ApiKey item={projectInfo[projectIndex]} />}
+          />
+          <Route
+            path="/usermanagement"
+            element={<UserManagement item={projectInfo[projectIndex]} />}
+          />
+          <Route
+            path="/settings"
+            element={<Settings item={projectInfo[projectIndex]} />}
+          />
           <Route path="/billing" element={<Billing />} />
-          <Route path={"*"} element={<NotFound />} />
+          <Route path={"/*"} element={<NotFoundPage />} />
         </Routes>
       </div>
     </div>
