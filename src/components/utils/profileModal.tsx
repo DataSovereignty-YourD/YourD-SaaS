@@ -30,9 +30,9 @@ export default function ProfileModal({
   //   const [activeTab, setActiveTab] = useState("profile");
   const handleItemClick = (index) => {
     setSelectedItem(index);
-    navigation("/");
   };
   const handleLogout = () => {
+    navigation("/");
     setLoggedIn(!isLoggedIn);
   };
   const handleTabChange = (tab) => {

@@ -131,6 +131,7 @@ export default function DashBoard() {
                   borderBottomWidth: 3,
                 }}
               >
+
                 <div className=" flex items-center">
                   <div
                     className=" text-black font-bold"
@@ -141,6 +142,9 @@ export default function DashBoard() {
                   <div className=" mx-2  text-gray-500 text-lg uppercase font-bold">
                     {data.title}
                   </div>
+
+                
+
                 </div>
                 <div className=" flex items-center gap-2 my-2">
                   <div className="mr-0 sm:mr-2">

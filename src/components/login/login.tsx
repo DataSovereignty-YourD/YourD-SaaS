@@ -22,6 +22,11 @@ export default function Login() {
     setIsPasswordVisible(!isPasswordVisible);
   };
 
+  const handleLogin = () => {
+    setIsLogin(true);
+    navigate("/project");
+  };
+
   document.body.style.overflow = "hidden";
 
   return (
@@ -99,8 +104,8 @@ export default function Login() {
             </div>
             <div className="text-center">
               <button
-                className="w-1/2 py-4  bg-blue-600 hover:bg-blue-700 rounded-full text-white  text-2xl mt-4 "
-                onClick={() => setIsLogin(true)}
+                className="w-1/2 py-4  bg-blue-600 hover:bg-blue-799 rounded-full text-white  text-2xl mt-4 "
+                onClick={() => handleLogin()}
               >
                 Login
               </button>

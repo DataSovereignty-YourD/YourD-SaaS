@@ -3,6 +3,7 @@ import Subscribe from "../subscribe";
 
 import { AiTwotoneThunderbolt } from "react-icons/ai";
 import { LiaCalendarCheck } from "react-icons/lia";
+import Subscribe from "../subscribe";
 
 export default function Plan() {
   const [activeMenu, setActiveMenu] = useState("plan");
