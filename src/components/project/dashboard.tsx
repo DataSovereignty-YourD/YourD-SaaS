@@ -265,8 +265,8 @@ export default function DashBoard() {
             Requests Activity
           </h1>
 
-          <div className="bg-white mt-3 rounded-md drop-shadow-md">
-            <div className="bg-white uppercase  drop-shadow-md text-black grid grid-cols-4 items-center justify-between px-2 py-3">
+          <div className="bg-white mt-3 rounded-md drop-shadow-md text-center">
+            <div className="bg-white uppercase font-bold  drop-shadow-md text-black grid grid-cols-4 items-center justify-between px-2 py-3">
               {columns.map((column, index) => {
                 const isDID = column.key === "did";
                 return (
@@ -292,14 +292,12 @@ export default function DashBoard() {
             {sortedUsers.map((user, index) => (
               <div
                 key={`${user.txId} + ${index}`}
-                className=" grid grid-cols-4 text-black  items-center justify-between border-b p-2"
+                className=" grid grid-cols-4 text-black justify-center  border-b p-2"
               >
-                <span className=" col-span-1  mx-2 my-4 flex items-center">
-                  {user.txId}
-                </span>
-                <span className=" col-span-1 mx-2">{user.user}</span>
-                <span className=" col-span-1 mx-2">{user.date}</span>
-                <span className="  col-span-1 mx-2">{user.cost}</span>
+                <span className=" col-span-1  mx-2 my-4    ">{user.txId}</span>
+                <span className=" col-span-1 mx-2 my-4 ">{user.user}</span>
+                <span className=" col-span-1 mx-2 my-4 ">{user.date}</span>
+                <span className="  col-span-1 mx-2 my-4 ">{user.cost}</span>
               </div>
             ))}
           </div>

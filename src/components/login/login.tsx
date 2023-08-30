@@ -6,19 +6,26 @@ import {
   useLocation,
   useNavigate,
 } from "react-router-dom";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useRecoilState } from "recoil";
 import loginimage from "../../assets/img/YourD_Logo.jpg";
 import { loginState } from "../../recoil/loginState";
 
 export default function Login() {
-  const [seePassword, setSeePassword] = useState(true);
-  const [isLogin,setIsLogin] = useRecoilState(loginState);
+  const [signUp, setSignUp] = useState("");
+  const [isLogin, setIsLogin] = useRecoilState(loginState);
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
   const navigate = useNavigate();
 
-  const handleLogin=()=> {
+  const handlePasswordToggle = () => {
+    setIsPasswordVisible(!isPasswordVisible);
+  };
+
+  const handleLogin = () => {
     setIsLogin(true);
-    navigate('/project');
-  }
+    navigate("/project");
+  };
 
   document.body.style.overflow = "hidden";
 
@@ -30,12 +37,11 @@ export default function Login() {
       <div>
         <img
           src={loginimage}
-          alt="bgimg"
           className="absolute z-0  blur-2xl top-0 right-1/2"
         />
       </div>
       <div className="max-w-md w-full mx-auto z-[1]">
-        <div className="max-w-md w-full mx-auto mt-4 bg-white p-8 border border-gray-300">
+        <div className="max-w-md w-full mx-auto bg-white p-8 border border-gray-300">
           <form className="form space-y-6">
             =
             <div>
@@ -49,18 +55,35 @@ export default function Login() {
                 Login to your account
               </div>
 
-              <input
-                type="text"
-                className="w-full p-2 border border-gray-300 rounded mt-10 "
-                placeholder="Email Address"
-              />
+              <div className="mt-5">
+                Email Address
+                <input
+                  type="text"
+                  className="w-full p-2 border border-gray-300 rounded  mb-4 "
+                  placeholder="Email Address"
+                />
+              </div>
 
-              <input
-                type="password"
-                className="w-full p-2 border border-gray-300 rounded mt-5"
-                name="password"
-                placeholder="Password"
-              />
+              <div className="mb-2 relative ">
+                <div>
+                  Password
+                  <input
+                    type={isPasswordVisible ? "text" : "password"}
+                    value={signUp}
+                    onChange={(e) => setSignUp(e.target.value)}
+                    placeholder="Password"
+                    className="w-full p-2 border border-gray-300 rounded"
+                  />
+                </div>
+                <button
+                  type="button"
+                  onClick={handlePasswordToggle}
+                  className="absolute top-1/2 right-3 transform  translate-y-3/2 flex items-center justify-center  focus:outline-none"
+                  style={{ width: "24px", height: "24px" }}
+                >
+                  {isPasswordVisible ? <FaEyeSlash /> : <FaEye />}
+                </button>
+              </div>
             </div>
             <div className="text-right">
               <a href="" className="font-medium text-sm text-blue-500 ">
