@@ -12,6 +12,7 @@ export default function SignUp() {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   const handlePasswordToggle = () => {
+    document.body.style.overflow = "auto";
     setIsPasswordVisible(!isPasswordVisible);
   };
 
