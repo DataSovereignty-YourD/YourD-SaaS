@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import useSessionStorage from "../../function/sesstionStorage";
+import useSessionStorage from "../../hooks/sesstionStorage";
 import { currentProjectState } from "../../recoil/dashBoard/project";
 export default function ProjectListBox({ project }) {
   const [selectProject, setSelectProject] = useSessionStorage('currentProjectInfo',{});

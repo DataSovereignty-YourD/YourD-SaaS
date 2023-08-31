@@ -2,7 +2,7 @@ import { atom, selector } from "recoil";
 
 export const loginState = atom({
     key: "loginState",
-    default: true,
+    default: false,
 })
 
 export const loginValue = selector({

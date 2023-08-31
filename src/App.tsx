@@ -2,17 +2,18 @@ import { Route, Router, Routes } from "react-router-dom";
 import "./App.css";
 import { useRecoilValue } from "recoil";
 import { loginValue } from "./recoil/loginState";
-import MainTopbar from "./components/mainTopBar";
+import MainTopbar from "./pages/navigation/mainTopBar";
 import DefaultPage from "./pages/defaultPage";
 import ProjectDetailPage from "./pages/projectDetailPage";
 import ProjectListPage from "./pages/projectListPage";
-import ProjectTopBar from "./components/projectTobBar";
+import ProjectTopBar from "./pages/navigation/projectTobBar";
 import NotFoundPage from './pages/404Page';
 import Login from "./pages/login/login";
 import SignUp from "./pages/login/signUp";
 
 function App() {
   const isLoggedin = useRecoilValue(loginValue);
+  console.log(isLoggedin);
 
   if (!isLoggedin) {
     return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/" element={<DefaultPage />} />
           <Route path="/signin" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path={"*"} element={<NotFoundPage />} />
         </Routes>
       </div>
     );

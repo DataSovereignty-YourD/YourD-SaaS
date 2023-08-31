@@ -12,6 +12,8 @@ export default function DefaultPage() {
   }, []);
   
   return (
-      <Login />
+      <div>
+        {!isLogin&&<Login />}
+      </div>
   );
 }

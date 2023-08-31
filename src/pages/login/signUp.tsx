@@ -12,34 +12,28 @@ export default function SignUp() {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   const handlePasswordToggle = () => {
-    document.body.style.overflow = "auto";
     setIsPasswordVisible(!isPasswordVisible);
   };
 
-  document.body.style.overflow = "hidden";
-
   return (
-    <div
-      className="min-h-[calc(100vh-4rem)]  bg-gray-50 flex flex-col justify-center bg-center z-[1]"
-      style={{ backgroundImage: loginimage }}
-    >
+    <div className="min-h-[calc(100vh)] py-6 w-full h-full overflow-y-scroll bg-gray-50 flex flex-col justify-center bg-center z-[2]">
       <div>
         <img
           src={loginimage}
-          className="absolute z-0  blur-2xl top-0 right-1/2"
+          className="absolute z-0 w-[600px] blur-lg top-1/5 left-1/5"
         />
       </div>
-      <div className="max-w-md w-full mx-auto z-[1]">
+      <div className="max-w-md w-full h-fit mx-auto mt-20 z-[1]">
         <div className="max-w-md w-full mx-auto  bg-white p-8 border border-gray-300">
-          <form className="form space-y-6">
-            =
+          <div className="absolute ">=</div>
+          <div className="flex flex-col gap-4">
             <div className="flex justify-center items-center">
               <img src={yourdLogo} alt="Your Logo" className="w-20 h-20 " />
             </div>
-            <div className="text-3xl font-bold text-gray-900 mt-2 text-center">
+            <div className="text-3xl font-bold text-gray-900 text-center">
               Get Started with <span className="text-blue-600">Metrix</span>
             </div>
-            <div className="text-center font-medium text-xl mt-5 text-gray-500">
+            <div className="text-center font-medium text-xl text-gray-500">
               Create your free account
             </div>
             <div className="grid grid-cols-2 gap-2 mt-3">
@@ -120,7 +114,7 @@ export default function SignUp() {
                 Create Account
               </button>
             </div>
-          </form>
+          </div>
         </div>
       </div>
     </div>

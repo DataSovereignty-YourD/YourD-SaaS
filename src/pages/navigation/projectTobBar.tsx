@@ -1,14 +1,14 @@
 import { Button } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import YourdLogo from "../assets/img/YourDLogo.png";
-import { projectModalState } from "../recoil/dashBoard/project";
+import YourdLogo from "../../assets/img/YourDLogo.png";
+import { projectModalState } from "../../recoil/dashBoard/project";
 import React, { useEffect, useState } from "react";
-import { sideBarToggleState } from "../recoil/sideBarToggle";
+import { sideBarToggleState } from "../../recoil/sideBarToggle";
 import classNames from "classnames";
-import { loginState } from "../recoil/loginState";
-import NotificationModal from "./utils/notificationmodal";
-import ProfileModal from "./utils/profileModal";
+import { loginState } from "../../recoil/loginState";
+import NotificationModal from "../../components/utils/notificationmodal";
+import ProfileModal from "../../components/utils/profileModal";
 import {
   AiOutlineSearch,
   AiOutlineMenuUnfold,
@@ -52,12 +52,7 @@ export default function ProjectTopBar() {
   const closeProfileDropdown = () => {
     setProfileToggle(false);
   };
-  const handleTabChange = (tab) => {
-    setActiveTab(tab);
-  };
-  const handleLogout = () => {
-    setLoggedIn(!isLoggedIn);
-  };
+
 
   window.addEventListener("resize", () => {
     // 현재 화면 너비

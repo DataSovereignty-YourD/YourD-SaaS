@@ -6,6 +6,8 @@ export interface projectType {
     QR?:any,
     clientId:number,
     redirectURLs:any,
+    didChain: string,
+    serviceChain: string,
 }
 
 export const projectModalState = atom({
@@ -32,7 +34,9 @@ export const currentProjectState = atom<projectType>({
         projectName: '',
         startProjectDate:0,
         clientId:0,
-        redirectURLs:''
+        redirectURLs:[],
+        didChain:'',
+        serviceChain:'',
     }
 })
 

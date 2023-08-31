@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-import {
-  Link,
-  Route,
-  Routes,
-  useLocation,
-  useNavigate,
-} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useRecoilState } from "recoil";
 import loginimage from "../../assets/img/YourD_Logo.jpg";
@@ -24,16 +18,13 @@ export default function Login() {
 
   const handleLogin = () => {
     setIsLogin(true);
-    navigate('/project');
-    document.body.style.overflow = "auto";
-  }
+    navigate("/project");
+  };
 
-  document.body.style.overflow = "hidden";
 
   return (
     <div
-      className="min-h-[calc(100vh-4rem)]  bg-gray-50 flex flex-col justify-center bg-center z-[1]"
-      style={{ backgroundImage: loginimage }}
+      className="min-h-[calc(100vh)] py-12 w-full h-full overflow-y-scroll bg-gray-50 flex flex-col justify-center bg-center z-[2]"
     >
       <div>
         <img
@@ -42,7 +33,7 @@ export default function Login() {
           className="absolute z-0 w-[600px] blur-lg top-1/5 left-1/5"
         />
       </div>
-      <div className="max-w-md w-full mx-auto z-[1]">
+      <div className="max-w-md w-full h-fit mx-auto mt-20 z-[1] ">
         <div className="max-w-md w-full mx-auto bg-white p-8 border border-gray-300">
           <form className="form space-y-6">
             =
