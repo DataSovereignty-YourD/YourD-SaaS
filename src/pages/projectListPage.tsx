@@ -19,13 +19,13 @@ export default function ProjectListPage() {
   const [projectInfo, setProjectInfo] = useSessionStorage('projectInfo', []);
   const [project,setProjectState] = useRecoilState(projectState);
   const [newProjectState,setNewProjectState] = useState({});
-
+  document.body.style.overflow = "auto";
   useEffect(() => {
     if(!modalOpen) {
       addProject();
       // window.sessionStorage.clear();
     }
-  }, [modalOpen]);
+  }, [project]);
 
   const addProject=()=> {
     if(Object.keys(newProjectState).length !== 0) {
@@ -67,23 +67,23 @@ export default function ProjectListPage() {
   );
 
   return (
-    <div className="w-full pt-12 min-h-screen h-fit px-20">
+    <div className="w-full pt-12 min-h-screen h-fit">
       <div className="mb-10">
         <NewProjectForm visible={modalOpen} setVisible={setModalOpen} setNewProjectState={setNewProjectState}/>
       </div>
-      <section title="main" className="container w-full mx-auto ">
+      <section title="main" className="w-full ">
         {projectInfo[0] && isLogin ? (
-          <div className="items-center ">
-            <div className="flex justify-between mb-5">
-              <div className="flex items-start text-2xl font-bold text-black ">
+          <div className="flex flex-col items-center w-full px-8 md:px-40 xl:px-96 duration-300">
+            <div className="flex justify-between w-full  mb-5">
+              <div className="flex items-start text-xl md:text-2xl font-bold text-gray-600 ">
                 Projects
               </div>
-              <button onClick={()=>newProject()} className="px-4 py-2 bg-blue-400 rounded-md ">add Project</button>
+              <div onClick={()=>newProject()} className="px-2 py-1 md:px-4 md:py-2 bg-white drop-shadow-md active:drop-shadow-none rounded-sm active:bg-blue-50 duration-300">Add Project</div>
             </div >
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 w-full">
               {projectInfo.map((item) => {
                 return (
-                  <div key={item.clientId}>
+                  <div key={item.clientId} className="min-w-[300px]">
                     <ProjectListBox project={item}/>
                   </div>
                 );
@@ -94,24 +94,24 @@ export default function ProjectListPage() {
           <NewProjectButton />
         )}
 
-        <div className=" grid grid-cols-2 gap-8 items-center w-full pb-32">
-          <div className="col-span-2 text-3xl font-bold mt-10">
+        <div className=" grid grid-cols-2 gap-8 items-center w-full pb-32 px-8 md:px-40 xl:px-96 duration-300">
+          <div className="col-span-2 text-[1.2rem] md:text-2xl font-bold mt-10">
             Let's get started
           </div>
           {projectList.map((project, index) => {
             return (
               <div
                 key={project.title}
-                className="transition-all col-span-1 w-full h-fit ease-in-out duration-100 rounded-sm justify-center p-10 bg-white shadow-md"
+                className="transition-all col-span-2 md:col-span-1 w-full h-fit ease-in-out duration-100 rounded-sm justify-center px-2 py-2 bg-white shadow-md"
               >
-                <div className="flex float-left  items-center">
-                  <div className="mr-8">{project.icon}</div>
-                  <div className="flex-col">
+                <div className="flex items-center justify-around">
+                  <div className="p-2">{project.icon}</div>
+                  <div className="flex-col p-4">
                     <div className=" text-l font-bold">{project.title}</div>
-                    <div className="text-sm text-gray-500 ">
+                    <div className="text-sm text-gray-500 pb-3">
                       {project.subtitle}
                     </div>
-                    <button className="bg-blue-200 text-black py-2 px-4 rounded-lg mt-2 w-40 drop-shadow-md hover:drop-shadow-lg active:drop-shadow-none ">
+                    <button className="bg-blue-200 text-black py-2 px-4 rounded-lg mt-2 w-fit whitespace-nowrap  drop-shadow-md hover:drop-shadow-lg active:drop-shadow-none ">
                       {project.buttontext}
                     </button>
                   </div>

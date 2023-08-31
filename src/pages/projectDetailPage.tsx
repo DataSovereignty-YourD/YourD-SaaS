@@ -16,9 +16,9 @@ import { useEffect, useState } from "react";
 export default function ProjectDetailPage() {
   const [projectInfo, setProjectInfo] = useSessionStorage("projectInfo", {});
   const [showNotFound, setShowNotFound] = useState(false);
-  const [projectIndex, setProjectIndex] = useState(null);
+  const [projectIndex, setProjectIndex] = useState(0);
   const { id } = useParams();
-
+  
   useEffect(() => {
     let found = false;
     projectInfo.map((project, index) => {
@@ -27,7 +27,7 @@ export default function ProjectDetailPage() {
         setProjectIndex(index);
       }
     });
-
+    
     if (!found) {
       setShowNotFound(true);
     }

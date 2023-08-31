@@ -25,12 +25,12 @@ export default function NewProjectForm({
   });
   if (!visible) return null;
 
-  if (visible) document.body.style.overflow = "hidden";
   // 모달이 열릴 때 스크롤을 막습니다.
-  else document.body.style.overflow = ""; // 모달이 닫힐 때 스크롤을 다시 허용합니다.
+  if (visible) document.body.style.overflow = "hidden";
+  
 
-  const didChain = ["Klaytn", "Tezos", "item 3", "item 4"];
-  const serviceChain = ["None", "Klaytn", "Tezos", "item 4"];
+  const didChain = ["Klaytn", "Tezos", "Ethereum", "Solana"];
+  const serviceChain = ["None", "Klaytn", "Tezos", "Ethereum","Solana"];
 
   const chains = [
     {
@@ -64,6 +64,7 @@ export default function NewProjectForm({
   }
 
   const makeProject = async () => {
+    document.body.style.overflow = "auto";
     let newProject = {
       ...project,
       projectName: projectName.value.projectName,

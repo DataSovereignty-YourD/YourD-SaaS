@@ -18,7 +18,6 @@ function App() {
   const [isLoggedinSession, setIsLoggedinSesstion] = useSessionStorage('isLoggedin',false);
   useEffect(()=>{
     setIsLoggedIn(isLoggedinSession);
-    console.log(isLoggedinSession)
   },[]);
 
   useEffect(()=>{

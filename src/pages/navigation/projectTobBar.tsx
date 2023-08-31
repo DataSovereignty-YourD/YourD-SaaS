@@ -64,7 +64,7 @@ export default function ProjectTopBar() {
   });
 
   return (
-    <div className="fixed bg-white w-full h-12 flex items-center z-20 drop-shadow-md">
+    <div className="fixed bg-white w-full  h-12 flex items-center z-20 drop-shadow-md">
       {!isMain && (
         <button
           onClick={() => setSidebarVisible((prev) => !prev)}
@@ -81,10 +81,10 @@ export default function ProjectTopBar() {
       <img
         src={YourdLogo}
         onClick={() => navigation("/")}
-        className="absolute ml-16 h-[48px] object-contain "
+        className="absolute ml-8 md:ml-16 h-[48px] object-contain "
       />
       {/* search icon */}
-      <div className="flex justify-between w-full mx-10 ">
+      <div className="flex justify-between w-full mx-10">
         <div className="flex items-center">
           {pathName !== "/project" && (
             <div className="md:flex items-center ml-20 w-fit duration-500 origin-left">
