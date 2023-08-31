@@ -3,7 +3,7 @@ import { Button } from "react-bootstrap";
 import { useRecoilState } from "recoil";
 import { Close } from "../assets/icons/close";
 import { projectModalState, projectState } from "../recoil/dashBoard/project";
-import Dropdown from "./project/newProjectDropdown";
+import Dropdown from "./project/dropDown";
 import { AiOutlineClose } from "react-icons/ai";
 import useSessionStorage from "../hooks/sesstionStorage";
 import { useInput } from "../hooks/useInput";

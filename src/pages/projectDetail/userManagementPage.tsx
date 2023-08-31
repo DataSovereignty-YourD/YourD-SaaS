@@ -4,7 +4,7 @@ import { projectType } from "../../recoil/dashBoard/project";
 import Path from "../../components/project/path";
 import { BiSolidUserCircle } from "react-icons/bi";
 import { AiOutlineArrowDown, AiOutlineArrowUp } from "react-icons/ai";
-
+//responsive 미완
 function UserManagement({ item }: { item: projectType }) {
   const location = useLocation();
   const pathName = location.pathname;
