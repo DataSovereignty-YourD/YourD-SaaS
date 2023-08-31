@@ -1,9 +1,10 @@
 import { Link, useLocation } from "react-router-dom";
-import { ReactElement, useState } from "react";
+import { ReactElement, useState, useRef, useEffect } from "react";
 import { projectType } from "../../recoil/dashBoard/project";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import {
   currentPageValue,
+  sideBarToggleState,
   sideBarTogleValue,
 } from "../../recoil/sideBarToggle";
 import {
@@ -18,7 +19,21 @@ import { FaHornbill } from "react-icons/fa";
 export default function SideBar({ item }: { item: projectType }) {
   const location = useLocation();
   const selectedMenu = useRecoilValue(currentPageValue);
-  const isSidebarVisible = useRecoilValue(sideBarTogleValue);
+  const [isSidebarVisible, setSidebarVisible] =
+    useRecoilState(sideBarToggleState);
+
+  const closeSidebarVisible = () => {
+    setSidebarVisible(false);
+  };
+
+  window.addEventListener("resize", () => {
+    // 현재 화면 너비
+    const width = window.innerWidth;
+
+    if (width <= 1024) {
+      setSidebarVisible(false);
+    }
+  });
 
   type navigationType = {
     classify: string;
@@ -46,7 +61,6 @@ export default function SideBar({ item }: { item: projectType }) {
       path: "apikey",
       icon: <AiOutlineApi size={20} />,
     },
-    
   ];
 
   let navigationBottom: navigationType[] = [
@@ -122,13 +136,13 @@ export default function SideBar({ item }: { item: projectType }) {
     <div
       className={`${
         isSidebarVisible ? "w-44" : "sm:w-14 hidden sm:flex"
-      } h-full fixed bg-white sm:relative flex-col duration-300 ease-in-out pt-12 `}
+      }  h-full fixed z-50 bg-white sm:relative flex-col duration-300 ease-in-out pt-12 `}
     >
       <div
         id="menu"
         className={`${
           isSidebarVisible ? "w-44" : "w-14 "
-        } fixed duration-300 flex flex-col justify-between h-[calc(100vh-4rem)] `}
+        } fixed duration-300 z-50 flex flex-col justify-between h-[calc(100vh-4rem)] `}
       >
         <div>
           {Object.entries(classifyData(navigationTop)).map(
@@ -143,6 +157,12 @@ export default function SideBar({ item }: { item: projectType }) {
           )}
         </div>
       </div>
+      {isSidebarVisible && (
+        <div
+          className="z-40 fixed md:hidden  md:w-0 md:h-0 w-screen h-screen inset-0 "
+          onClick={closeSidebarVisible}
+        ></div>
+      )}
     </div>
   );
 }
