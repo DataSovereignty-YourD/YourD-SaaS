@@ -5,8 +5,6 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { CgCopy } from 'react-icons/cg';
 import Path from '../../components/project/path';
 import LocalPush from '../../components/utils/localPush';
-import Dropdown from '../../components/project/dropDown';
-
 import ethereumImg from '../../assets/img/eth_logo.png';
 import solanaImg from '../../assets/img/solana_logo.png';
 import tezosImg from '../../assets/img/tezos_logo.png';
@@ -21,13 +19,6 @@ export default function ApiKey({ item }: { item: projectType }, visible) {
   const handleApiKeyToggle = () => {
     setIsApiKey(!isApiKey);
   };
-  const [dropdownVisibility, setDropdownVisibility] = useState(false);
-  if (!visible) return null;
-  //did 체인 선택, 서비스 체인 선택 항목 추가
-
-  if (visible) document.body.style.overflow = 'hidden';
-  // 모달이 열릴 때 스크롤을 막습니다.
-  else document.body.style.overflow = ''; // 모달이 닫힐 때 스크롤을 다시 허용합니다.
 
   const Endpoints = [
     {
@@ -121,22 +112,4 @@ export default function ApiKey({ item }: { item: projectType }, visible) {
       </div>
     </div>
   );
-}
-
-{
-  /* <button onClick={() => setDropdownVisibility(!dropdownVisibility)}>
-{dropdownVisibility ? "Close" : "Select"}
-</button>
-<Dropdown visibility={dropdownVisibility}>
-<ul
-className={`flex flex-col gap-3 bg-white duration-300 border border-gray-100 ${
-  dropdownVisibility ? "translate-y-0 " : " -translate-y-52"
-}`}
->
-<button className="border-b-[1px] px-4 py-2">Klaytn</button>
-<li className="border-b-[1px] px-4 py-2">Tezos</li>
-<li className="border-b-[1px] px-4 py-2">item 3</li>
-<li className="px-4 py-2">item 4</li>
-</ul>
-</Dropdown> */
 }

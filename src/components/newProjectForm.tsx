@@ -5,7 +5,6 @@ import { Close } from "../assets/icons/close";
 import { projectModalState, projectState } from "../recoil/dashBoard/project";
 import Dropdown from "./project/dropDown";
 import { AiOutlineClose } from "react-icons/ai";
-import useSessionStorage from "../hooks/sesstionStorage";
 import { useInput } from "../hooks/useInput";
 import { AiOutlineUp, AiOutlineDown } from "react-icons/ai";
 export default function NewProjectForm({
@@ -35,16 +34,16 @@ export default function NewProjectForm({
 
   const chains = [
     {
-      title: "User information storage chain",
+      index: 0,
+      title: "User information storage chain (DID)",
       stateKey: "didChain",
       items: didChain,
-      index: 0,
     },
     {
-      title: "User Service Chain (DID)",
+      index: 1,
+      title: "User Service Chain ",
       stateKey: "serviceChain",
       items: serviceChain,
-      index: 1,
     },
   ];
 
@@ -67,14 +66,28 @@ export default function NewProjectForm({
   const makeProject = async () => {
     let newProject = {
       ...project,
-      projectName: projectName.value,
-      redirectURI: redirectURI.value,
+      projectName: projectName.value.projectName,
+      redirectURI: redirectURI.value.redirectURI,
       startProjectDate: new Date().getTime(),
       clientId: randomNumberInRange(100000, 999999),
     };
     setNewProjectState(newProject);
     setVisible(false);
+    resetValue();
   };
+
+  const resetValue =()=> {
+    projectName.resetValue();
+    redirectURI.resetValue();
+    setProject({
+      projectName: "",
+      startProjectDate: 0,
+      clientId: 0,
+      redirectURI: "",
+      didChain: null,
+      serviceChain: null,
+    })
+  }
 
   const renderChainLabel = (index) => {
     const icon =
@@ -199,82 +212,6 @@ export default function NewProjectForm({
             </div>
           ))}
         </div>
-        {/* <div className="relative mb-3 ">
-          <p className="mb-2 font-semibold text-gray-500 ">
-            User information storage chain 
-          </p>
-          <div>
-            <button
-              onClick={() => setDropdownVisibility([!dropdownVisibility[0],dropdownVisibility[1]])}
-              className={`p-2 bg-white shadow-sm  border border-gray-200 w-36 rounded-sm ${
-                !project.didChain && "text-gray-500"
-              }`}
-            >
-                {renderChainLabel(0)}
-            </button>
-            <Dropdown visibility={dropdownVisibility[0]}>
-              <ul
-                className={` flex flex-col gap-3 bg-white duration-300 border border-gray-100 ${ dropdownVisibility[0] ? "translate-y-0 " : " -translate-y-52"}`}
-              >
-                {didChain.map((item, index) => (
-                  <li
-                    key={index}
-                    className={`w-36 py-2 text-center ${
-                      index < didChain.length - 1 ? "border-b-[1px]" : ""
-                    }`}
-                    onClick={(index) => handleClick({item,index:0})}
-                  >
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </Dropdown>
-            {dropdownVisibility && (
-              <div
-                onClick={() => setDropdownVisibility([false,dropdownVisibility[1]])}
-                className="fixed h-full w-full left-0 top-0 z-40"
-              />
-            )}
-          </div>
-        </div>
-        <div className="relative mb-3 ">
-          <p className="mb-2 font-semibold text-gray-500 ">
-            User Service Chain (DID)
-          </p>
-          <div>
-            <button
-              onClick={() => setDropdownVisibility([dropdownVisibility[0],!dropdownVisibility[1]])}
-              className={`p-2 bg-white shadow-sm  border border-gray-200 w-36 rounded-sm ${
-                !project.didChain && "text-gray-500"
-              }`}
-            >
-                {renderChainLabel(1)}
-            </button>
-            <Dropdown visibility={dropdownVisibility[1]}>
-              <ul
-                className={` flex flex-col gap-3 bg-white duration-300 border border-gray-100 ${ dropdownVisibility[1] ? "translate-y-0 " : " -translate-y-52"}`}
-              >
-                {serviceChain.map((item, index) => (
-                  <li
-                    key={index}
-                    className={`w-36 py-2 text-center ${
-                      index < serviceChain.length - 1 ? "border-b-[1px]" : ""
-                    }`}
-                    onClick={() => handleClick({item,index:1})}
-                  >
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </Dropdown>
-            {dropdownVisibility && (
-              <div
-                onClick={() => setDropdownVisibility([dropdownVisibility[0],false])}
-                className="fixed h-full w-full left-0 top-0 z-40"
-              />
-            )}
-          </div>
-        </div> */}
       </div>
 
       <div className="flex flex-row items-center justify-between p-5 bg-white border-t border-gray-200 rounded-bl-lg rounded-br-lg">

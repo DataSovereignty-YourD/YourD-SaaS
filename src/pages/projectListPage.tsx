@@ -15,8 +15,8 @@ import ProjectListBox from "../components/project-list/projectListBox";
 
 export default function ProjectListPage() {
   const [modalOpen, setModalOpen] = useRecoilState(projectModalState);
-  const [projectInfo, setProjectInfo] = useSessionStorage('projectInfo', []);
   const isLogin = useRecoilValue(loginValue);
+  const [projectInfo, setProjectInfo] = useSessionStorage('projectInfo', []);
   const [project,setProjectState] = useRecoilState(projectState);
   const [newProjectState,setNewProjectState] = useState({});
 
