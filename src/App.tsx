@@ -1,27 +1,39 @@
 import { Route, Router, Routes } from "react-router-dom";
 import "./App.css";
-import { useRecoilValue } from "recoil";
-import { loginValue } from "./recoil/loginState";
-import MainTopbar from "./components/mainTopBar";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { loginState, loginValue } from "./recoil/loginState";
+import MainTopbar from "./pages/navigation/mainTopBar";
 import DefaultPage from "./pages/defaultPage";
 import ProjectDetailPage from "./pages/projectDetailPage";
 import ProjectListPage from "./pages/projectListPage";
-import ProjectTopBar from "./components/projectTobBar";
+import ProjectTopBar from "./pages/navigation/projectTobBar";
 import NotFoundPage from './pages/404Page';
 import Login from "./pages/login/login";
 import SignUp from "./pages/login/signUp";
+import useSessionStorage from "./hooks/sesstionStorage";
+import { useEffect } from "react";
 
 function App() {
-  const isLoggedin = useRecoilValue(loginValue);
+  const [isLoggedIn,setIsLoggedIn] = useRecoilState(loginState);
+  const [isLoggedinSession, setIsLoggedinSesstion] = useSessionStorage('isLoggedin',false);
+  useEffect(()=>{
+    setIsLoggedIn(isLoggedinSession);
+    console.log(isLoggedinSession)
+  },[]);
 
-  if (!isLoggedin) {
+  useEffect(()=>{
+    setIsLoggedinSesstion(isLoggedIn);
+  },[isLoggedIn])
+
+  if (!isLoggedIn) {
     return (
       <div>
         <MainTopbar />
         <Routes>
           <Route path="/" element={<DefaultPage />} />
-          <Route path="/signin" element={<Login />} />
+          <Route path="/signin" element={<Login/>} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path={"*"} element={<NotFoundPage />} />
         </Routes>
       </div>
     );

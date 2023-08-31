@@ -1,15 +1,19 @@
-import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
-import { projectType } from "../../recoil/dashBoard/project";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
-import {CgCopy} from "react-icons/cg";
-import Path from "../../components/project/path";
-import LocalPush from "../../components/utils/localPush";
-
-export default function ApiKey({ item }: { item: projectType }) {
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import { projectType } from '../../recoil/dashBoard/project';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { CgCopy } from 'react-icons/cg';
+import Path from '../../components/project/path';
+import LocalPush from '../../components/utils/localPush';
+import ethereumImg from '../../assets/img/eth_logo.png';
+import solanaImg from '../../assets/img/solana_logo.png';
+import tezosImg from '../../assets/img/tezos_logo.png';
+import xrpImg from '../../assets/img/xrp_logo.png';
+import klaytnImg from '../../assets/img/klaytn_logo.png'
+export default function ApiKey({ item }: { item: projectType }, visible) {
   const location = useLocation();
   const pathName = location.pathname;
-  const apikey1 = "ab090990336c0a8b0809b809";
+  const apikey1 = 'ab090990336c0a8b0809b809';
   const [isApiKey, setIsApiKey] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
   const handleApiKeyToggle = () => {
@@ -18,17 +22,26 @@ export default function ApiKey({ item }: { item: projectType }) {
 
   const Endpoints = [
     {
-      chain: "Ethereum",
-      endpointUri: "https://ethereum.org",
+      chain: 'Ethereum',
+      endpointUri: 'https://ethereum.org',
+      image: ethereumImg,
     },
     {
-      chain: "Klaytn",
-      endpointUri: "https://klaytn.foundation",
+      chain: 'Klaytn',
+      endpointUri: 'https://klaytn.foundation',
+      image: klaytnImg,
     },
     {
-      chain: "Tezos",
-      endpointUri: "https://tezos.com",
+      chain: 'Tezos',
+      endpointUri: 'EXAMPLE',
+      image: tezosImg,
     },
+    {
+      chain: 'Solana',
+      endpointUri: 'https://api.mainnet-beta.solana.com',
+      image: solanaImg,
+    },
+    { chain: 'XRP', endpointUri: 'EXAMPLE', image: xrpImg },
   ];
 
   const CopyButton = (data) => (
@@ -42,14 +55,16 @@ export default function ApiKey({ item }: { item: projectType }) {
         }, 4000);
       }}
     >
-      <CgCopy size={24} color={'gray'}/>
+      <CgCopy size={24} color={'gray'} />
     </button>
   );
 
   return (
     <div id="ApiKey" className="min-h-[calc(100vh-4rem)] ">
       <Path pathname={pathName} />
-      {showNotification && <LocalPush message="Successfully Copied!" type="success"/>}
+      {showNotification && (
+        <LocalPush message="Successfully Copied!" type="success" />
+      )}
       <h1 className="font-bold text-black mb-2 uppercase text-2xl">ApiKey</h1>
       <div className="flex flex-col bg-white drop-shadow-md rounded-sm p-4 text-black my-3 items-center gap-4">
         <div className="flex w-full items-center">
@@ -62,7 +77,7 @@ export default function ApiKey({ item }: { item: projectType }) {
         <div className="flex w-full items-center">
           <div className="font-medium w-32 whitespace-nowrap">API KEY</div>
           <input
-            type={isApiKey ? "text" : "password"}
+            type={isApiKey ? 'text' : 'password'}
             value={apikey1}
             disabled
             className="w-full py-2 px-4 ml-2 border rounded-sm justify-center bg-black/5 focus:outline-0"
@@ -71,18 +86,21 @@ export default function ApiKey({ item }: { item: projectType }) {
             type="button"
             onClick={handleApiKeyToggle}
             className="absolute right-[75px] "
-            style={{ width: "24px", height: "24px" }}
+            style={{ width: '24px', height: '24px' }}
           >
             {isApiKey ? <FaEyeSlash /> : <FaEye />}
           </button>
           {CopyButton(apikey1)}
         </div>
       </div>
-      <h1 className="font-bold text-black mb-2 uppercase text-2xl mt-3">Endpoints</h1>
+      <h1 className="font-bold text-black mb-2 uppercase text-2xl mt-3">
+        Endpoints
+      </h1>
       <div className="relative w-full p-4 rounded-sm drop-shadow-md  bg-white text-black my-2 ">
         {Endpoints.map((type, index) => {
           return (
             <div key={index} className="flex items-center mt-2">
+              <img src={type.image} className="w-8 h-8 mr-2" />
               <div className="font-medium text-lg w-32 mr-2">{type.chain}</div>
               <div className=" w-full py-2 px-4 border rounded-sm justify-center bg-black/5">
                 {type.endpointUri}

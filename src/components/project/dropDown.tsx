@@ -17,9 +17,10 @@ function Dropdown(props) {
     }, [props.visibility]);
 
     return (
-        <article className={`absolute p-1 overflow-hidden `}>
+        <article className={`absolute z-50 w-fit overflow-hidden `}>
             { visibilityAnimation && props.children }
         </article>
+        //children이 div값
     )
 };
 

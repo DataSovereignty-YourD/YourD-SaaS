@@ -1,6 +1,6 @@
 
 import { useRecoilState, useRecoilValue } from "recoil";
-import NewProject from "../components/newProjectModal";
+import NewProjectForm from "../components/newProjectForm";
 import {
   projectModalState,
   projectState,
@@ -10,13 +10,13 @@ import { useEffect, useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import { BsLayoutTextWindowReverse } from "react-icons/bs";
 import { AiOutlineLock } from "react-icons/ai";
-import useSessionStorage from "../function/sesstionStorage";
+import useSessionStorage from "../hooks/sesstionStorage";
 import ProjectListBox from "../components/project-list/projectListBox";
 
 export default function ProjectListPage() {
   const [modalOpen, setModalOpen] = useRecoilState(projectModalState);
-  const [projectInfo, setProjectInfo] = useSessionStorage('projectInfo', []);
   const isLogin = useRecoilValue(loginValue);
+  const [projectInfo, setProjectInfo] = useSessionStorage('projectInfo', []);
   const [project,setProjectState] = useRecoilState(projectState);
   const [newProjectState,setNewProjectState] = useState({});
 
@@ -69,7 +69,7 @@ export default function ProjectListPage() {
   return (
     <div className="w-full pt-12 min-h-screen h-fit px-20">
       <div className="mb-10">
-        <NewProject visible={modalOpen} setVisible={setModalOpen} setNewProjectState={setNewProjectState}/>
+        <NewProjectForm visible={modalOpen} setVisible={setModalOpen} setNewProjectState={setNewProjectState}/>
       </div>
       <section title="main" className="container w-full mx-auto ">
         {projectInfo[0] && isLogin ? (
