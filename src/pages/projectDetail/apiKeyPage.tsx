@@ -21,13 +21,6 @@ export default function ApiKey({ item }: { item: projectType }, visible) {
   const handleApiKeyToggle = () => {
     setIsApiKey(!isApiKey);
   };
-  const [dropdownVisibility, setDropdownVisibility] = useState(false);
-  if (!visible) return null;
-  //did 체인 선택, 서비스 체인 선택 항목 추가
-
-  if (visible) document.body.style.overflow = 'hidden';
-  // 모달이 열릴 때 스크롤을 막습니다.
-  else document.body.style.overflow = ''; // 모달이 닫힐 때 스크롤을 다시 허용합니다.
 
   const Endpoints = [
     {
@@ -74,17 +67,17 @@ export default function ApiKey({ item }: { item: projectType }, visible) {
       {showNotification && (
         <LocalPush message="Successfully Copied!" type="success" />
       )}
-      <h1 className="font-bold text-black mb-2 uppercase text-2xl">ApiKey</h1>
+      <h1 className="font-bold text-black my-5 uppercase text-xl ">ApiKey</h1>
       <div className="flex flex-col bg-white drop-shadow-md rounded-sm p-4 text-black my-3 items-center gap-4">
         <div className="flex w-full items-center">
-          <div className="font-medium w-32 whitespace-nowrap ">Client ID </div>
-          <div className="w-full py-2 px-4 ml-2 border rounded-sm bg-black/5">
+          <div className="font-medium w-40 whitespace-nowrap text-sm sm:text-lg px-4 ml-2">Client ID </div>
+          <div className="w-full py-2 px-4 ml-2 border rounded-sm text-sm sm:text-lg bg-black/5">
             {item.clientId}
           </div>
           {CopyButton(item.clientId)}
         </div>
         <div className="flex w-full items-center">
-          <div className="font-lg text-xl w-32 whitespace-nowrap sm:text-lg">
+          <div className="font-medium text-sm w-40 whitespace-nowrap sm:text-lg px-4 ml-2">
             API KEY
           </div>
           <input
@@ -104,44 +97,29 @@ export default function ApiKey({ item }: { item: projectType }, visible) {
           {CopyButton(apikey1)}
         </div>
       </div>
-      <h1 className="font-bold text-black mb-2 uppercase text-xl mt-3">
+      <h1 className="font-bold text-black my-5 uppercase text-xl ">
         Endpoints
       </h1>
       <div className="relative w-full p-4 rounded-sm drop-shadow-md  bg-white text-black my-2 grid grid-cols-1 md:grid-cols-1 xl:grid-cols-1 gap-4 ">
         {Endpoints.map((type, index) => {
           return (
-            <div key={index} className="flex items-center mt-2">
-              <img src={type.image} className="w-8 h-8 mr-2" />
-              <div className="font-medium text-lg w-32 mr-2 sm:text-sm overflow-hidden">
-                {type.chain}
+            <div key={index} className="flex flex-col md:flex-row md:items-center mt-2">
+              <div className='flex mb-3 items-center'>
+                <img src={type.image} className="w-8 h-8 mr-2" />
+                <div className="font-medium text-sm w-32 mr-2 sm:text-lg ">
+                  {type.chain}
+                </div>
               </div>
-              <div className="w-full py-2 px-4 border rounded-sm justify-center bg-black/5 flex items-center sm:flex-col max-h-[50px] overflow-auto">
-                {type.endpointUri}
+              <div className='flex w-full'>
+                <div className="w-full py-2 px-4 border rounded-sm md:justify-start  bg-black/5 flex sm:flex-col max-h-[50px] overflow-auto">
+                  {type.endpointUri}
+                </div>
+                {CopyButton(type.endpointUri)}
               </div>
-
-              {CopyButton(type.endpointUri)}
             </div>
           );
         })}
       </div>
     </div>
   );
-}
-
-{
-  /* <button onClick={() => setDropdownVisibility(!dropdownVisibility)}>
-{dropdownVisibility ? "Close" : "Select"}
-</button>
-<Dropdown visibility={dropdownVisibility}>
-<ul
-className={`flex flex-col gap-3 bg-white duration-300 border border-gray-100 ${
-  dropdownVisibility ? "translate-y-0 " : " -translate-y-52"
-}`}
->
-<button className="border-b-[1px] px-4 py-2">Klaytn</button>
-<li className="border-b-[1px] px-4 py-2">Tezos</li>
-<li className="border-b-[1px] px-4 py-2">item 3</li>
-<li className="px-4 py-2">item 4</li>
-</ul>
-</Dropdown> */
 }

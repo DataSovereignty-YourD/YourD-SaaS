@@ -14,7 +14,7 @@ import NotFoundPage from "./404Page";
 import { useEffect, useState } from "react";
 
 export default function ProjectDetailPage() {
-  const [projectInfo, setProjectInfo] = useSessionStorage("projectInfo", {});
+  const [projectInfo, setProjectInfo] = useSessionStorage("projectInfo", []);
   const [showNotFound, setShowNotFound] = useState(false);
   const [projectIndex, setProjectIndex] = useState(0);
   const { id } = useParams();

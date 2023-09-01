@@ -1,19 +1,18 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useRecoilState } from "recoil";
-import { loginState } from "../recoil/loginState";
-import Login from "./login/login";
+import useSessionStorage from "../hooks/sesstionStorage";
 
 export default function DefaultPage() {
   const navigate = useNavigate();
-  const [isLogin, setIsLogin] = useRecoilState(loginState);
-  useEffect(() => {
-    if (isLogin) navigate("/project");
-  }, []);
+  const [isLoggedinSession, setIsLoggedinSesstion] = useSessionStorage('isLoggedin',false);
+
+  useEffect(()=> {
+    isLoggedinSession ? navigate("/project") : navigate("/signin")
+  },[])
+  
   
   return (
       <div>
-        {!isLogin&&<Login />}
       </div>
   );
 }

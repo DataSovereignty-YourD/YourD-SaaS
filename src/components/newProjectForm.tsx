@@ -20,8 +20,8 @@ export default function NewProjectForm({
     startProjectDate: 0,
     clientId: 0,
     redirectURI: "",
-    didChain: null,
-    serviceChain: null,
+    didChain: 'None',
+    serviceChain: 'None',
   });
   if (!visible) return null;
 

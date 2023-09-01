@@ -20,12 +20,16 @@ export default function ProjectListPage() {
   const [project,setProjectState] = useRecoilState(projectState);
   const [newProjectState,setNewProjectState] = useState({});
   document.body.style.overflow = "auto";
+
+  //
   useEffect(() => {
     if(!modalOpen) {
       addProject();
       // window.sessionStorage.clear();
     }
-  }, [project]);
+  }, [newProjectState]);
+
+  console.log(projectInfo);
 
   const addProject=()=> {
     if(Object.keys(newProjectState).length !== 0) {
@@ -34,6 +38,7 @@ export default function ProjectListPage() {
         ...projectInfo,
         newProjectState
       ];
+      console.log(newProjectState);
       setProjectInfo(newProject);
       setProjectState(newProject);
     }
@@ -72,7 +77,7 @@ export default function ProjectListPage() {
         <NewProjectForm visible={modalOpen} setVisible={setModalOpen} setNewProjectState={setNewProjectState}/>
       </div>
       <section title="main" className="w-full ">
-        {projectInfo[0] && isLogin ? (
+        {projectInfo.length !==0 && isLogin ? (
           <div className="flex flex-col items-center w-full px-8 md:px-40 xl:px-96 duration-300">
             <div className="flex justify-between w-full  mb-5">
               <div className="flex items-start text-xl md:text-2xl font-bold text-gray-600 ">

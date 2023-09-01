@@ -3,7 +3,7 @@ import { useRecoilState } from "recoil";
 import useSessionStorage from "../../hooks/sesstionStorage";
 import { currentProjectState } from "../../recoil/dashBoard/project";
 export default function ProjectListBox({ project }) {
-  const [selectProject, setSelectProject] = useSessionStorage('currentProjectInfo',{});
+  const [selectProject, setSelectProject] = useSessionStorage('currentProjectInfo',[]);
 
   function randomNumberInRange(min: number, max: number) {
     // 👇️ get number between min (inclusive) and max (inclusive)
