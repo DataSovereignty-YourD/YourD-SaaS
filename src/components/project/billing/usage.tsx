@@ -129,7 +129,7 @@ export default function Usage() {
           type="button"
           onClick={toggleDropdownB}
         >
-          All methods
+          Methods
           <MdOutlineKeyboardArrowDown />
         </button>
 
@@ -159,7 +159,7 @@ export default function Usage() {
   return (
     <div className=" ">
       <div className="font-bold text-black"></div>
-      <div className=" grid grid-cols-1 md:grid-cols-2  bg-white rounded-lg  gap-16">
+      <div className=" grid grid-cols-1 md:grid-cols-2  bg-white rounded-lg  sm:gap-16">
         <div className=" font-bold text-black p-5 ">
           <div className="mx-3">Network Request Volumes</div>
           <div className="flex justify-between">
@@ -170,12 +170,12 @@ export default function Usage() {
               <div className="text-lg">73</div>
             </div>
             <div>
-              <div className="max-w-lg mx-auto">
+              <div className="max-w-lg mx-auto my-6">
                 <DropDownA />
               </div>
             </div>
           </div>
-          <div className="  h-5/6 overflow-visible pr-6">
+          <div className="  h-2/3 overflow-visible pr-6">
             {MyResponsiveBarCanvas({ data: incomeData })}
           </div>
         </div>
@@ -183,20 +183,20 @@ export default function Usage() {
           <div className="mx-3">Method Request Volumes</div>
           <div className="flex justify-between">
             <div className="flex-col p-4">
-              <div className=" font-bold   text-gray-500 border-b-2  uppercase">
+              <div className=" font-bold     text-gray-500 border-b-2  uppercase">
                 last 7 days total
               </div>
               <div className="text-lg">73</div>
             </div>
             <div>
-              <div className="max-w-lg mx-auto">
-                <div>
+              <div className="max-w-lg mx-auto my-6">
+                <div className="">
                   <DropDownB />
                 </div>
               </div>
             </div>
           </div>
-          <div className="  h-5/6 overflow-visible pr-6">
+          <div className="  h-2/3 overflow-visible pr-6">
             {MyResponsiveBarCanvas({ data: incomeData })}
           </div>
         </div>
@@ -205,12 +205,12 @@ export default function Usage() {
         id="requests activity"
         className="min-h-[calc(100vh-4rem)] max-h-full pb-10 "
       >
-        <h1 className="font-bold text-black mb-6 uppercase text-2xl my-12">
+        <h1 className="font-bold text-black  mx-2 uppercase text-2xl mt-4 my-2">
           Requests Activity
         </h1>
 
-        <div className="bg-white mt-3 rounded-md drop-shadow-md">
-          <div className="bg-white uppercase  drop-shadow-md text-black grid grid-cols-5 items-center justify-between px-2 py-3">
+        <div className="bg-white   rounded-md drop-shadow-md">
+          <div className="bg-white uppercase  drop-shadow-md text-black grid grid-cols-5 text-xs truncate items-center justify-between px-2 py-3">
             {columns.map((column, index) => {
               const isDID = column.key === "did";
               return (
@@ -218,7 +218,7 @@ export default function Usage() {
                   key={`${column.key} + ${index}`}
                   className={`${
                     isDID ? "col-span-2" : "col-span-1"
-                  } mx-2 hover:group relative cursor-pointer`}
+                  } mx-2 hover:group relative truncate bg-gray-200 text-center rounded-sm cursor-pointer`}
                   onClick={() => handleSort(column.key)}
                 >
                   {column.label}
@@ -236,17 +236,23 @@ export default function Usage() {
           {sortedUsers.map((user, index) => (
             <div
               key={`${user.method} + ${index}`}
-              className=" grid grid-cols-5 text-black  items-center justify-between border-b p-2"
+              className="grid grid-cols-5 text-black items-center justify-between border-b p-2"
             >
-              <span className=" col-span-1  mx-2 my-4 flex items-center">
+              <span className="truncate col-span-1 mx-2 my-4 flex items-center sm:items-center sm:justify-center sm:flex">
                 {user.method}
               </span>
-              <span className=" col-span-1 mx-2">{user.network}</span>
-              <span className=" col-span-1 mx-2">{user.requests_volume}</span>
-              <span className=" col-span-1 mx-2">
+              <span className="truncate col-span-1 mx-2 sm:items-center sm:justify-center sm:flex">
+                {user.network}
+              </span>
+              <span className="truncate col-span-1 mx-2 items-center justify-center flex">
+                {user.requests_volume}
+              </span>
+              <span className="truncate col-span-1 mx-2 sm:items-center sm:justify-center sm:flex ">
                 {user.successful_requests}
               </span>
-              <span className=" col-span-1 mx-2">{user.failed_requests}</span>
+              <span className="truncate col-span-1 mx-2 sm:items-center sm:justify-center sm:flex">
+                {user.failed_requests}
+              </span>
             </div>
           ))}
         </div>
