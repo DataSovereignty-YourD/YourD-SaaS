@@ -64,7 +64,7 @@ export default function ApiKey({ item }: { item: projectType }, visible) {
   const [selectedItemIndex, setSelectedItemIndex] = useState(-1);
   const CopyButton = (data) => (
     <button
-      className="w-fit h-10 px-2 py-2 ml-3 border bg-white  hover:bg-gray-100 text-gray-800 font-semibold border-gray-400 rounded-sm shadow"
+      className="flex items-center justify-center w-10 h-10 px-2 py-2 sm:ml-3 border bg-white hover:bg-gray-100 text-gray-800 font-semibold border-gray-400 rounded-sm shadow"
       onClick={() => {
         navigator.clipboard.writeText(String(data));
         setShowNotification(true);
@@ -73,7 +73,8 @@ export default function ApiKey({ item }: { item: projectType }, visible) {
         }, 4000);
       }}
     >
-      <CgCopy size={24} color={'gray'} />
+      <CgCopy size={20} className="sm:hidden" color={'gray'} />
+      <CgCopy size={16} className="hidden sm:inline-block" color={'gray'} />
     </button>
   );
 
@@ -107,7 +108,7 @@ export default function ApiKey({ item }: { item: projectType }, visible) {
           <button
             type="button"
             onClick={handleApiKeyToggle}
-            className="absolute right-[75px] "
+            className="absolute right-[50px] "
             style={{ width: '24px', height: '24px' }}
           >
             {isApiKey ? <FaEyeSlash /> : <FaEye />}
@@ -119,22 +120,30 @@ export default function ApiKey({ item }: { item: projectType }, visible) {
         Endpoints
       </h1>
 
-      <div className="relative w-full p-4 rounded-sm drop-shadow-md bg-white text-black my-2 grid grid-cols-1 md:grid-cols-1 xl:grid-cols-1 gap-4">
+      <div className="relative w-full p-4 rounded-sm drop-shadow-md bg-white text-black my-2 grid grid-cols-1 md:grid-cols-1 xl:grid-cols-1 gap-4 ">
         {Endpoints.map((type, index) => {
           return (
             <div
               key={index}
-              className="flex flex-col md:flex-row md:items-center mt-2 relative"
+              className="flex flex-col md:flex-row md:items-start mt-2 relative h-full"
             >
               <div className="flex mb-3 items-center">
                 <img src={type.image} className="w-8 h-8 mr-2" />
                 <div className="font-medium text-sm w-32 mr-2 sm:text-lg">
                   {type.chain}
                 </div>
+                {type.chain === 'Tezos' && (
+                  <button
+                    onClick={() => setDropdownVisible(!dropdownVisible)}
+                    className="sm:hidden flex bg-blue-white text-slate-400 font-bold border border-slate-300 h-10 items-center w-28 justify-between"
+                  >
+                    {selectedUri.name}
+                  </button>
+                )}
               </div>
-              <div className="flex flex-col w-full ml-40">
+              <div className="flex flex-col w-full sm:ml-40 justify-start">
                 {Array.isArray(type.endpointUri) && (
-                  <div className="flex flex-col relative -left-32">
+                  <div className="hidden sm:flex flex-col relative -left-32">
                     <button
                       onClick={() => setDropdownVisible(!dropdownVisible)}
                       className="flex bg-blue-white text-slate-400 font-bold absolute left-0 border border-slate-300 h-10 items-center w-28 justify-between"
@@ -146,7 +155,7 @@ export default function ApiKey({ item }: { item: projectType }, visible) {
                         visibility={dropdownVisible}
                         style={{ top: '50px' }}
                       >
-                        <div className="flex flex-col bg-white  w-40">
+                        <div className="flex flex-col bg-white w-40">
                           {type.endpointUri.map((item, uriIndex) => (
                             <div
                               key={uriIndex}
@@ -172,17 +181,21 @@ export default function ApiKey({ item }: { item: projectType }, visible) {
                     </div>
                   </div>
                 )}
-                <div className="w-full py-2 px-4 border rounded-sm md:justify-start bg-black/5 flex sm:flex-col max-h-[50px] overflow-auto">
+                <div className="w-full py-2 px-4 border rounded-sm  bg-black/5 flex sm:flex-col max-h-[50px] overflow-auto ">
                   {Array.isArray(type.endpointUri) ? (
-                    <div className="flex justify-between">
+                    <div className="flex justify-between items-center h-full">
                       <div>{selectedUri.uri}</div>
                     </div>
                   ) : (
-                    type.endpointUri
+                    <div className="h-full flex items-center">
+                      {type.endpointUri}
+                    </div>
                   )}
                 </div>
               </div>
-              {CopyButton(type.endpointUri)}
+              <div className="flex items-center">
+                {CopyButton(type.endpointUri)}
+              </div>
             </div>
           );
         })}
@@ -190,37 +203,3 @@ export default function ApiKey({ item }: { item: projectType }, visible) {
     </div>
   );
 }
-// Dropdown visibility={dropdownVisibility[chain.index]}>
-//                   <ul
-//                     className={`flex flex-col gap-3 bg-white duration-300 border border-gray-100 ${
-//                       dropdownVisibility[chain.index]
-//                         ? "translate-y-0 " : " -translate-y-52"
-//                     }`}
-//                   >
-//                     {chain.items.map((item, index) => (
-//                       <button
-//                         key={index}
-//                         className={`w-36 py-2 text-center hover:bg-gray-100${
-//                           index < chain.items.length - 1 ? "border-b-[1px] hover:bg-gray-100" : ""
-//                         }`}
-//                         onClick={() =>
-//                           handleClick({
-//                             item,
-//                             index: chain.index,
-//                             stateKey: chain.stateKey,
-//                           })
-//                         }
-//                       >
-//                         {item}
-//                       </button>
-//                     ))}
-//                   </ul>
-//                 </Dropdown>
-// useEffect(() => {
-//   const selectedDateInfo = dates.find(
-//     (dateInfo) => dateInfo.list === selectedDate
-//   );
-//   if (selectedDateInfo) {
-//     setSelectedDateInfo(selectedDateInfo);
-//   }
-// }, [selectedDate]);
