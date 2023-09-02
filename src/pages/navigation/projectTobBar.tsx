@@ -53,7 +53,6 @@ export default function ProjectTopBar() {
     setProfileToggle(false);
   };
 
-
   window.addEventListener("resize", () => {
     // 현재 화면 너비
     const width = window.innerWidth;
@@ -81,10 +80,10 @@ export default function ProjectTopBar() {
       <img
         src={YourdLogo}
         onClick={() => navigation("/")}
-        className="absolute ml-8 md:ml-16 h-[48px] object-contain "
+        className="absolute ml-12 md:ml-16 h-[48px] object-contain "
       />
       {/* search icon */}
-      <div className="flex justify-between w-full mx-10">
+      <div className="flex justify-between w-full mx-5 md:mx-10">
         <div className="flex items-center">
           {pathName !== "/project" && (
             <div className="md:flex items-center ml-20 w-fit duration-500 origin-left">
@@ -110,7 +109,7 @@ export default function ProjectTopBar() {
           )}
         </div>
         {/* notification icon */}
-        <div className="flex items-center gap-0 md:gap-3">
+        <div className="flex items-center gap-1 md:gap-3">
           <div>
             <div
               onClick={toggleDropdown}
@@ -138,14 +137,14 @@ export default function ProjectTopBar() {
           {/* morning/night mode */}
           <MdOutlineModeNight size={28} className="hidden md:flex" />
           {/* user image */}
-          <div className="">
+          <div className="hidden md:flex ">
             <div
               onClick={profileDropdown}
               className=" flex items-center justify-center rounded-md  dropdown  focus:outline-none focus:ring"
               // type="button"
             >
               <span className="inline-flex items-center hover:bg-gray-100 justify-center px-2.5 py-0.5 rounded-full text-xs font-medium">
-                <PiUserCircle size={28} className=" hidden md:flex " />
+                <PiUserCircle size={28} className=" " />
               </span>
             </div>
             <ProfileModal
@@ -170,7 +169,7 @@ export default function ProjectTopBar() {
 
           {/* shrink icon */}
           <button
-            className=" md:hidden rounded-md bg-gray-200 hover:bg-gray-300 focus:outline-none focus:ring"
+            className=" md:hidden rounded-md drop-shadow-md  duration-300"
             onClick={() => setMenuToggle(!menuToggle)}
           >
             {!menuToggle ? (

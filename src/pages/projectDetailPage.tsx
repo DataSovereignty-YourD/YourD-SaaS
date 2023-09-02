@@ -20,17 +20,10 @@ export default function ProjectDetailPage() {
   const { id } = useParams();
   
   useEffect(() => {
-    let found = false;
-    projectInfo.map((project, index) => {
-      if (String(id) === String(project.clientId)) {
-        found = true;
-        setProjectIndex(index);
-      }
-    });
+    const findIndex = projectInfo.findIndex(project => project.clientId === Number(id));
+    if(findIndex>=0) setProjectIndex(findIndex);
+    else setShowNotFound(true);
     
-    if (!found) {
-      setShowNotFound(true);
-    }
   }, []);
 
   if (showNotFound) {

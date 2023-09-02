@@ -87,6 +87,7 @@ export default function ProjectListPage() {
             </div >
             <div className="flex flex-col gap-4 w-full">
               {projectInfo.map((item) => {
+                if(item === null) return;
                 return (
                   <div key={item.clientId} className="min-w-[300px]">
                     <ProjectListBox project={item}/>

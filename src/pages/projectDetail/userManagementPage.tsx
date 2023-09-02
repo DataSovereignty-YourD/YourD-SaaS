@@ -112,44 +112,46 @@ function UserManagement({ item }: { item: projectType }) {
       <h1 className="font-bold text-black mb-2 uppercase text-2xl">
         User Management
       </h1>
-      <div className="w-full flex justify-center sm:block ">
-        <div className="bg-white mt-3 rounded-md drop-shadow-md max-w-xs sm:max-w-md md:max-w-full overflow-hidden ">
-          <div className="w-full overflow-x-scroll">
-            <div className="bg-white drop-shadow-md text-black grid grid-cols-6 w-max sm:w-full items-center justify-between px-2 py-3 text-[0.9rem] sm:text-[0.9rem] md:text-[1.1rem]">
+      <div className="w-full flex justify-center sm:inline-block ">
+        <div className="bg-white mt-3 rounded-md drop-shadow-md w-[calc(100vw - 80px)]">
+          <div className="overflow-x-scroll w-full ">
+            <div className="bg-white drop-shadow-md flex text-black w-fit items-center justify-between px-2 py-3 text-[0.9rem] sm:text-[0.9rem] md:text-[1.1rem]">
               {columns.map((column) => {
                 const isDID = column.key === "did";
                 return (
-                  <span
+                  <div
                     key={column.key}
                     className={`${
-                      isDID ? "col-span-3 mx-4" : "col-span-1 mx-4"
-                    }  sm:mx-2 hover:group relative cursor-pointer w-[100%] `}
+                      isDID ? "min-w-[200px]" : " min-w-[100px]"
+                    } mr-4 md:mr-2 hover:group flex relative cursor-pointer w-[100%] border justify-between`}
                     onClick={() => handleSort(column.key)}
                   >
-                    {column.label}
-                    <button className="absolute top-1/2 transform -translate-y-1/2">
+                    <span>
+                      {column.label}
+                    </span>
+                    <button className=" ">
                       {sortColumn === column.key && sortDirection === "asc" ? (
                         <AiOutlineArrowUp />
                       ) : (
                         <AiOutlineArrowDown />
                       )}
                     </button>
-                  </span>
+                  </div>
                 );
               })}
             </div>
               {sortedUsers.map((user) => (
                 <div
                   key={user.id}
-                  className="grid grid-cols-6 text-black items-center w-max sm:w-full justify-between border-b p-2  text-[0.9rem] sm:text-[0.9rem] md:text-[1.1rem]"
+                  className=" text-black items-center py-3 min-w-fit whitespace-nowrap justify-between border-b px-2 text-[0.9rem] sm:text-[0.9rem] md:text-[1.1rem]"
                 >
-                  <span className="col-span-1 mx-2 flex items-center">
-                    <BiSolidUserCircle className="mr-2 flex w-4 h-4 sm:w-6 sm:h-6" />
+                  <span className="min-w-[100px] mx-2 flex items-center text-sm ">
+                    <BiSolidUserCircle className="mr-2 w-4 h-4 sm:w-6 sm:h-6 object-contain"/>
                     {user.name}
                   </span>
-                  <span className="col-span-3 w-fit mx-2">{user.did}</span>
-                  <span className="col-span-1 w-fit mx-6">{user.status}</span>
-                  <span className="col-span-1 w-fit whitespace-nowrap mx-2">
+                  <span className="min-w-[200px] whitespace-nowrap  w-fit text-clip mx-2  text-sm">{user.did}</span>
+                  <span className="min-w-[100px] whitespace-nowrap  w-fit mx-2 text-sm ">{user.status}</span>
+                  <span className="min-w-[100px] whitespace-nowrap w-fit mx-2 text-sm">
                     {user.lastLogin}
                   </span>
                 </div>

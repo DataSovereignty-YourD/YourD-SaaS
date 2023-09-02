@@ -13,13 +13,13 @@ export default function NewProjectForm({
   setNewProjectState,
 }) {
   const projectName = useInput("", "projectName");
-  const redirectURI = useInput("", "redirectURI");
+  const redirectUri = useInput("", "redirectUri");
   const [dropdownVisibility, setDropdownVisibility] = useState([false, false]);
   const [project, setProject] = useState({
     projectName: "",
     startProjectDate: 0,
     clientId: 0,
-    redirectURI: "",
+    redirectUri: "",
     didChain: 'None',
     serviceChain: 'None',
   });
@@ -68,7 +68,7 @@ export default function NewProjectForm({
     let newProject = {
       ...project,
       projectName: projectName.value.projectName,
-      redirectURI: redirectURI.value.redirectURI,
+      redirectUri: redirectUri.value.redirectURI,
       startProjectDate: new Date().getTime(),
       clientId: randomNumberInRange(100000, 999999),
     };
@@ -79,12 +79,12 @@ export default function NewProjectForm({
 
   const resetValue =()=> {
     projectName.resetValue();
-    redirectURI.resetValue();
+    redirectUri.resetValue();
     setProject({
       projectName: "",
       startProjectDate: 0,
       clientId: 0,
-      redirectURI: "",
+      redirectUri: "",
       didChain: null,
       serviceChain: null,
     })
@@ -140,13 +140,13 @@ export default function NewProjectForm({
               type="text"
               placeholder="Enter Redirect URL"
               id="Server Url"
-              defaultValue={redirectURI.value.redirectURI}
-              onChange={(e) => redirectURI.onChange(e)}
+              defaultValue={redirectUri.value.redirectUri}
+              onChange={(e) => redirectUri.onChange(e)}
               className="p-5 bg-white border border-gray-200 rounded w-full shadow-sm h-12"
             />
             <button
               className="absolute right-8 "
-              onClick={() => redirectURI.resetValue()}
+              onClick={() => redirectUri.resetValue()}
             >
               <AiOutlineClose size={26} />
             </button>

@@ -5,7 +5,7 @@ export interface projectType {
     startProjectDate: number,
     QR?:any,
     clientId:number,
-    redirectURLs:any,
+    redirectUri:any,
     didChain: string,
     serviceChain: string,
 }
@@ -34,7 +34,7 @@ export const currentProjectState = atom<projectType>({
         projectName: '',
         startProjectDate:0,
         clientId:0,
-        redirectURLs:[],
+        redirectUri:[],
         didChain:'',
         serviceChain:'',
     }
