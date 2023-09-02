@@ -112,52 +112,51 @@ function UserManagement({ item }: { item: projectType }) {
       <h1 className="font-bold text-black mb-2 uppercase text-2xl">
         User Management
       </h1>
-      <div className="w-full flex justify-center sm:inline-block ">
-        <div className="bg-white mt-3 rounded-md drop-shadow-md w-[calc(100vw - 80px)]">
-          <div className="overflow-x-scroll w-full ">
-            <div className="bg-white drop-shadow-md flex text-black w-fit items-center justify-between px-2 py-3 text-[0.9rem] sm:text-[0.9rem] md:text-[1.1rem]">
-              {columns.map((column) => {
-                const isDID = column.key === "did";
-                return (
-                  <div
-                    key={column.key}
-                    className={`${
-                      isDID ? "min-w-[200px]" : " min-w-[100px]"
-                    } mr-4 md:mr-2 hover:group flex relative cursor-pointer w-[100%] border justify-between`}
-                    onClick={() => handleSort(column.key)}
-                  >
-                    <span>
-                      {column.label}
-                    </span>
-                    <button className=" ">
-                      {sortColumn === column.key && sortDirection === "asc" ? (
-                        <AiOutlineArrowUp />
-                      ) : (
-                        <AiOutlineArrowDown />
-                      )}
-                    </button>
-                  </div>
-                );
-              })}
-            </div>
-              {sortedUsers.map((user) => (
+      <div className="flex justify-center sm:block w-[calc(100vw-50px)] sm:w-[calc(100vw-100px)] md:w-full">
+        <div className="bg-white mt-3 rounded-md drop-shadow-md overflow-x-scroll w-full">
+          <div className="bg-white drop-shadow-md flex text-black w-fit md:w-full items-center py-3 pl-4 text-[0.9rem] sm:text-[0.9rem] md:text-[1rem]">
+            {columns.map((column) => {
+              const isDID = column.key === "did";
+              return (
                 <div
-                  key={user.id}
-                  className=" text-black items-center py-3 min-w-fit whitespace-nowrap justify-between border-b px-2 text-[0.9rem] sm:text-[0.9rem] md:text-[1.1rem]"
+                  key={column.key}
+                  className={`${
+                    isDID ? "min-w-[240px]" : " min-w-[100px]"
+                  } hover:group w-full mr-2 flex relative cursor-pointer justify-between`}
+                  onClick={() => handleSort(column.key)}
                 >
-                  <span className="min-w-[100px] mx-2 flex items-center text-sm ">
-                    <BiSolidUserCircle className="mr-2 w-4 h-4 sm:w-6 sm:h-6 object-contain"/>
-                    {user.name}
-                  </span>
-                  <span className="min-w-[200px] whitespace-nowrap  w-fit text-clip mx-2  text-sm">{user.did}</span>
-                  <span className="min-w-[100px] whitespace-nowrap  w-fit mx-2 text-sm ">{user.status}</span>
-                  <span className="min-w-[100px] whitespace-nowrap w-fit mx-2 text-sm">
-                    {user.lastLogin}
-                  </span>
+                  <span>{column.label}</span>
+                  <button className=" ">
+                    {sortColumn === column.key && sortDirection === "asc" ? (
+                      <AiOutlineArrowUp />
+                    ) : (
+                      <AiOutlineArrowDown />
+                    )}
+                  </button>
                 </div>
-              ))}
-            </div>
+              );
+            })}
           </div>
+          {sortedUsers.map((user) => (
+            <div
+              key={user.id}
+              className=" flex text-black items-center pl-4 py-3 whitespace-nowrap border-b  text-[0.9rem] sm:text-[0.9rem] md:text-[1.1rem]"
+            >
+              <span className="min-w-[100px] mr-2 flex w-full items-center text-sm whitespace-nowrap">
+                {user.name}
+              </span>
+              <span className="min-w-[240px] mr-2 whitespace-nowrap  w-full  text-sm">
+                {user.did}
+              </span>
+              <span className="min-w-[100px] mr-2 whitespace-nowrap  w-full  text-sm ">
+                {user.status}
+              </span>
+              <span className="min-w-[100px] mr-2 whitespace-nowrap w-full  text-sm">
+                {user.lastLogin}
+              </span>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
