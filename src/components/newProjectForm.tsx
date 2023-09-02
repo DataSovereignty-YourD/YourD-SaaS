@@ -179,10 +179,10 @@ export default function NewProjectForm({
                     }`}
                   >
                     {chain.items.map((item, index) => (
-                      <li
+                      <button
                         key={index}
-                        className={`w-36 py-2 text-center ${
-                          index < chain.items.length - 1 ? "border-b-[1px]" : ""
+                        className={`w-36 py-2 text-center hover:bg-gray-100${
+                          index < chain.items.length - 1 ? "border-b-[1px] hover:bg-gray-100" : ""
                         }`}
                         onClick={() =>
                           handleClick({
@@ -193,7 +193,7 @@ export default function NewProjectForm({
                         }
                       >
                         {item}
-                      </li>
+                      </button>
                     ))}
                   </ul>
                 </Dropdown>
