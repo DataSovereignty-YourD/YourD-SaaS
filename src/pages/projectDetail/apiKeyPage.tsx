@@ -6,7 +6,7 @@ import { CgCopy } from 'react-icons/cg';
 import Path from '../../components/project/path';
 import LocalPush from '../../components/utils/localPush';
 import Dropdown from '../../components/project/dropDown';
-
+import { RxDropdownMenu } from 'react-icons/rx';
 import ethereumImg from '../../assets/img/eth_logo.png';
 import solanaImg from '../../assets/img/solana_logo.png';
 import tezosImg from '../../assets/img/tezos_logo.png';
@@ -21,7 +21,11 @@ export default function ApiKey({ item }: { item: projectType }, visible) {
   const handleApiKeyToggle = () => {
     setIsApiKey(!isApiKey);
   };
-
+  const [dropdownVisible, setDropdownVisible] = useState(false);
+  const [selectedUri, setSelectedUri] = useState({
+    name: 'ECAD Labs',
+    uri: 'https://mainnet.ecadinfra.com',
+  });
   const Endpoints = [
     {
       chain: 'Ethereum',
@@ -35,7 +39,15 @@ export default function ApiKey({ item }: { item: projectType }, visible) {
     },
     {
       chain: 'Tezos',
-      endpointUri: 'EXAMPLE',
+      endpointUri: [
+        {
+          name: 'ECAD Labs',
+          uri: 'https://mainnet.ecadinfra.com',
+        },
+        { name: 'SmartPy', uri: 'https://mainnet.smartpy.io' },
+        { name: 'Tezos Foundation', uri: 'https://rpc.tzbeta.net/' },
+        { name: 'Marigold', uri: 'https://mainnet.tezos.marigold.dev/' },
+      ],
       image: tezosImg,
     },
     {
@@ -43,9 +55,13 @@ export default function ApiKey({ item }: { item: projectType }, visible) {
       endpointUri: 'https://api.mainnet-beta.solana.com',
       image: solanaImg,
     },
-    { chain: 'XRP', endpointUri: 'EXAMPLE', image: xrpImg },
+    {
+      chain: 'XRP',
+      endpointUri: 'https://s1.ripple.com:51234/',
+      image: xrpImg,
+    },
   ];
-
+  const [selectedItemIndex, setSelectedItemIndex] = useState(-1);
   const CopyButton = (data) => (
     <button
       className="w-fit h-10 px-2 py-2 ml-3 border bg-white  hover:bg-gray-100 text-gray-800 font-semibold border-gray-400 rounded-sm shadow"
@@ -70,7 +86,9 @@ export default function ApiKey({ item }: { item: projectType }, visible) {
       <h1 className="font-bold text-black my-5 uppercase text-xl ">ApiKey</h1>
       <div className="flex flex-col bg-white drop-shadow-md rounded-sm p-4 text-black my-3 items-center gap-4">
         <div className="flex w-full items-center">
-          <div className="font-medium w-40 whitespace-nowrap text-sm sm:text-lg px-4 ml-2">Client ID </div>
+          <div className="font-medium w-40 whitespace-nowrap text-sm sm:text-lg px-4 ml-2">
+            Client ID{' '}
+          </div>
           <div className="w-full py-2 px-4 ml-2 border rounded-sm text-sm sm:text-lg bg-black/5">
             {item.clientId}
           </div>
@@ -100,22 +118,71 @@ export default function ApiKey({ item }: { item: projectType }, visible) {
       <h1 className="font-bold text-black my-5 uppercase text-xl ">
         Endpoints
       </h1>
-      <div className="relative w-full p-4 rounded-sm drop-shadow-md  bg-white text-black my-2 grid grid-cols-1 md:grid-cols-1 xl:grid-cols-1 gap-4 ">
+
+      <div className="relative w-full p-4 rounded-sm drop-shadow-md bg-white text-black my-2 grid grid-cols-1 md:grid-cols-1 xl:grid-cols-1 gap-4">
         {Endpoints.map((type, index) => {
           return (
-            <div key={index} className="flex flex-col md:flex-row md:items-center mt-2">
-              <div className='flex mb-3 items-center'>
+            <div
+              key={index}
+              className="flex flex-col md:flex-row md:items-center mt-2 relative"
+            >
+              <div className="flex mb-3 items-center">
                 <img src={type.image} className="w-8 h-8 mr-2" />
-                <div className="font-medium text-sm w-32 mr-2 sm:text-lg ">
+                <div className="font-medium text-sm w-32 mr-2 sm:text-lg">
                   {type.chain}
                 </div>
               </div>
-              <div className='flex w-full'>
-                <div className="w-full py-2 px-4 border rounded-sm md:justify-start  bg-black/5 flex sm:flex-col max-h-[50px] overflow-auto">
-                  {type.endpointUri}
+              <div className="flex flex-col w-full ml-40">
+                {Array.isArray(type.endpointUri) && (
+                  <div className="flex flex-col relative -left-32">
+                    <button
+                      onClick={() => setDropdownVisible(!dropdownVisible)}
+                      className="flex bg-blue-white text-slate-400 font-bold absolute left-0 border border-slate-300 h-10 items-center w-28 justify-between"
+                    >
+                      {selectedUri.name}
+                    </button>
+                    <div className="absolute mt-10">
+                      <Dropdown
+                        visibility={dropdownVisible}
+                        style={{ top: '50px' }}
+                      >
+                        <div className="flex flex-col bg-white  w-40">
+                          {type.endpointUri.map((item, uriIndex) => (
+                            <div
+                              key={uriIndex}
+                              className={`py-1 cursor-pointer ${
+                                uriIndex === selectedItemIndex
+                                  ? 'bg-blue-200'
+                                  : 'hover:bg-gray-200'
+                              }`}
+                              onClick={() => {
+                                setSelectedUri({
+                                  name: item.name,
+                                  uri: item.uri,
+                                });
+                                setSelectedItemIndex(uriIndex);
+                                setDropdownVisible(false);
+                              }}
+                            >
+                              {item.name}
+                            </div>
+                          ))}
+                        </div>
+                      </Dropdown>
+                    </div>
+                  </div>
+                )}
+                <div className="w-full py-2 px-4 border rounded-sm md:justify-start bg-black/5 flex sm:flex-col max-h-[50px] overflow-auto">
+                  {Array.isArray(type.endpointUri) ? (
+                    <div className="flex justify-between">
+                      <div>{selectedUri.uri}</div>
+                    </div>
+                  ) : (
+                    type.endpointUri
+                  )}
                 </div>
-                {CopyButton(type.endpointUri)}
               </div>
+              {CopyButton(type.endpointUri)}
             </div>
           );
         })}
@@ -123,3 +190,37 @@ export default function ApiKey({ item }: { item: projectType }, visible) {
     </div>
   );
 }
+// Dropdown visibility={dropdownVisibility[chain.index]}>
+//                   <ul
+//                     className={`flex flex-col gap-3 bg-white duration-300 border border-gray-100 ${
+//                       dropdownVisibility[chain.index]
+//                         ? "translate-y-0 " : " -translate-y-52"
+//                     }`}
+//                   >
+//                     {chain.items.map((item, index) => (
+//                       <button
+//                         key={index}
+//                         className={`w-36 py-2 text-center hover:bg-gray-100${
+//                           index < chain.items.length - 1 ? "border-b-[1px] hover:bg-gray-100" : ""
+//                         }`}
+//                         onClick={() =>
+//                           handleClick({
+//                             item,
+//                             index: chain.index,
+//                             stateKey: chain.stateKey,
+//                           })
+//                         }
+//                       >
+//                         {item}
+//                       </button>
+//                     ))}
+//                   </ul>
+//                 </Dropdown>
+// useEffect(() => {
+//   const selectedDateInfo = dates.find(
+//     (dateInfo) => dateInfo.list === selectedDate
+//   );
+//   if (selectedDateInfo) {
+//     setSelectedDateInfo(selectedDateInfo);
+//   }
+// }, [selectedDate]);
