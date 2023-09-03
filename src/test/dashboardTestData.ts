@@ -127,16 +127,16 @@ export const userGrowthData = [
 
   export const IncomeData=[
     {
-      title: 'Income (Month)',
+      title: 'Income (1M)',
       value: 5456,
       change: '+14'
     },{
-      title: 'Income (7Days)',
+      title: 'Income (7D)',
       value: 865,
       change: '+39'
     },
     {
-      title: 'Income (24Hours)',
+      title: 'Income (24H)',
       value: 84,
       change: '-20'
     },

@@ -203,19 +203,19 @@ export default function DashBoard() {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-7 my-5">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4 md:gap-7 my-5">
         {IncomeData.map((income) => {
           return (
             <div
               key={income.title}
-              className=" bg-white h-fit p-4 font-bold rounded-sm  drop-shadow-md shadow-black transition-transform ease-in-out transform  duration-500 "
+              className=" bg-white h-fit p-2 md:p-4 font-bold rounded-sm  drop-shadow-md shadow-black transition-transform ease-in-out transform  duration-500 "
             >
-              <div className="font-bold text-gray-500 uppercase">
+              <div className="font-bold text-gray-500 whitespace-nowrap uppercase">
                 {income.title}
               </div>
               <div className="flex items-center">
                 <div className="text-xl mr-2 text-gray-500">$</div>
-                <div className="text-black text-2xl w-full">
+                <div className="text-black text-lg md:text-2xl w-full">
                   {income.value.toLocaleString()}
                 </div>
                 <div
@@ -259,8 +259,8 @@ export default function DashBoard() {
             Requests Activity
           </h1>
 
-          <div className="bg-white mt-3 rounded-md drop-shadow-md text-center">
-            <div className="bg-white uppercase font-bold  drop-shadow-md text-black grid grid-cols-4 items-center justify-between px-2 py-3">
+          <div className="bg-white mt-3 rounded-md drop-shadow-md">
+            <div className="bg-white uppercase font-bold  drop-shadow-md text-black grid grid-cols-4 items-center  py-3  pl-2 md:pl-4">
               {columns.map((column, index) => {
                 const isDID = column.key === "did";
                 return (
@@ -268,7 +268,7 @@ export default function DashBoard() {
                     key={`${column.key} + ${index}`}
                     className={`${
                       isDID ? "col-span-2" : "col-span-1"
-                    } mx-2 hover:group relative cursor-pointer`}
+                    }  hover:group relative cursor-pointer`}
                     onClick={() => handleSort(column.key)}
                   >
                     {column.label}
@@ -286,12 +286,12 @@ export default function DashBoard() {
             {sortedUsers.map((user, index) => (
               <div
                 key={`${user.txId} + ${index}`}
-                className=" grid grid-cols-4 text-black justify-center  border-b p-2"
+                className=" grid grid-cols-4 text-black justify-center  border-b py-4 pl-2 md:pl-4"
               >
-                <span className=" col-span-1  mx-2 my-4    ">{user.txId}</span>
-                <span className=" col-span-1 mx-2 my-4 ">{user.user}</span>
-                <span className=" col-span-1 mx-2 my-4 ">{user.date}</span>
-                <span className="  col-span-1 mx-2 my-4 ">{user.cost}</span>
+                <span className=" col-span-1  truncate  ">{user.txId}</span>
+                <span className=" col-span-1 truncate   ">{user.user}</span>
+                <span className=" col-span-1 whitespace-nowrap  ">{user.date}</span>
+                <span className="  col-span-1 ">{user.cost}</span>
               </div>
             ))}
           </div>
@@ -300,7 +300,7 @@ export default function DashBoard() {
     </div>
   );
 }
-var CanvasJS = CanvasJSReact.CanvasJS;
+
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 export class AreaChart extends Component {
   render() {
